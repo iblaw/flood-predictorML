@@ -1,0 +1,5946 @@
+[
+  {
+    "name": "Aba South",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 4289.16,
+    "lat": 5.0876592,
+    "lon": 7.3497135
+  },
+  {
+    "name": "Abadam",
+    "rp": 4,
+    "isUrban": 0,
+    "riverDistance": 7903.54,
+    "lat": 13.3704259,
+    "lon": 13.2681609
+  },
+  {
+    "name": "Abaji",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 3933.61,
+    "lat": 8.8678966,
+    "lon": 6.8281816
+  },
+  {
+    "name": "Abak",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 10738.83,
+    "lat": 5.0040731,
+    "lon": 7.7956668
+  },
+  {
+    "name": "Abakaliki",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 496.99,
+    "lat": 6.3208897,
+    "lon": 8.1133202
+  },
+  {
+    "name": "Abeokuta North",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 5226.66,
+    "lat": 7.2344952,
+    "lon": 3.2012259
+  },
+  {
+    "name": "Abeokuta South",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 2530.53,
+    "lat": 7.1594138,
+    "lon": 3.3645466
+  },
+  {
+    "name": "Abi",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 404.81,
+    "lat": 5.8866834,
+    "lon": 8.0328711
+  },
+  {
+    "name": "Aboh-Mbaise",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 6473.65,
+    "lat": 5.4188933,
+    "lon": 7.2606702
+  },
+  {
+    "name": "Abua/Odual",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 1644.29,
+    "lat": 4.8469396,
+    "lon": 6.5600328
+  },
+  {
+    "name": "Abuja Municipal",
+    "rp": 3,
+    "isUrban": 1,
+    "riverDistance": 1310.17,
+    "lat": 9.0805107,
+    "lon": 7.4969005
+  },
+  {
+    "name": "Adavi",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 91.39,
+    "lat": 7.6844147,
+    "lon": 6.4667075
+  },
+  {
+    "name": "Ado",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 300.68,
+    "lat": 6.7801258,
+    "lon": 8.0613627
+  },
+  {
+    "name": "Ado Ekiti",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 20000,
+    "lat": 7.6232482,
+    "lon": 5.22274
+  },
+  {
+    "name": "Ado-Odo/Ota",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 11857.25,
+    "lat": 6.6244986,
+    "lon": 3.0822509
+  },
+  {
+    "name": "Afijio",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 13712.75,
+    "lat": 7.7478111,
+    "lon": 3.8965833
+  },
+  {
+    "name": "Afikpo North",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 3398.85,
+    "lat": 5.860247,
+    "lon": 7.9184712
+  },
+  {
+    "name": "Afikpo South",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 14350.7,
+    "lat": 5.8274591,
+    "lon": 7.7839142
+  },
+  {
+    "name": "Agaie",
+    "rp": 4,
+    "isUrban": 0,
+    "riverDistance": 4576.65,
+    "lat": 8.9354301,
+    "lon": 6.4320188
+  },
+  {
+    "name": "Agatu",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 13008.06,
+    "lat": 7.8731757,
+    "lon": 7.8796916
+  },
+  {
+    "name": "Aguata",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 6951.67,
+    "lat": 5.9842248,
+    "lon": 7.0906432
+  },
+  {
+    "name": "Agwara",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 2064.47,
+    "lat": 10.7453014,
+    "lon": 4.5394175
+  },
+  {
+    "name": "Ahiazu-Mbaise",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 3991.51,
+    "lat": 5.5631995,
+    "lon": 7.2636268
+  },
+  {
+    "name": "Ahoada East",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 1839.92,
+    "lat": 5.0504985,
+    "lon": 6.64296
+  },
+  {
+    "name": "Ahoada West",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 5902.75,
+    "lat": 5.041966,
+    "lon": 6.513134
+  },
+  {
+    "name": "Aiyedade",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 4699.4,
+    "lat": 7.344518,
+    "lon": 4.3614141
+  },
+  {
+    "name": "Aiyedire",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 1792.63,
+    "lat": 7.5724511,
+    "lon": 4.2162199
+  },
+  {
+    "name": "Ajaokuta",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 1688.68,
+    "lat": 7.5639973,
+    "lon": 6.6291171
+  },
+  {
+    "name": "Ajingi",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 11849.26,
+    "lat": 11.958974,
+    "lon": 9.0338731
+  },
+  {
+    "name": "Akamkpa",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 1546.38,
+    "lat": 5.3896461,
+    "lon": 8.5446556
+  },
+  {
+    "name": "Akinyele",
+    "rp": 4,
+    "isUrban": 0,
+    "riverDistance": 3434.57,
+    "lat": 7.5545037,
+    "lon": 3.9120421
+  },
+  {
+    "name": "Akko",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 3723.87,
+    "lat": 10.1003094,
+    "lon": 11.0028596
+  },
+  {
+    "name": "Akoko North East",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 20000,
+    "lat": 7.5625875,
+    "lon": 5.9042263
+  },
+  {
+    "name": "Akoko North West",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 20000,
+    "lat": 7.6501792,
+    "lon": 5.8147441
+  },
+  {
+    "name": "Akoko South East",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 19381.69,
+    "lat": 7.4224909,
+    "lon": 5.9050607
+  },
+  {
+    "name": "Akoko South West",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 20000,
+    "lat": 7.4008129,
+    "lon": 5.7056416
+  },
+  {
+    "name": "Akoko-Edo",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 18410.18,
+    "lat": 7.3523936,
+    "lon": 6.1252351
+  },
+  {
+    "name": "Akpabuyo",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 10066.85,
+    "lat": 4.8956344,
+    "lon": 8.4803881
+  },
+  {
+    "name": "Akuku Toru",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 100.03,
+    "lat": 4.533629,
+    "lon": 6.6786707
+  },
+  {
+    "name": "Akure North",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 7535.15,
+    "lat": 7.2520758,
+    "lon": 5.3143805
+  },
+  {
+    "name": "Akure South",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 8639.08,
+    "lat": 7.22318,
+    "lon": 5.1688323
+  },
+  {
+    "name": "Akwanga",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 9324.17,
+    "lat": 9.0152703,
+    "lon": 8.3406254
+  },
+  {
+    "name": "Albasu",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 14484.24,
+    "lat": 11.6460292,
+    "lon": 9.0403142
+  },
+  {
+    "name": "Aleiro",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 11413.26,
+    "lat": 12.3203117,
+    "lon": 4.4531952
+  },
+  {
+    "name": "Alimosho",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 3703.86,
+    "lat": 6.5843883,
+    "lon": 3.2575876
+  },
+  {
+    "name": "Alkaleri",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 11157.58,
+    "lat": 9.896816,
+    "lon": 10.4308366
+  },
+  {
+    "name": "Amuwo-Odofin",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 2060.15,
+    "lat": 6.4470565,
+    "lon": 3.2663155
+  },
+  {
+    "name": "Anambra East",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 5971.66,
+    "lat": 6.3146982,
+    "lon": 6.8929567
+  },
+  {
+    "name": "Anambra West",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 3491.63,
+    "lat": 6.4925694,
+    "lon": 6.7765786
+  },
+  {
+    "name": "Anaocha",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 9136.49,
+    "lat": 6.0922999,
+    "lon": 7.0211714
+  },
+  {
+    "name": "Andoni",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 37.71,
+    "lat": 4.5061458,
+    "lon": 7.4073072
+  },
+  {
+    "name": "Aninri",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 17820.5,
+    "lat": 6.0679259,
+    "lon": 7.5971085
+  },
+  {
+    "name": "Aniocha North",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 9836.58,
+    "lat": 6.3679941,
+    "lon": 6.4702804
+  },
+  {
+    "name": "Aniocha South",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 9123.41,
+    "lat": 6.1419725,
+    "lon": 6.4773901
+  },
+  {
+    "name": "Anka",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 11936.45,
+    "lat": 11.9832114,
+    "lon": 5.9642846
+  },
+  {
+    "name": "Ankpa",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 20000,
+    "lat": 7.4693182,
+    "lon": 7.6191528
+  },
+  {
+    "name": "Apa",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 20000,
+    "lat": 7.6006341,
+    "lon": 7.8852036
+  },
+  {
+    "name": "Apapa",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 1186.15,
+    "lat": 6.445187,
+    "lon": 3.3683732
+  },
+  {
+    "name": "Ardo-Kola",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 813.22,
+    "lat": 8.8470989,
+    "lon": 11.1325195
+  },
+  {
+    "name": "Arewa-Dandi",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 20000,
+    "lat": 12.7215033,
+    "lon": 4.0747579
+  },
+  {
+    "name": "Argungu",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 967.18,
+    "lat": 12.6967675,
+    "lon": 4.4473728
+  },
+  {
+    "name": "Arochukwu",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 14337.01,
+    "lat": 5.5185153,
+    "lon": 7.8694045
+  },
+  {
+    "name": "Asa",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 5410.38,
+    "lat": 8.4132651,
+    "lon": 4.4423815
+  },
+  {
+    "name": "Asari-Toru",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 254.33,
+    "lat": 4.7529381,
+    "lon": 6.8348322
+  },
+  {
+    "name": "Askira/Uba",
+    "rp": 2,
+    "isUrban": 1,
+    "riverDistance": 3918.74,
+    "lat": 10.7251526,
+    "lon": 13.1565189
+  },
+  {
+    "name": "Atiba",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 15914.43,
+    "lat": 8.2356925,
+    "lon": 3.8685804
+  },
+  {
+    "name": "Augie",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 2714.78,
+    "lat": 12.9010929,
+    "lon": 4.6290649
+  },
+  {
+    "name": "Auyo",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 2509.69,
+    "lat": 12.3333297,
+    "lon": 9.9128345
+  },
+  {
+    "name": "Awe",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 8234.44,
+    "lat": 8.2167306,
+    "lon": 9.1609237
+  },
+  {
+    "name": "Awgu",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 20000,
+    "lat": 6.1731327,
+    "lon": 7.4512478
+  },
+  {
+    "name": "Awka North",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 2236.26,
+    "lat": 6.3417876,
+    "lon": 7.0583437
+  },
+  {
+    "name": "Awka South",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 585.47,
+    "lat": 6.1940561,
+    "lon": 7.0943469
+  },
+  {
+    "name": "Ayamelum",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 6998.38,
+    "lat": 6.5346229,
+    "lon": 6.9747974
+  },
+  {
+    "name": "Babura",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 20000,
+    "lat": 12.6050122,
+    "lon": 8.8275802
+  },
+  {
+    "name": "Badagry",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 4596.86,
+    "lat": 6.4393223,
+    "lon": 2.9060324
+  },
+  {
+    "name": "Bade",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 2144.83,
+    "lat": 10.0608705,
+    "lon": 13.267365
+  },
+  {
+    "name": "Bagudo",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 6651.51,
+    "lat": 11.4040393,
+    "lon": 4.2277586
+  },
+  {
+    "name": "Bagwai",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 155.15,
+    "lat": 12.1017637,
+    "lon": 8.1198444
+  },
+  {
+    "name": "Bakori",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 13552.58,
+    "lat": 11.6774063,
+    "lon": 7.4077956
+  },
+  {
+    "name": "Bakura",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 15230.02,
+    "lat": 12.5584645,
+    "lon": 5.8640739
+  },
+  {
+    "name": "Balanga",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 1741.64,
+    "lat": 9.945255,
+    "lon": 11.600761
+  },
+  {
+    "name": "Bali",
+    "rp": 2,
+    "isUrban": 1,
+    "riverDistance": 10448.62,
+    "lat": 8.0906258,
+    "lon": 10.9522619
+  },
+  {
+    "name": "Bama",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 5122.46,
+    "lat": 11.54544,
+    "lon": 14.0064277
+  },
+  {
+    "name": "Barikin Ladi",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 5101.1,
+    "lat": 9.533333,
+    "lon": 8.9
+  },
+  {
+    "name": "Baruten",
+    "rp": 15,
+    "isUrban": 0,
+    "riverDistance": 16104.76,
+    "lat": 9.384549,
+    "lon": 3.4806575
+  },
+  {
+    "name": "Bassa",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 12631.14,
+    "lat": 7.7467992,
+    "lon": 6.9610649
+  },
+  {
+    "name": "Batagarawa",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 1882.68,
+    "lat": 12.8677769,
+    "lon": 7.5314298
+  },
+  {
+    "name": "Batsari",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 664.5,
+    "lat": 12.8454221,
+    "lon": 7.2679827
+  },
+  {
+    "name": "Bauchi",
+    "rp": 7,
+    "isUrban": 1,
+    "riverDistance": 2165.77,
+    "lat": 10.6228284,
+    "lon": 10.0287754
+  },
+  {
+    "name": "Baure",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 20000,
+    "lat": 12.7897719,
+    "lon": 8.7816395
+  },
+  {
+    "name": "Bayo",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 560.69,
+    "lat": 10.452489,
+    "lon": 11.6827984
+  },
+  {
+    "name": "Bebeji",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 10786.44,
+    "lat": 11.5370886,
+    "lon": 8.3106486
+  },
+  {
+    "name": "Bende",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 13223.59,
+    "lat": 5.6390798,
+    "lon": 7.5893402
+  },
+  {
+    "name": "Biase",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 3808.25,
+    "lat": 5.547368,
+    "lon": 8.0520267
+  },
+  {
+    "name": "Bichi",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 3895.75,
+    "lat": 12.2334,
+    "lon": 8.24026
+  },
+  {
+    "name": "Bida",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 48.93,
+    "lat": 9.083333,
+    "lon": 6.016667
+  },
+  {
+    "name": "Billiri",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 7283.25,
+    "lat": 9.8350997,
+    "lon": 11.1418759
+  },
+  {
+    "name": "Bindawa",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 12505.82,
+    "lat": 12.7082443,
+    "lon": 7.8815931
+  },
+  {
+    "name": "Binji",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 16406.66,
+    "lat": 13.2095387,
+    "lon": 4.7694358
+  },
+  {
+    "name": "Biriniwa",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 20000,
+    "lat": 12.8364638,
+    "lon": 10.0835719
+  },
+  {
+    "name": "Birni Kudu",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 2252.36,
+    "lat": 10.5215406,
+    "lon": 7.4247932
+  },
+  {
+    "name": "Birnin Kebbi",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 2657.84,
+    "lat": 12.4573462,
+    "lon": 4.2006114
+  },
+  {
+    "name": "Birnin Magaji",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 783.5,
+    "lat": 12.1655937,
+    "lon": 5.3021667
+  },
+  {
+    "name": "Birnin-Gwari",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 10873.22,
+    "lat": 10.88377,
+    "lon": 6.585878
+  },
+  {
+    "name": "Biu",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 5254.72,
+    "lat": 10.6146098,
+    "lon": 12.1909612
+  },
+  {
+    "name": "Bodinga",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 7869.87,
+    "lat": 12.8106793,
+    "lon": 5.1723538
+  },
+  {
+    "name": "Bogoro",
+    "rp": 2,
+    "isUrban": 1,
+    "riverDistance": 7419.55,
+    "lat": 9.6369083,
+    "lon": 9.6200272
+  },
+  {
+    "name": "Boki",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 176.86,
+    "lat": 6.2680357,
+    "lon": 9.0290841
+  },
+  {
+    "name": "Bokkos",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 10084.71,
+    "lat": 9.2285352,
+    "lon": 8.8948024
+  },
+  {
+    "name": "Boluwaduro",
+    "rp": 2,
+    "isUrban": 0,
+    "riverDistance": 14552.99,
+    "lat": 7.9466403,
+    "lon": 4.8092286
+  },
+  {
+    "name": "Bomadi",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 2025.63,
+    "lat": 5.2255299,
+    "lon": 5.8097295
+  },
+  {
+    "name": "Bonny",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 798.92,
+    "lat": 4.505781,
+    "lon": 7.203466
+  },
+  {
+    "name": "Borgu",
+    "rp": 3,
+    "isUrban": 0,
+    "riverDistance": 10044.61,
+    "lat": 10.1967653,
+    "lon": 4.0920206
+  },
+  {
+    "name": "Boripe",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 9042.21,
+    "lat": 7.8622022,
+    "lon": 4.6594465
+  },
+  {
+    "name": "Bosso",
+    "rp": 4,
+    "isUrban": 0,
+    "riverDistance": 11097.15,
+    "lat": 9.6009083,
+    "lon": 6.3466716
+  },
+  {
+    "name": "Brass",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 407.1,
+    "lat": 4.5121961,
+    "lon": 6.4818845
+  },
+  {
+    "name": "Buji",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 10876.63,
+    "lat": 11.5483373,
+    "lon": 9.7315015
+  },
+  {
+    "name": "Bukkuyum",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 7101.53,
+    "lat": 11.9850101,
+    "lon": 5.5834557
+  },
+  {
+    "name": "Bungudu",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 2119.3,
+    "lat": 12.0079549,
+    "lon": 6.5157571
+  },
+  {
+    "name": "Bunkure",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 8152.51,
+    "lat": 11.6690434,
+    "lon": 8.5487486
+  },
+  {
+    "name": "Bunza",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 3980.61,
+    "lat": 12.2010775,
+    "lon": 3.9337264
+  },
+  {
+    "name": "Bursari",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 12030.09,
+    "lat": 12.4514335,
+    "lon": 10.7178005
+  },
+  {
+    "name": "Buruku",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 918.71,
+    "lat": 7.4191966,
+    "lon": 9.2137482
+  },
+  {
+    "name": "Burutu",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 564.99,
+    "lat": 5.3522824,
+    "lon": 5.5079208
+  },
+  {
+    "name": "Bwari",
+    "rp": 3,
+    "isUrban": 0,
+    "riverDistance": 6494.72,
+    "lat": 9.2357478,
+    "lon": 7.4718746
+  },
+  {
+    "name": "Calabar South",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 204.61,
+    "lat": 4.8527025,
+    "lon": 8.3207315
+  },
+  {
+    "name": "Calabar-Municipal",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 3432.56,
+    "lat": 5.0153885,
+    "lon": 8.346658
+  },
+  {
+    "name": "Chanchaga",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 5895.5,
+    "lat": 9.6194134,
+    "lon": 6.5496471
+  },
+  {
+    "name": "Charanchi",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 8045.06,
+    "lat": 12.5582006,
+    "lon": 7.6759502
+  },
+  {
+    "name": "Chibok",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 6079.51,
+    "lat": 10.8690461,
+    "lon": 12.8480309
+  },
+  {
+    "name": "Chikun",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 4703.95,
+    "lat": 10.4202275,
+    "lon": 7.3135795
+  },
+  {
+    "name": "Damaturu",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 20000,
+    "lat": 11.747,
+    "lon": 11.9608
+  },
+  {
+    "name": "Damban",
+    "rp": 2,
+    "isUrban": 1,
+    "riverDistance": 17395.67,
+    "lat": 11.617606,
+    "lon": 10.7666868
+  },
+  {
+    "name": "Dambatta",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 11634.35,
+    "lat": 12.428521,
+    "lon": 8.5965507
+  },
+  {
+    "name": "Damboa",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 5689.56,
+    "lat": 11.0793105,
+    "lon": 12.6688633
+  },
+  {
+    "name": "Dan Musa",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 1314.92,
+    "lat": 12.2587684,
+    "lon": 7.2858517
+  },
+  {
+    "name": "Dandi",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 20000,
+    "lat": 11.9019676,
+    "lon": 3.7945764
+  },
+  {
+    "name": "Dandume",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 20000,
+    "lat": 11.4169922,
+    "lon": 7.2224595
+  },
+  {
+    "name": "Dange-Shuni",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 20000,
+    "lat": 12.8256542,
+    "lon": 5.4191047
+  },
+  {
+    "name": "Danja",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 14445.51,
+    "lat": 11.4083136,
+    "lon": 7.4790533
+  },
+  {
+    "name": "Darazo",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 14633.27,
+    "lat": 11.1188755,
+    "lon": 10.5562017
+  },
+  {
+    "name": "Dass",
+    "rp": 2,
+    "isUrban": 1,
+    "riverDistance": 4504.35,
+    "lat": 10.0114079,
+    "lon": 9.4718203
+  },
+  {
+    "name": "Daura",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 7773.8,
+    "lat": 13.035917,
+    "lon": 8.319388
+  },
+  {
+    "name": "Dawakin Kudu",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 3072.34,
+    "lat": 11.7974797,
+    "lon": 8.7065887
+  },
+  {
+    "name": "Dawakin Tofa",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 7127.14,
+    "lat": 12.142136,
+    "lon": 8.3611161
+  },
+  {
+    "name": "Degema",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 869.51,
+    "lat": 4.5905613,
+    "lon": 6.9389479
+  },
+  {
+    "name": "Dekina",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 20000,
+    "lat": 7.5953906,
+    "lon": 7.1434419
+  },
+  {
+    "name": "Demsa",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 1103.97,
+    "lat": 9.4222181,
+    "lon": 12.0875217
+  },
+  {
+    "name": "Dikwa",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 11199.97,
+    "lat": 11.9443017,
+    "lon": 14.0711604
+  },
+  {
+    "name": "Doguwa",
+    "rp": 3,
+    "isUrban": 0,
+    "riverDistance": 3420.14,
+    "lat": 10.8799648,
+    "lon": 8.6761589
+  },
+  {
+    "name": "Doma",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 7513.35,
+    "lat": 8.3922968,
+    "lon": 8.3565453
+  },
+  {
+    "name": "Donga",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 0,
+    "lat": 7.2330632,
+    "lon": 10.499495
+  },
+  {
+    "name": "Dukku",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 20000,
+    "lat": 10.7799177,
+    "lon": 10.8210523
+  },
+  {
+    "name": "Dunukofia",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 8016.5,
+    "lat": 6.2738049,
+    "lon": 6.9780011
+  },
+  {
+    "name": "Dutse",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 12035.31,
+    "lat": 11.6909859,
+    "lon": 9.3390747
+  },
+  {
+    "name": "Dutsin-Ma",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 8593.41,
+    "lat": 12.4067522,
+    "lon": 7.527285
+  },
+  {
+    "name": "Eastern Obolo",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 195.66,
+    "lat": 4.5365226,
+    "lon": 7.7059004
+  },
+  {
+    "name": "Ebonyi",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 10974.74,
+    "lat": 6.1996918,
+    "lon": 8.0348906
+  },
+  {
+    "name": "Edati",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 10940.58,
+    "lat": 8.9633375,
+    "lon": 5.9997548
+  },
+  {
+    "name": "Ede North",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 1582.94,
+    "lat": 7.7344181,
+    "lon": 4.4739981
+  },
+  {
+    "name": "Ede South",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 9407.15,
+    "lat": 7.6592076,
+    "lon": 4.4636917
+  },
+  {
+    "name": "Edu",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 5592.15,
+    "lat": 8.8453918,
+    "lon": 5.2120792
+  },
+  {
+    "name": "Efon",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 17622,
+    "lat": 7.6836482,
+    "lon": 4.9348868
+  },
+  {
+    "name": "Egbado North",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 4684.9,
+    "lat": 7.1260629,
+    "lon": 2.9408573
+  },
+  {
+    "name": "Egbado South",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 5395.11,
+    "lat": 6.7778024,
+    "lon": 2.9583573
+  },
+  {
+    "name": "Egbeda",
+    "rp": 4,
+    "isUrban": 0,
+    "riverDistance": 900.07,
+    "lat": 7.3926447,
+    "lon": 4.0387216
+  },
+  {
+    "name": "Egbedore",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 3546.72,
+    "lat": 7.7874849,
+    "lon": 4.4362977
+  },
+  {
+    "name": "Egor",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 9484.04,
+    "lat": 6.3438385,
+    "lon": 5.5615668
+  },
+  {
+    "name": "Ehime-Mbano",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 5029.21,
+    "lat": 5.6882541,
+    "lon": 7.3001814
+  },
+  {
+    "name": "Ejigbo",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 16645.41,
+    "lat": 7.8999894,
+    "lon": 4.3167086
+  },
+  {
+    "name": "Ekeremor",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 1284.98,
+    "lat": 4.9440157,
+    "lon": 5.710206
+  },
+  {
+    "name": "Eket",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 988.43,
+    "lat": 4.6360066,
+    "lon": 7.9575416
+  },
+  {
+    "name": "Ekiti",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 20000,
+    "lat": 7.736891,
+    "lon": 5.2738326
+  },
+  {
+    "name": "Ekiti East",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 20000,
+    "lat": 7.7208095,
+    "lon": 5.6597767
+  },
+  {
+    "name": "Ekiti South West",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 14042.35,
+    "lat": 7.5234638,
+    "lon": 5.0333579
+  },
+  {
+    "name": "Ekiti West",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 20000,
+    "lat": 7.7210934,
+    "lon": 5.034239
+  },
+  {
+    "name": "Ekwusigo",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 3803.1,
+    "lat": 5.9883647,
+    "lon": 6.8402004
+  },
+  {
+    "name": "Eleme",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 1556,
+    "lat": 4.7506524,
+    "lon": 7.1474252
+  },
+  {
+    "name": "Emohua",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 3336.1,
+    "lat": 4.8838852,
+    "lon": 6.8609777
+  },
+  {
+    "name": "Emure",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 20000,
+    "lat": 7.4293752,
+    "lon": 5.5129244
+  },
+  {
+    "name": "Enugu East",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 2877.19,
+    "lat": 6.5483445,
+    "lon": 7.5568359
+  },
+  {
+    "name": "Enugu North",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 3898.63,
+    "lat": 6.4410785,
+    "lon": 7.5383207
+  },
+  {
+    "name": "Enugu South",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 3530.7,
+    "lat": 6.4001343,
+    "lon": 7.5139031
+  },
+  {
+    "name": "Epe",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 8952.52,
+    "lat": 6.5857286,
+    "lon": 3.975694
+  },
+  {
+    "name": "Esan Central",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 20000,
+    "lat": 6.7047055,
+    "lon": 6.2079259
+  },
+  {
+    "name": "Esan North East",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 15845.09,
+    "lat": 6.7867315,
+    "lon": 6.4334884
+  },
+  {
+    "name": "Esan South East",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 3297.12,
+    "lat": 6.576807,
+    "lon": 6.4860838
+  },
+  {
+    "name": "Esan West",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 20000,
+    "lat": 6.6546491,
+    "lon": 6.1396625
+  },
+  {
+    "name": "Ese-Odo",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 153.86,
+    "lat": 6.2308481,
+    "lon": 4.9530442
+  },
+  {
+    "name": "Esit - Eket",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 4999.14,
+    "lat": 4.642734,
+    "lon": 8.0759035
+  },
+  {
+    "name": "Essien Udim",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 2322.18,
+    "lat": 5.1035626,
+    "lon": 7.6567273
+  },
+  {
+    "name": "Etche",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 2972.36,
+    "lat": 5.0765321,
+    "lon": 7.0926388
+  },
+  {
+    "name": "Ethiope East",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 993.22,
+    "lat": 5.6672926,
+    "lon": 5.9721297
+  },
+  {
+    "name": "Ethiope West",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 4929.24,
+    "lat": 5.9113228,
+    "lon": 5.7758592
+  },
+  {
+    "name": "Eti-Osa",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 7284.62,
+    "lat": 6.4592426,
+    "lon": 3.532073
+  },
+  {
+    "name": "Etim Ekpo",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 6183.16,
+    "lat": 4.954823,
+    "lon": 7.5738446
+  },
+  {
+    "name": "Etinan",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 2251.75,
+    "lat": 4.8457415,
+    "lon": 7.8431499
+  },
+  {
+    "name": "Etsako Central",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 5980.14,
+    "lat": 6.978096,
+    "lon": 6.5157761
+  },
+  {
+    "name": "Etsako East",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 5866.98,
+    "lat": 7.1872207,
+    "lon": 6.5169123
+  },
+  {
+    "name": "Etsako West",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 2562.87,
+    "lat": 6.9969282,
+    "lon": 6.3018014
+  },
+  {
+    "name": "Etung",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 6466.72,
+    "lat": 5.8739933,
+    "lon": 8.8076153
+  },
+  {
+    "name": "Ewekoro",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 14539.95,
+    "lat": 6.961699,
+    "lon": 3.1734405
+  },
+  {
+    "name": "Ezeagu",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 15421.45,
+    "lat": 6.4170554,
+    "lon": 7.2379601
+  },
+  {
+    "name": "Ezinihitte",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 4109.3,
+    "lat": 5.4732246,
+    "lon": 7.3224601
+  },
+  {
+    "name": "Ezza North",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 10773.19,
+    "lat": 6.2590742,
+    "lon": 7.9835226
+  },
+  {
+    "name": "Ezza South",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 7548.56,
+    "lat": 6.1269331,
+    "lon": 8.021691
+  },
+  {
+    "name": "Fagge",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 3412.64,
+    "lat": 12.032223,
+    "lon": 8.5174197
+  },
+  {
+    "name": "Fakai",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 8371.01,
+    "lat": 11.5267507,
+    "lon": 4.8830122
+  },
+  {
+    "name": "Faskari",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 8323.84,
+    "lat": 11.7138498,
+    "lon": 7.0993315
+  },
+  {
+    "name": "Fika",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 20000,
+    "lat": 11.320567,
+    "lon": 11.2729093
+  },
+  {
+    "name": "Fufore",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 8633.78,
+    "lat": 9.2577101,
+    "lon": 12.7592871
+  },
+  {
+    "name": "Funakaye",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 8919.27,
+    "lat": 10.8541991,
+    "lon": 11.4446812
+  },
+  {
+    "name": "Fune",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 16484.85,
+    "lat": 11.8920217,
+    "lon": 11.4324499
+  },
+  {
+    "name": "Funtua",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 10455.24,
+    "lat": 11.5232142,
+    "lon": 7.307497
+  },
+  {
+    "name": "Gabasawa",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 11724.49,
+    "lat": 12.1348836,
+    "lon": 8.8570347
+  },
+  {
+    "name": "Gada",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 7869.43,
+    "lat": 13.6829016,
+    "lon": 5.7011027
+  },
+  {
+    "name": "Gagarawa",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 20000,
+    "lat": 12.4856312,
+    "lon": 9.5202629
+  },
+  {
+    "name": "Gamawa",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 19548.89,
+    "lat": 12.014595,
+    "lon": 10.5934781
+  },
+  {
+    "name": "Ganjuwa",
+    "rp": 3,
+    "isUrban": 1,
+    "riverDistance": 2562.14,
+    "lat": 10.7493609,
+    "lon": 9.9899566
+  },
+  {
+    "name": "Ganye",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 7874.07,
+    "lat": 8.4379908,
+    "lon": 11.8544901
+  },
+  {
+    "name": "Garki",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 20000,
+    "lat": 12.4303749,
+    "lon": 9.1130416
+  },
+  {
+    "name": "Garko",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 11353.64,
+    "lat": 11.5649275,
+    "lon": 8.8369338
+  },
+  {
+    "name": "Garum Mallam",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 4876.47,
+    "lat": 11.6585436,
+    "lon": 8.4011183
+  },
+  {
+    "name": "Gashaka",
+    "rp": 2,
+    "isUrban": 0,
+    "riverDistance": 8198.59,
+    "lat": 7.5071871,
+    "lon": 11.3402371
+  },
+  {
+    "name": "Gassol",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 1533.25,
+    "lat": 8.3828235,
+    "lon": 10.4650956
+  },
+  {
+    "name": "Gaya",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 14866.65,
+    "lat": 11.8189571,
+    "lon": 9.0267113
+  },
+  {
+    "name": "Gbako",
+    "rp": 2,
+    "isUrban": 0,
+    "riverDistance": 15031.26,
+    "lat": 9.2790366,
+    "lon": 5.9973716
+  },
+  {
+    "name": "Gboko",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 9672.65,
+    "lat": 7.3778482,
+    "lon": 8.8713224
+  },
+  {
+    "name": "Geidam",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 1092.81,
+    "lat": 12.8952043,
+    "lon": 11.9264702
+  },
+  {
+    "name": "Gezawa",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 7953.35,
+    "lat": 12.0643182,
+    "lon": 8.7188397
+  },
+  {
+    "name": "Giade",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 20000,
+    "lat": 11.4165826,
+    "lon": 10.2346898
+  },
+  {
+    "name": "Girei",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 10488.2,
+    "lat": 9.418212,
+    "lon": 12.4745425
+  },
+  {
+    "name": "Giwa",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 20000,
+    "lat": 11.0464629,
+    "lon": 7.2339435
+  },
+  {
+    "name": "Gokana",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 3864.95,
+    "lat": 4.6578536,
+    "lon": 7.2944847
+  },
+  {
+    "name": "Gombe",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 2458.31,
+    "lat": 10.4304018,
+    "lon": 11.2065408
+  },
+  {
+    "name": "Gombi",
+    "rp": 3,
+    "isUrban": 0,
+    "riverDistance": 3449.07,
+    "lat": 10.2425242,
+    "lon": 12.53884
+  },
+  {
+    "name": "Goronyo",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 13481.23,
+    "lat": 13.3498618,
+    "lon": 5.7675412
+  },
+  {
+    "name": "Gubio",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 3775.63,
+    "lat": 12.6718417,
+    "lon": 12.7756347
+  },
+  {
+    "name": "Gudu",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 20000,
+    "lat": 13.4596132,
+    "lon": 4.4512601
+  },
+  {
+    "name": "Gujba",
+    "rp": 3,
+    "isUrban": 1,
+    "riverDistance": 17244.57,
+    "lat": 11.344585,
+    "lon": 11.9202736
+  },
+  {
+    "name": "Gulani",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 3470.16,
+    "lat": 10.9178343,
+    "lon": 11.6427552
+  },
+  {
+    "name": "Guma",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 8400.25,
+    "lat": 7.8682914,
+    "lon": 8.8286537
+  },
+  {
+    "name": "Gumel",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 20000,
+    "lat": 12.6232524,
+    "lon": 9.4044169
+  },
+  {
+    "name": "Gummi",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 4271.94,
+    "lat": 12.0443133,
+    "lon": 5.1088086
+  },
+  {
+    "name": "Gurara",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 1378.25,
+    "lat": 9.3250486,
+    "lon": 7.0316675
+  },
+  {
+    "name": "Guri",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 733.63,
+    "lat": 12.7284315,
+    "lon": 10.4197948
+  },
+  {
+    "name": "Gusau",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 785.38,
+    "lat": 12.1658358,
+    "lon": 6.6606398
+  },
+  {
+    "name": "Guyuk",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 9667.07,
+    "lat": 9.8359475,
+    "lon": 11.9223112
+  },
+  {
+    "name": "Guzamala",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 20000,
+    "lat": 12.8640065,
+    "lon": 13.2508969
+  },
+  {
+    "name": "Gwadabawa",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 8248.51,
+    "lat": 13.4160911,
+    "lon": 5.3227333
+  },
+  {
+    "name": "Gwagwalada",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 170.94,
+    "lat": 8.9360261,
+    "lon": 7.0859144
+  },
+  {
+    "name": "Gwale",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 6170.06,
+    "lat": 11.9747465,
+    "lon": 8.4746362
+  },
+  {
+    "name": "Gwandu",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 20000,
+    "lat": 12.4893811,
+    "lon": 4.6277949
+  },
+  {
+    "name": "Gwaram",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 19970.9,
+    "lat": 11.2198673,
+    "lon": 10.0506649
+  },
+  {
+    "name": "Gwarzo",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 8456.45,
+    "lat": 11.9009397,
+    "lon": 7.9836793
+  },
+  {
+    "name": "Gwer East",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 20000,
+    "lat": 7.378217,
+    "lon": 8.3527425
+  },
+  {
+    "name": "Gwer West",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 20000,
+    "lat": 7.6210447,
+    "lon": 8.206342
+  },
+  {
+    "name": "Gwiwa",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 16238.83,
+    "lat": 12.7376334,
+    "lon": 8.292064
+  },
+  {
+    "name": "Gwoza",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 3505.84,
+    "lat": 11.0831008,
+    "lon": 13.6941974
+  },
+  {
+    "name": "Hawul",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 834.35,
+    "lat": 10.4545467,
+    "lon": 12.3077703
+  },
+  {
+    "name": "Hong",
+    "rp": 3,
+    "isUrban": 0,
+    "riverDistance": 6244.22,
+    "lat": 10.2622947,
+    "lon": 12.9479254
+  },
+  {
+    "name": "Ibadan North",
+    "rp": 4,
+    "isUrban": 0,
+    "riverDistance": 594.04,
+    "lat": 7.4206526,
+    "lon": 3.9092156
+  },
+  {
+    "name": "Ibadan North West",
+    "rp": 15,
+    "isUrban": 0,
+    "riverDistance": 1850.49,
+    "lat": 7.4036511,
+    "lon": 3.871402
+  },
+  {
+    "name": "Ibadan South West",
+    "rp": 15,
+    "isUrban": 1,
+    "riverDistance": 823.7,
+    "lat": 7.3733705,
+    "lon": 3.8589668
+  },
+  {
+    "name": "Ibaji",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 4641.24,
+    "lat": 6.7915719,
+    "lon": 6.7599354
+  },
+  {
+    "name": "Ibarapa Central",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 10935.09,
+    "lat": 7.4115165,
+    "lon": 3.247705
+  },
+  {
+    "name": "Ibarapa East",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 3589.59,
+    "lat": 7.5840667,
+    "lon": 3.459362
+  },
+  {
+    "name": "Ibarapa North",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 2217.54,
+    "lat": 7.6445747,
+    "lon": 3.1731014
+  },
+  {
+    "name": "Ibeju/Lekki",
+    "rp": 7,
+    "isUrban": 1,
+    "riverDistance": 16589.98,
+    "lat": 6.4711251,
+    "lon": 3.8147504
+  },
+  {
+    "name": "Ibeno",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 2846.98,
+    "lat": 4.5580121,
+    "lon": 8.1085551
+  },
+  {
+    "name": "Ibesikpo Asutan",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 7381.98,
+    "lat": 4.9179451,
+    "lon": 7.9647991
+  },
+  {
+    "name": "Ibi",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 1163.87,
+    "lat": 8.182155,
+    "lon": 9.7472789
+  },
+  {
+    "name": "Ibiono Ibom",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 6969.5,
+    "lat": 5.2040105,
+    "lon": 7.8974506
+  },
+  {
+    "name": "Idah",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 538.56,
+    "lat": 7.1099854,
+    "lon": 6.7340488
+  },
+  {
+    "name": "Idanre",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 1511.11,
+    "lat": 6.975549,
+    "lon": 5.2547047
+  },
+  {
+    "name": "Ideato North",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 8452.88,
+    "lat": 5.8611507,
+    "lon": 7.1358232
+  },
+  {
+    "name": "Ideato South",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 3109.34,
+    "lat": 5.8053246,
+    "lon": 7.1389231
+  },
+  {
+    "name": "Idemili North",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 6479.81,
+    "lat": 6.1371463,
+    "lon": 6.8856971
+  },
+  {
+    "name": "Idemili South",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 5839.77,
+    "lat": 6.0722537,
+    "lon": 6.8332372
+  },
+  {
+    "name": "Ido",
+    "rp": 2,
+    "isUrban": 0,
+    "riverDistance": 1339.71,
+    "lat": 7.5191533,
+    "lon": 3.697842
+  },
+  {
+    "name": "Ido-Osi",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 20000,
+    "lat": 7.8633483,
+    "lon": 5.1969435
+  },
+  {
+    "name": "Ifako-Ijaye",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 4996.27,
+    "lat": 6.6604933,
+    "lon": 3.3214708
+  },
+  {
+    "name": "Ife Central",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 3608.38,
+    "lat": 7.5463691,
+    "lon": 4.5280269
+  },
+  {
+    "name": "Ife East",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 10312.42,
+    "lat": 7.403415,
+    "lon": 4.5995946
+  },
+  {
+    "name": "Ife North",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 5428.55,
+    "lat": 7.2776156,
+    "lon": 4.4528658
+  },
+  {
+    "name": "Ife South",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 5604.04,
+    "lat": 7.2248225,
+    "lon": 4.6099752
+  },
+  {
+    "name": "Ifedayo",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 2874.62,
+    "lat": 7.9618888,
+    "lon": 4.9848067
+  },
+  {
+    "name": "Ifedore",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 5056.75,
+    "lat": 7.3528421,
+    "lon": 5.1103681
+  },
+  {
+    "name": "Ifelodun",
+    "rp": 3,
+    "isUrban": 0,
+    "riverDistance": 3804.69,
+    "lat": 7.9045165,
+    "lon": 4.6370338
+  },
+  {
+    "name": "Ifo",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 9355.12,
+    "lat": 6.7563533,
+    "lon": 3.2416864
+  },
+  {
+    "name": "Igabi",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 10831.48,
+    "lat": 10.7490822,
+    "lon": 7.5289498
+  },
+  {
+    "name": "Igalamela-Odolu",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 1080.41,
+    "lat": 7.0354145,
+    "lon": 7.0591062
+  },
+  {
+    "name": "Igbo-Etiti",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 20000,
+    "lat": 6.6889069,
+    "lon": 7.4059266
+  },
+  {
+    "name": "Igbo-Eze North",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 20000,
+    "lat": 7.0047968,
+    "lon": 7.4594853
+  },
+  {
+    "name": "Igbo-Eze South",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 18628.11,
+    "lat": 6.9519151,
+    "lon": 7.3499866
+  },
+  {
+    "name": "Igueben",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 20000,
+    "lat": 6.6018648,
+    "lon": 6.242448
+  },
+  {
+    "name": "Ihiala",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 6892.24,
+    "lat": 5.8443234,
+    "lon": 6.8732874
+  },
+  {
+    "name": "Ihitte/Uboma",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 3572.56,
+    "lat": 5.6492083,
+    "lon": 7.3814958
+  },
+  {
+    "name": "Ijebu East",
+    "rp": 2,
+    "isUrban": 0,
+    "riverDistance": 3718.41,
+    "lat": 6.8181465,
+    "lon": 4.2512575
+  },
+  {
+    "name": "Ijebu North",
+    "rp": 4,
+    "isUrban": 0,
+    "riverDistance": 2610.96,
+    "lat": 7.032131,
+    "lon": 3.9914572
+  },
+  {
+    "name": "Ijebu North East",
+    "rp": 4,
+    "isUrban": 0,
+    "riverDistance": 10448.7,
+    "lat": 6.887079,
+    "lon": 4.0068673
+  },
+  {
+    "name": "Ijebu Ode",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 10006.91,
+    "lat": 6.8140077,
+    "lon": 3.9151668
+  },
+  {
+    "name": "Ijero",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 17958.29,
+    "lat": 7.8317359,
+    "lon": 5.0583553
+  },
+  {
+    "name": "Ijumu",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 20000,
+    "lat": 7.842371,
+    "lon": 5.8957474
+  },
+  {
+    "name": "Ika",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 8235,
+    "lat": 5.0161686,
+    "lon": 7.542619
+  },
+  {
+    "name": "Ika North East",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 14369.54,
+    "lat": 6.2361939,
+    "lon": 6.320777
+  },
+  {
+    "name": "Ika South",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 8252.99,
+    "lat": 6.1849053,
+    "lon": 6.1380809
+  },
+  {
+    "name": "Ikara",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 1630.46,
+    "lat": 11.3111222,
+    "lon": 8.1640685
+  },
+  {
+    "name": "Ikeduru",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 664.75,
+    "lat": 5.5596812,
+    "lon": 7.1489271
+  },
+  {
+    "name": "Ikeja",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 6188.68,
+    "lat": 6.5974727,
+    "lon": 3.3432815
+  },
+  {
+    "name": "Ikenne",
+    "rp": 15,
+    "isUrban": 1,
+    "riverDistance": 7153.56,
+    "lat": 6.9010633,
+    "lon": 3.6977168
+  },
+  {
+    "name": "Ikere",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 20000,
+    "lat": 7.5135717,
+    "lon": 5.2202759
+  },
+  {
+    "name": "Ikole",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 20000,
+    "lat": 7.8831532,
+    "lon": 5.5156487
+  },
+  {
+    "name": "Ikom",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 2333.77,
+    "lat": 5.962765,
+    "lon": 8.7239694
+  },
+  {
+    "name": "Ikono",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 9098.42,
+    "lat": 5.1832347,
+    "lon": 7.7908996
+  },
+  {
+    "name": "Ikorodu",
+    "rp": 3,
+    "isUrban": 1,
+    "riverDistance": 3578.46,
+    "lat": 6.6191233,
+    "lon": 3.5041271
+  },
+  {
+    "name": "Ikot Abasi",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 1382.52,
+    "lat": 4.5850454,
+    "lon": 7.635553
+  },
+  {
+    "name": "Ikot Ekpene",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 1163.86,
+    "lat": 5.181975,
+    "lon": 7.7132177
+  },
+  {
+    "name": "Ikpoba-Okha",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 9816.92,
+    "lat": 6.1997654,
+    "lon": 5.6622467
+  },
+  {
+    "name": "Ikwerre",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 14413.9,
+    "lat": 5.0705152,
+    "lon": 6.8820046
+  },
+  {
+    "name": "Ikwo",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 65.22,
+    "lat": 6.0830204,
+    "lon": 8.1856299
+  },
+  {
+    "name": "Ikwuano",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 20000,
+    "lat": 5.4092775,
+    "lon": 7.5729916
+  },
+  {
+    "name": "Ila",
+    "rp": 3,
+    "isUrban": 0,
+    "riverDistance": 5431.44,
+    "lat": 7.9702752,
+    "lon": 4.8951082
+  },
+  {
+    "name": "Ilaje",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 5635.11,
+    "lat": 6.1963821,
+    "lon": 4.7590558
+  },
+  {
+    "name": "Ile-Oluji-Okeigbo",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 15489.57,
+    "lat": 7.2369326,
+    "lon": 4.8913266
+  },
+  {
+    "name": "Ilesha East",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 12752.93,
+    "lat": 7.6113053,
+    "lon": 4.7621063
+  },
+  {
+    "name": "Ilesha West",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 7561.62,
+    "lat": 7.6388128,
+    "lon": 4.7163994
+  },
+  {
+    "name": "Illela",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 4031.6,
+    "lat": 13.6664957,
+    "lon": 5.321407
+  },
+  {
+    "name": "Ilorin East",
+    "rp": 3,
+    "isUrban": 0,
+    "riverDistance": 9034.54,
+    "lat": 8.5932799,
+    "lon": 4.7853981
+  },
+  {
+    "name": "Ilorin South",
+    "rp": 2,
+    "isUrban": 0,
+    "riverDistance": 2034.68,
+    "lat": 8.4404502,
+    "lon": 4.6894414
+  },
+  {
+    "name": "Ilorin West",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 1212.38,
+    "lat": 8.4864338,
+    "lon": 4.5138928
+  },
+  {
+    "name": "Imeko-Afon",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 13568.81,
+    "lat": 7.6689512,
+    "lon": 2.8602162
+  },
+  {
+    "name": "Ingawa",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 8480.62,
+    "lat": 12.6149151,
+    "lon": 8.1109489
+  },
+  {
+    "name": "Ini",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 12927.25,
+    "lat": 5.4039717,
+    "lon": 7.7515186
+  },
+  {
+    "name": "Ipokia",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 11594.15,
+    "lat": 6.6435327,
+    "lon": 2.8114232
+  },
+  {
+    "name": "Irele",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 4388,
+    "lat": 6.4894071,
+    "lon": 4.8700171
+  },
+  {
+    "name": "Irepo",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 20000,
+    "lat": 9.0246081,
+    "lon": 3.8849516
+  },
+  {
+    "name": "Irepodun",
+    "rp": 3,
+    "isUrban": 0,
+    "riverDistance": 1579.02,
+    "lat": 7.8954838,
+    "lon": 4.5222317
+  },
+  {
+    "name": "Irepodun/Ifelodun",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 20000,
+    "lat": 7.706224,
+    "lon": 5.2644602
+  },
+  {
+    "name": "Irewole",
+    "rp": 4,
+    "isUrban": 0,
+    "riverDistance": 2177.21,
+    "lat": 7.4233538,
+    "lon": 4.2112928
+  },
+  {
+    "name": "Isa",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 650.77,
+    "lat": 13.202844,
+    "lon": 6.4057228
+  },
+  {
+    "name": "Ise/Orun",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 20000,
+    "lat": 7.4205606,
+    "lon": 5.384951
+  },
+  {
+    "name": "Iseyin",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 12943.56,
+    "lat": 7.9710106,
+    "lon": 3.5956141
+  },
+  {
+    "name": "Ishielu",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 1820.14,
+    "lat": 6.4270885,
+    "lon": 7.8441149
+  },
+  {
+    "name": "Isi-Uzo",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 19435.72,
+    "lat": 6.7418618,
+    "lon": 7.6809367
+  },
+  {
+    "name": "Isiala Mbano",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 3314.38,
+    "lat": 5.6846896,
+    "lon": 7.1963538
+  },
+  {
+    "name": "Isiala-Ngwa North",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 16206.65,
+    "lat": 5.2795472,
+    "lon": 7.4422931
+  },
+  {
+    "name": "Isiala-Ngwa South",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 9546.22,
+    "lat": 5.3855522,
+    "lon": 7.4163509
+  },
+  {
+    "name": "Isin",
+    "rp": 4,
+    "isUrban": 0,
+    "riverDistance": 11266.59,
+    "lat": 8.2579064,
+    "lon": 5.0388491
+  },
+  {
+    "name": "Isiukwuato",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 2105.08,
+    "lat": 6.4519351,
+    "lon": 7.5047277
+  },
+  {
+    "name": "Isokan",
+    "rp": 4,
+    "isUrban": 0,
+    "riverDistance": 7222.69,
+    "lat": 7.2917009,
+    "lon": 4.1970783
+  },
+  {
+    "name": "Isoko North",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 10476.68,
+    "lat": 5.5213421,
+    "lon": 6.1308705
+  },
+  {
+    "name": "Isoko South",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 1099.89,
+    "lat": 5.3895204,
+    "lon": 6.2110496
+  },
+  {
+    "name": "Isu",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 2861.24,
+    "lat": 5.6868983,
+    "lon": 7.0561313
+  },
+  {
+    "name": "Itas/Gadau",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 4504.14,
+    "lat": 11.877064,
+    "lon": 10.0445349
+  },
+  {
+    "name": "Itesiwaju",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 20000,
+    "lat": 8.2107134,
+    "lon": 3.5481983
+  },
+  {
+    "name": "Itu",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 6440.17,
+    "lat": 5.1451749,
+    "lon": 8.0032914
+  },
+  {
+    "name": "Ivo",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 11388.43,
+    "lat": 5.9093492,
+    "lon": 7.637395
+  },
+  {
+    "name": "Iwajowa",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 20000,
+    "lat": 7.9901335,
+    "lon": 2.9887347
+  },
+  {
+    "name": "Iwo",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 4645.81,
+    "lat": 7.633333,
+    "lon": 4.183333
+  },
+  {
+    "name": "Izzi",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 6134.38,
+    "lat": 6.5523757,
+    "lon": 8.2718631
+  },
+  {
+    "name": "Jaba",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 5772.39,
+    "lat": 9.4747461,
+    "lon": 8.0124917
+  },
+  {
+    "name": "Jada",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 3778.7,
+    "lat": 8.6964628,
+    "lon": 12.3215818
+  },
+  {
+    "name": "Jahun",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 16038.68,
+    "lat": 12.0753808,
+    "lon": 9.6257925
+  },
+  {
+    "name": "Jakusko",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 20000,
+    "lat": 12.3691,
+    "lon": 10.7744631
+  },
+  {
+    "name": "Jalingo",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 1066.57,
+    "lat": 8.894985,
+    "lon": 11.360042
+  },
+  {
+    "name": "Jama'are",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 4831.47,
+    "lat": 11.6515401,
+    "lon": 9.8885184
+  },
+  {
+    "name": "Jega",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 10428.24,
+    "lat": 12.1012026,
+    "lon": 4.4659199
+  },
+  {
+    "name": "Jema'a",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 2657.69,
+    "lat": 9.4136358,
+    "lon": 8.2529284
+  },
+  {
+    "name": "Jere",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 4765.33,
+    "lat": 11.9360745,
+    "lon": 13.1816703
+  },
+  {
+    "name": "Jibia",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 1178.71,
+    "lat": 12.9826952,
+    "lon": 7.467752
+  },
+  {
+    "name": "Jos East",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 12147.93,
+    "lat": 9.872746,
+    "lon": 9.1340164
+  },
+  {
+    "name": "Jos North",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 354.97,
+    "lat": 9.9421959,
+    "lon": 8.8929852
+  },
+  {
+    "name": "Jos South",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 4588.1,
+    "lat": 9.7587528,
+    "lon": 8.8487805
+  },
+  {
+    "name": "Kabba/Bunu",
+    "rp": 10,
+    "isUrban": 0,
+    "riverDistance": 20000,
+    "lat": 8.0700982,
+    "lon": 6.1414186
+  },
+  {
+    "name": "Kabo",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 9111.83,
+    "lat": 11.8914633,
+    "lon": 8.2006285
+  },
+  {
+    "name": "Kachia",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 10441.01,
+    "lat": 9.8570726,
+    "lon": 7.6885857
+  },
+  {
+    "name": "Kaduna North",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 2391.71,
+    "lat": 10.5561853,
+    "lon": 7.4527471
+  },
+  {
+    "name": "Kafin Hausa",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 13100.99,
+    "lat": 12.1643718,
+    "lon": 9.9873569
+  },
+  {
+    "name": "Kafur",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 3144.68,
+    "lat": 11.632705,
+    "lon": 7.6975486
+  },
+  {
+    "name": "Kaga",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 20000,
+    "lat": 11.6008803,
+    "lon": 12.5301876
+  },
+  {
+    "name": "Kagarko",
+    "rp": 2,
+    "isUrban": 1,
+    "riverDistance": 7595.08,
+    "lat": 9.4903756,
+    "lon": 7.5743264
+  },
+  {
+    "name": "Kaiama",
+    "rp": 15,
+    "isUrban": 0,
+    "riverDistance": 20000,
+    "lat": 9.5360179,
+    "lon": 4.1148138
+  },
+  {
+    "name": "Kaita",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 7944.39,
+    "lat": 13.1799187,
+    "lon": 7.7922704
+  },
+  {
+    "name": "Kajola",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 14166.44,
+    "lat": 8.0285326,
+    "lon": 3.3585943
+  },
+  {
+    "name": "Kajuru",
+    "rp": 3,
+    "isUrban": 1,
+    "riverDistance": 7834.61,
+    "lat": 10.2550515,
+    "lon": 7.7714939
+  },
+  {
+    "name": "Kala/Balge",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 197.79,
+    "lat": 11.906762,
+    "lon": 14.4562539
+  },
+  {
+    "name": "Kalgo",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 3766.03,
+    "lat": 12.3898376,
+    "lon": 4.0431789
+  },
+  {
+    "name": "Kaltungo",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 2126.29,
+    "lat": 9.8269458,
+    "lon": 11.4361064
+  },
+  {
+    "name": "Kanam",
+    "rp": 3,
+    "isUrban": 0,
+    "riverDistance": 12543.39,
+    "lat": 9.491138,
+    "lon": 10.1545302
+  },
+  {
+    "name": "Kankara",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 8098.34,
+    "lat": 11.9720225,
+    "lon": 7.3609374
+  },
+  {
+    "name": "Kanke",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 7580.87,
+    "lat": 9.3671789,
+    "lon": 9.6393549
+  },
+  {
+    "name": "Kankia",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 12580,
+    "lat": 12.4289363,
+    "lon": 7.7953999
+  },
+  {
+    "name": "Karasuwa",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 20000,
+    "lat": 13.0000596,
+    "lon": 10.6717985
+  },
+  {
+    "name": "Karaye",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 2342.31,
+    "lat": 11.7608489,
+    "lon": 7.9788017
+  },
+  {
+    "name": "Karim-Lamido",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 16481.32,
+    "lat": 9.1473131,
+    "lon": 10.8580208
+  },
+  {
+    "name": "Karu",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 165.9,
+    "lat": 8.995008,
+    "lon": 7.7512256
+  },
+  {
+    "name": "Katagum",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 20000,
+    "lat": 11.6557329,
+    "lon": 10.3503719
+  },
+  {
+    "name": "Katcha",
+    "rp": 5,
+    "isUrban": 1,
+    "riverDistance": 438.52,
+    "lat": 8.7617343,
+    "lon": 6.311747
+  },
+  {
+    "name": "Katsina",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 5862.73,
+    "lat": 12.5630825,
+    "lon": 7.6207063
+  },
+  {
+    "name": "Katsina-Ala",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 2114.64,
+    "lat": 7.313762,
+    "lon": 9.5660977
+  },
+  {
+    "name": "Kaugama",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 20000,
+    "lat": 12.5509256,
+    "lon": 9.7591978
+  },
+  {
+    "name": "Kaura",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 706.2,
+    "lat": 9.6424163,
+    "lon": 8.4516188
+  },
+  {
+    "name": "Kaura Namoda",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 6332.33,
+    "lat": 12.4773306,
+    "lon": 6.5716659
+  },
+  {
+    "name": "Kauru",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 9296.04,
+    "lat": 10.3557989,
+    "lon": 8.1828454
+  },
+  {
+    "name": "Kazaure",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 16162.1,
+    "lat": 12.6649357,
+    "lon": 8.4352429
+  },
+  {
+    "name": "Keana",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 1248.19,
+    "lat": 8.1726904,
+    "lon": 8.7560264
+  },
+  {
+    "name": "Kebbe",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 15469.84,
+    "lat": 11.8863543,
+    "lon": 4.7436167
+  },
+  {
+    "name": "Keffi",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 1231.64,
+    "lat": 8.8453176,
+    "lon": 7.876834
+  },
+  {
+    "name": "Khana",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 486.07,
+    "lat": 4.6693695,
+    "lon": 7.4375406
+  },
+  {
+    "name": "Kibiya",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 12871.1,
+    "lat": 11.4926881,
+    "lon": 8.6969015
+  },
+  {
+    "name": "Kirfi",
+    "rp": 2,
+    "isUrban": 1,
+    "riverDistance": 11369.83,
+    "lat": 10.4393765,
+    "lon": 10.5360929
+  },
+  {
+    "name": "Kiri Kasamma",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 7942.35,
+    "lat": 12.6932,
+    "lon": 10.2551
+  },
+  {
+    "name": "Kiru",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 2834.4,
+    "lat": 11.5568483,
+    "lon": 8.0989509
+  },
+  {
+    "name": "Kiyawa",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 11740.76,
+    "lat": 11.7964786,
+    "lon": 9.5194975
+  },
+  {
+    "name": "Kogi",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 880,
+    "lat": 7.7949602,
+    "lon": 6.6868669
+  },
+  {
+    "name": "Koko/Besse",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 6431.2,
+    "lat": 11.4355339,
+    "lon": 4.4793871
+  },
+  {
+    "name": "Kokona",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 13897.98,
+    "lat": 8.8461237,
+    "lon": 8.0833607
+  },
+  {
+    "name": "Kolokuma/Opokuma",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 1481.61,
+    "lat": 5.0663759,
+    "lon": 6.2461084
+  },
+  {
+    "name": "Konduga",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 13971.36,
+    "lat": 11.6327538,
+    "lon": 13.1840692
+  },
+  {
+    "name": "Konshisha",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 3125.59,
+    "lat": 7.1204698,
+    "lon": 8.6180473
+  },
+  {
+    "name": "Kontagora",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 1269.43,
+    "lat": 10.399893,
+    "lon": 5.4694905
+  },
+  {
+    "name": "Kosofe",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 1007.77,
+    "lat": 6.581974,
+    "lon": 3.4148359
+  },
+  {
+    "name": "Kubau",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 486.77,
+    "lat": 10.8121332,
+    "lon": 8.3609171
+  },
+  {
+    "name": "Kudan",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 4110.32,
+    "lat": 11.2638864,
+    "lon": 7.7175626
+  },
+  {
+    "name": "Kuje",
+    "rp": 3,
+    "isUrban": 0,
+    "riverDistance": 20000,
+    "lat": 8.6984415,
+    "lon": 7.3004993
+  },
+  {
+    "name": "Kukawa",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 20000,
+    "lat": 13.1239109,
+    "lon": 13.7775223
+  },
+  {
+    "name": "Kumbotso",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 5791.9,
+    "lat": 11.9174554,
+    "lon": 8.5198363
+  },
+  {
+    "name": "Kunchi",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 3493.31,
+    "lat": 12.4684379,
+    "lon": 8.2590837
+  },
+  {
+    "name": "Kura",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 3825.61,
+    "lat": 11.7791433,
+    "lon": 8.4743857
+  },
+  {
+    "name": "Kurfi",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 3792.32,
+    "lat": 12.6891921,
+    "lon": 7.4606759
+  },
+  {
+    "name": "Kurmi",
+    "rp": 4,
+    "isUrban": 0,
+    "riverDistance": 2921.17,
+    "lat": 7.2643352,
+    "lon": 10.7014076
+  },
+  {
+    "name": "Kusada",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 2664.61,
+    "lat": 12.4618432,
+    "lon": 7.9485737
+  },
+  {
+    "name": "Kwali",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 10161.94,
+    "lat": 8.8205774,
+    "lon": 7.037166
+  },
+  {
+    "name": "Kwami",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 7621.91,
+    "lat": 10.4918757,
+    "lon": 11.2274196
+  },
+  {
+    "name": "Kwande",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 203.72,
+    "lat": 6.8549397,
+    "lon": 9.3998035
+  },
+  {
+    "name": "Kware",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 2069.17,
+    "lat": 13.1554579,
+    "lon": 5.2931233
+  },
+  {
+    "name": "Kwaya Kusar",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 1177.41,
+    "lat": 10.4857449,
+    "lon": 11.8543195
+  },
+  {
+    "name": "Lafia",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 5052.02,
+    "lat": 8.4960459,
+    "lon": 8.5147636
+  },
+  {
+    "name": "Lagelu",
+    "rp": 7,
+    "isUrban": 0,
+    "riverDistance": 7469.94,
+    "lat": 7.5116973,
+    "lon": 4.0789034
+  },
+  {
+    "name": "Lagos Mainland",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 232.14,
+    "lat": 6.4932779,
+    "lon": 3.3883546
+  },
+  {
+    "name": "Lamurde",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 1203.46,
+    "lat": 9.6072357,
+    "lon": 11.7930477
+  },
+  {
+    "name": "Langtang North",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 628.12,
+    "lat": 9.0494609,
+    "lon": 9.8187243
+  },
+  {
+    "name": "Langtang South",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 14805.4,
+    "lat": 8.5842962,
+    "lon": 9.8329948
+  },
+  {
+    "name": "Lapai",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 591.12,
+    "lat": 8.781127,
+    "lon": 6.6753811
+  },
+  {
+    "name": "Lau",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 702.18,
+    "lat": 9.1939002,
+    "lon": 11.4630191
+  },
+  {
+    "name": "Lavun",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 20000,
+    "lat": 9.3823776,
+    "lon": 5.6366923
+  },
+  {
+    "name": "Lere",
+    "rp": 7,
+    "isUrban": 0,
+    "riverDistance": 2293.91,
+    "lat": 10.3617512,
+    "lon": 8.5723993
+  },
+  {
+    "name": "Logo",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 8643.38,
+    "lat": 7.6671713,
+    "lon": 9.2074676
+  },
+  {
+    "name": "Lokoja",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 1131.43,
+    "lat": 7.802355,
+    "lon": 6.7430327
+  },
+  {
+    "name": "Machina",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 20000,
+    "lat": 13.0342994,
+    "lon": 10.0474618
+  },
+  {
+    "name": "Madagali",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 3197.02,
+    "lat": 10.786603,
+    "lon": 13.4885513
+  },
+  {
+    "name": "Madobi",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 4029.24,
+    "lat": 11.8179194,
+    "lon": 8.3432693
+  },
+  {
+    "name": "Mafa",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 5331.62,
+    "lat": 11.9239025,
+    "lon": 13.6002436
+  },
+  {
+    "name": "Magama",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 2338.37,
+    "lat": 10.2990765,
+    "lon": 5.0610888
+  },
+  {
+    "name": "Magumeri",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 20000,
+    "lat": 12.1432355,
+    "lon": 12.6629372
+  },
+  {
+    "name": "Mai'adua",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 12535.26,
+    "lat": 13.161061,
+    "lon": 8.2129682
+  },
+  {
+    "name": "Maiduguri",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 1011.5,
+    "lat": 11.8395375,
+    "lon": 13.1536214
+  },
+  {
+    "name": "Maigatari",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 20000,
+    "lat": 12.6935744,
+    "lon": 9.6103451
+  },
+  {
+    "name": "Maiha",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 6725.55,
+    "lat": 9.8562705,
+    "lon": 13.1576397
+  },
+  {
+    "name": "Maiyama",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 4971.33,
+    "lat": 12.0068976,
+    "lon": 4.2962992
+  },
+  {
+    "name": "Makoda",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 15327.8,
+    "lat": 12.4269267,
+    "lon": 8.4312888
+  },
+  {
+    "name": "Makurdi",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 1070.26,
+    "lat": 7.7312634,
+    "lon": 8.538425
+  },
+  {
+    "name": "Malam Madori",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 14807.46,
+    "lat": 12.5297795,
+    "lon": 9.8959769
+  },
+  {
+    "name": "Malumfashi",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 8627.39,
+    "lat": 11.8663485,
+    "lon": 7.8091868
+  },
+  {
+    "name": "Mangu",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 3003.85,
+    "lat": 9.3622294,
+    "lon": 9.1816302
+  },
+  {
+    "name": "Mani",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 10205.83,
+    "lat": 12.9074412,
+    "lon": 7.9331795
+  },
+  {
+    "name": "Maradun",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 8811.56,
+    "lat": 12.7162901,
+    "lon": 6.3270017
+  },
+  {
+    "name": "Mariga",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 150.97,
+    "lat": 10.6073683,
+    "lon": 5.8670483
+  },
+  {
+    "name": "Marte",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 8828.52,
+    "lat": 12.4029201,
+    "lon": 13.8326386
+  },
+  {
+    "name": "Maru",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 16764.75,
+    "lat": 11.636483,
+    "lon": 6.3200966
+  },
+  {
+    "name": "Mashegu",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 20000,
+    "lat": 9.8155046,
+    "lon": 5.2392304
+  },
+  {
+    "name": "Mashi",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 14196.43,
+    "lat": 13.1318643,
+    "lon": 8.0128383
+  },
+  {
+    "name": "Matazu",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 18994.27,
+    "lat": 12.2380556,
+    "lon": 7.6587901
+  },
+  {
+    "name": "Mayo-Belwa",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 2686.86,
+    "lat": 8.871243,
+    "lon": 12.0202268
+  },
+  {
+    "name": "Mbaitoli",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 4011.22,
+    "lat": 5.5935474,
+    "lon": 7.0191523
+  },
+  {
+    "name": "Mbo",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 1704.11,
+    "lat": 4.6506469,
+    "lon": 8.2493976
+  },
+  {
+    "name": "Michika",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 1992.89,
+    "lat": 10.577505,
+    "lon": 13.4045579
+  },
+  {
+    "name": "Miga",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 2606.83,
+    "lat": 12.235652,
+    "lon": 9.6980272
+  },
+  {
+    "name": "Mikang",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 2877.78,
+    "lat": 9.0122647,
+    "lon": 9.5544813
+  },
+  {
+    "name": "Minjibir",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 7276.98,
+    "lat": 12.1936318,
+    "lon": 8.6142193
+  },
+  {
+    "name": "Misau",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 13008.1,
+    "lat": 11.3861194,
+    "lon": 10.4685521
+  },
+  {
+    "name": "Mkpat Enin",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 10015.06,
+    "lat": 4.7047345,
+    "lon": 7.7610095
+  },
+  {
+    "name": "Moba",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 18584.48,
+    "lat": 7.9928837,
+    "lon": 5.131158
+  },
+  {
+    "name": "Mobbar",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 16751.93,
+    "lat": 13.0669035,
+    "lon": 12.6776969
+  },
+  {
+    "name": "Mokwa",
+    "rp": 2,
+    "isUrban": 0,
+    "riverDistance": 5829.9,
+    "lat": 9.1218968,
+    "lon": 5.3232819
+  },
+  {
+    "name": "Monguno",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 20000,
+    "lat": 12.6534453,
+    "lon": 13.6856712
+  },
+  {
+    "name": "Mopa-Muro",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 8082.27,
+    "lat": 8.1404458,
+    "lon": 5.888926
+  },
+  {
+    "name": "Moro",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 3261.5,
+    "lat": 8.8535638,
+    "lon": 4.5154722
+  },
+  {
+    "name": "Mubi North",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 804.72,
+    "lat": 10.2801221,
+    "lon": 13.3214501
+  },
+  {
+    "name": "Mubi South",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 8063.28,
+    "lat": 10.148035,
+    "lon": 13.3284979
+  },
+  {
+    "name": "Musawa",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 16058.25,
+    "lat": 12.1112494,
+    "lon": 7.7097378
+  },
+  {
+    "name": "Mushin",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 5459.94,
+    "lat": 6.5247655,
+    "lon": 3.3516348
+  },
+  {
+    "name": "Muya",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 382.39,
+    "lat": 10.749001,
+    "lon": 7.115305
+  },
+  {
+    "name": "Nafada",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 4079.2,
+    "lat": 11.0505637,
+    "lon": 11.2551261
+  },
+  {
+    "name": "Nangere",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 3515.29,
+    "lat": 11.8075446,
+    "lon": 11.0562868
+  },
+  {
+    "name": "Nasarawa",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 816.69,
+    "lat": 8.4387868,
+    "lon": 8.2382849
+  },
+  {
+    "name": "Ndokwa East",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 4458.53,
+    "lat": 5.6582752,
+    "lon": 6.4961408
+  },
+  {
+    "name": "Ndokwa West",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 5221.02,
+    "lat": 5.8260994,
+    "lon": 6.4163551
+  },
+  {
+    "name": "Nembe",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 146.87,
+    "lat": 4.5154824,
+    "lon": 6.2831826
+  },
+  {
+    "name": "Ngala",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 561.78,
+    "lat": 12.3758114,
+    "lon": 14.0852342
+  },
+  {
+    "name": "Nganzai",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 4018.21,
+    "lat": 12.4493445,
+    "lon": 13.1252411
+  },
+  {
+    "name": "Ngaski",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 705.84,
+    "lat": 10.5767008,
+    "lon": 4.7208828
+  },
+  {
+    "name": "Ngor-Okpala",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 1370.74,
+    "lat": 5.3274231,
+    "lon": 7.1575034
+  },
+  {
+    "name": "Nguru",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 7979.74,
+    "lat": 12.875615,
+    "lon": 10.4540091
+  },
+  {
+    "name": "Ningi",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 742.61,
+    "lat": 11.0046287,
+    "lon": 9.2016788
+  },
+  {
+    "name": "Njaba",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 996.88,
+    "lat": 5.7054952,
+    "lon": 7.0021319
+  },
+  {
+    "name": "Njikoka",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 7567.73,
+    "lat": 6.1892624,
+    "lon": 6.9937842
+  },
+  {
+    "name": "Nkanu East",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 5545.58,
+    "lat": 6.3371067,
+    "lon": 7.6610906
+  },
+  {
+    "name": "Nkanu West",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 4581.04,
+    "lat": 6.3215568,
+    "lon": 7.5208351
+  },
+  {
+    "name": "Nkwerre",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 3167.51,
+    "lat": 5.7442951,
+    "lon": 7.0994267
+  },
+  {
+    "name": "Nnewi North",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 6457.63,
+    "lat": 6.006232,
+    "lon": 6.9120158
+  },
+  {
+    "name": "Nnewi South",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 6198.68,
+    "lat": 5.9604744,
+    "lon": 6.9807066
+  },
+  {
+    "name": "Nsit Atai",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 14450,
+    "lat": 4.8185556,
+    "lon": 8.013983
+  },
+  {
+    "name": "Nsit Ibom",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 1128.92,
+    "lat": 4.9036345,
+    "lon": 7.896614
+  },
+  {
+    "name": "Nsit Ubium",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 7110.85,
+    "lat": 4.7597313,
+    "lon": 7.9487236
+  },
+  {
+    "name": "Nsukka",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 20000,
+    "lat": 6.8561,
+    "lon": 7.3927
+  },
+  {
+    "name": "Numan",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 1639.73,
+    "lat": 9.4598443,
+    "lon": 12.0359283
+  },
+  {
+    "name": "Nwangele",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 560,
+    "lat": 5.7111706,
+    "lon": 7.1195741
+  },
+  {
+    "name": "Obafemi-Owode",
+    "rp": 3,
+    "isUrban": 0,
+    "riverDistance": 8012.83,
+    "lat": 6.9171662,
+    "lon": 3.4459066
+  },
+  {
+    "name": "Obanliku",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 15198.27,
+    "lat": 6.4864846,
+    "lon": 9.2946334
+  },
+  {
+    "name": "Obi",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 19626.51,
+    "lat": 7.0439804,
+    "lon": 8.3038379
+  },
+  {
+    "name": "Obi Ngwa",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 8207.64,
+    "lat": 5.1522715,
+    "lon": 7.4478142
+  },
+  {
+    "name": "Obokun",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 2884.56,
+    "lat": 7.7744022,
+    "lon": 4.7781458
+  },
+  {
+    "name": "Obot Akara",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 4836.02,
+    "lat": 5.243455,
+    "lon": 7.6006957
+  },
+  {
+    "name": "Obowo",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 4804.72,
+    "lat": 5.5585649,
+    "lon": 7.3605637
+  },
+  {
+    "name": "Obubra",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 7924.73,
+    "lat": 6.015311,
+    "lon": 8.4146667
+  },
+  {
+    "name": "Obudu",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 2070.01,
+    "lat": 6.5583976,
+    "lon": 9.0532889
+  },
+  {
+    "name": "Odeda",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 4273,
+    "lat": 7.3126235,
+    "lon": 3.4564069
+  },
+  {
+    "name": "Odigbo",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 2236.14,
+    "lat": 6.7318828,
+    "lon": 4.8851666
+  },
+  {
+    "name": "Odo-Otin",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 1045.04,
+    "lat": 8.0074435,
+    "lon": 4.6790483
+  },
+  {
+    "name": "Odogbolu",
+    "rp": 7,
+    "isUrban": 1,
+    "riverDistance": 650.92,
+    "lat": 6.8077002,
+    "lon": 3.8141003
+  },
+  {
+    "name": "Odukpani",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 3593.99,
+    "lat": 5.1865544,
+    "lon": 8.1975491
+  },
+  {
+    "name": "Offa",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 8554.62,
+    "lat": 8.1560008,
+    "lon": 4.7227435
+  },
+  {
+    "name": "Ofu",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 14183.07,
+    "lat": 7.3294933,
+    "lon": 7.068971
+  },
+  {
+    "name": "Ogba/Egbema/Ndoni",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 2319.98,
+    "lat": 5.4512857,
+    "lon": 6.6409178
+  },
+  {
+    "name": "Ogbadibo",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 20000,
+    "lat": 7.008833,
+    "lon": 7.6456569
+  },
+  {
+    "name": "Ogbaru",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 3716.82,
+    "lat": 5.9212864,
+    "lon": 6.7609969
+  },
+  {
+    "name": "Ogbia",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 353.11,
+    "lat": 4.7957445,
+    "lon": 6.3138193
+  },
+  {
+    "name": "Ogbomosho North",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 1231.19,
+    "lat": 8.1568767,
+    "lon": 4.2633807
+  },
+  {
+    "name": "Ogo Oluwa",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 4177.26,
+    "lat": 7.9610822,
+    "lon": 4.1808762
+  },
+  {
+    "name": "Ogoja",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 1574.71,
+    "lat": 6.527803,
+    "lon": 8.6878448
+  },
+  {
+    "name": "Ogori/Magongo",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 11880.12,
+    "lat": 7.4786735,
+    "lon": 6.1558739
+  },
+  {
+    "name": "Ogu/Bolo",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 321.99,
+    "lat": 4.6742177,
+    "lon": 7.201702
+  },
+  {
+    "name": "Ogun waterside",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 3981.66,
+    "lat": 6.4608379,
+    "lon": 4.3903695
+  },
+  {
+    "name": "Oguta",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 2195.79,
+    "lat": 5.6594644,
+    "lon": 6.7783824
+  },
+  {
+    "name": "Ohafia",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 17519.39,
+    "lat": 5.6629148,
+    "lon": 7.8324886
+  },
+  {
+    "name": "Ohaji/Egbema",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 9087.36,
+    "lat": 5.4234836,
+    "lon": 6.8388261
+  },
+  {
+    "name": "Ohaozara",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 3049.33,
+    "lat": 6.0045553,
+    "lon": 7.7938501
+  },
+  {
+    "name": "Ohaukwu",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 13943.36,
+    "lat": 6.5240374,
+    "lon": 8.0108481
+  },
+  {
+    "name": "Ohimini",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 20000,
+    "lat": 7.2502554,
+    "lon": 7.9572672
+  },
+  {
+    "name": "Oji-River",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 8657.41,
+    "lat": 6.1654933,
+    "lon": 7.3030229
+  },
+  {
+    "name": "Ojo",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 1275.54,
+    "lat": 6.4624975,
+    "lon": 3.1657099
+  },
+  {
+    "name": "Oju",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 12686.21,
+    "lat": 6.8701551,
+    "lon": 8.3636442
+  },
+  {
+    "name": "Oke-Ero",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 5688.38,
+    "lat": 8.1803193,
+    "lon": 5.2964357
+  },
+  {
+    "name": "Okehi",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 3721.42,
+    "lat": 7.7331346,
+    "lon": 6.3561003
+  },
+  {
+    "name": "Okene",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 796.26,
+    "lat": 7.4610396,
+    "lon": 6.398817
+  },
+  {
+    "name": "Okigwe",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 6357.83,
+    "lat": 5.8227091,
+    "lon": 7.3198299
+  },
+  {
+    "name": "Okitipupa",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 7343.96,
+    "lat": 6.5654448,
+    "lon": 4.7294512
+  },
+  {
+    "name": "Okobo",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 8048.56,
+    "lat": 4.8136649,
+    "lon": 8.1239681
+  },
+  {
+    "name": "Okpe",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 3945.55,
+    "lat": 5.7004104,
+    "lon": 5.7518793
+  },
+  {
+    "name": "Okpokwu",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 20000,
+    "lat": 7.0453758,
+    "lon": 7.9101002
+  },
+  {
+    "name": "Okrika",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 182.12,
+    "lat": 4.6920776,
+    "lon": 7.0614745
+  },
+  {
+    "name": "Ola-oluwa",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 8755.78,
+    "lat": 7.7457421,
+    "lon": 4.1994322
+  },
+  {
+    "name": "Olorunda",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 5176.13,
+    "lat": 7.8734477,
+    "lon": 4.5821284
+  },
+  {
+    "name": "Olorunsogo",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 19581.21,
+    "lat": 8.7931509,
+    "lon": 4.0601689
+  },
+  {
+    "name": "Oluyole",
+    "rp": 5,
+    "isUrban": 0,
+    "riverDistance": 2576.39,
+    "lat": 7.2195796,
+    "lon": 3.8929879
+  },
+  {
+    "name": "Omala",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 20000,
+    "lat": 7.777828,
+    "lon": 7.5658863
+  },
+  {
+    "name": "Omumma",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 2699.26,
+    "lat": 5.0931204,
+    "lon": 7.235432
+  },
+  {
+    "name": "Ona-Ara",
+    "rp": 5,
+    "isUrban": 0,
+    "riverDistance": 4492.16,
+    "lat": 7.258719,
+    "lon": 4.064942
+  },
+  {
+    "name": "Ondo East",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 4263.05,
+    "lat": 7.066805,
+    "lon": 4.9623712
+  },
+  {
+    "name": "Ondo West",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 11483.9,
+    "lat": 7.0331467,
+    "lon": 4.7687111
+  },
+  {
+    "name": "Onicha",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 10656.51,
+    "lat": 6.1085424,
+    "lon": 7.8142408
+  },
+  {
+    "name": "Onitsha North",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 807.59,
+    "lat": 6.1513108,
+    "lon": 6.8026218
+  },
+  {
+    "name": "Onna",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 1752.83,
+    "lat": 4.6367584,
+    "lon": 7.8723707
+  },
+  {
+    "name": "Opobo/Nkoro",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 295.91,
+    "lat": 4.5092548,
+    "lon": 7.5209388
+  },
+  {
+    "name": "Oredo",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 130.23,
+    "lat": 6.2297631,
+    "lon": 5.5617902
+  },
+  {
+    "name": "Orelope",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 20000,
+    "lat": 8.7941346,
+    "lon": 3.8019227
+  },
+  {
+    "name": "Orhionmwon",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 2285.35,
+    "lat": 6.0884175,
+    "lon": 5.9483601
+  },
+  {
+    "name": "Ori Ire",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 1769.16,
+    "lat": 8.3093052,
+    "lon": 4.2035848
+  },
+  {
+    "name": "Oriade",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 20000,
+    "lat": 7.5530772,
+    "lon": 4.867415
+  },
+  {
+    "name": "Orlu",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 2619.73,
+    "lat": 5.8179105,
+    "lon": 7.0409322
+  },
+  {
+    "name": "Orolu",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 6952.93,
+    "lat": 7.903355,
+    "lon": 4.4735706
+  },
+  {
+    "name": "Oron",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 1165.9,
+    "lat": 4.8169432,
+    "lon": 8.2369999
+  },
+  {
+    "name": "Orsu",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 5889.58,
+    "lat": 5.8494268,
+    "lon": 6.9828062
+  },
+  {
+    "name": "Oru East",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 6301.04,
+    "lat": 5.7274848,
+    "lon": 6.9478755
+  },
+  {
+    "name": "Oru West",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 6766.82,
+    "lat": 5.7544954,
+    "lon": 6.9107675
+  },
+  {
+    "name": "Oruk Anam",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 11009.45,
+    "lat": 4.8202351,
+    "lon": 7.6508147
+  },
+  {
+    "name": "Orumba North",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 2029.52,
+    "lat": 6.1134022,
+    "lon": 7.1625696
+  },
+  {
+    "name": "Orumba South",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 12644.02,
+    "lat": 5.9892248,
+    "lon": 7.2049199
+  },
+  {
+    "name": "Ose",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 8516.29,
+    "lat": 7.051014,
+    "lon": 5.7286513
+  },
+  {
+    "name": "Oshimili North",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 6919.87,
+    "lat": 6.30333,
+    "lon": 6.6477729
+  },
+  {
+    "name": "Oshimili South",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 2622.49,
+    "lat": 6.1303621,
+    "lon": 6.7307334
+  },
+  {
+    "name": "Oshodi-Isolo",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 8956.84,
+    "lat": 6.5398494,
+    "lon": 3.312384
+  },
+  {
+    "name": "Osisioma Ngwa",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 3253.72,
+    "lat": 5.1924923,
+    "lon": 7.3358399
+  },
+  {
+    "name": "Osogbo",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 1826.26,
+    "lat": 7.7583223,
+    "lon": 4.5750447
+  },
+  {
+    "name": "Oturkpo",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 20000,
+    "lat": 7.1912599,
+    "lon": 8.1328576
+  },
+  {
+    "name": "Ovia North East",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 6974.36,
+    "lat": 6.3963337,
+    "lon": 5.5027204
+  },
+  {
+    "name": "Ovia South West",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 12619.54,
+    "lat": 6.4709535,
+    "lon": 5.2991591
+  },
+  {
+    "name": "Owan East",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 12483.49,
+    "lat": 7.0306056,
+    "lon": 6.1056297
+  },
+  {
+    "name": "Owan West",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 8325.61,
+    "lat": 6.9274464,
+    "lon": 5.8934672
+  },
+  {
+    "name": "Owerri North",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 1152.79,
+    "lat": 5.4323857,
+    "lon": 7.1074755
+  },
+  {
+    "name": "Owerri West",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 1337.79,
+    "lat": 5.4068275,
+    "lon": 6.9851183
+  },
+  {
+    "name": "Owerri-Municipal",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 528.1,
+    "lat": 5.4799006,
+    "lon": 7.0219827
+  },
+  {
+    "name": "Owo",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 20000,
+    "lat": 7.1962012,
+    "lon": 5.5868016
+  },
+  {
+    "name": "Oye",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 20000,
+    "lat": 7.8805359,
+    "lon": 5.3375344
+  },
+  {
+    "name": "Oyi",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 545.82,
+    "lat": 6.2395957,
+    "lon": 6.907348
+  },
+  {
+    "name": "Oyigbo",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 1447.99,
+    "lat": 4.8814078,
+    "lon": 7.1334475
+  },
+  {
+    "name": "Oyo East",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 5039.36,
+    "lat": 7.8700811,
+    "lon": 4.0289582
+  },
+  {
+    "name": "Oyo West",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 6627.56,
+    "lat": 7.9571932,
+    "lon": 3.8166315
+  },
+  {
+    "name": "Oyun",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 10142.1,
+    "lat": 8.1998492,
+    "lon": 4.6316354
+  },
+  {
+    "name": "Paikoro",
+    "rp": 5,
+    "isUrban": 0,
+    "riverDistance": 14956.84,
+    "lat": 9.4930392,
+    "lon": 6.8376786
+  },
+  {
+    "name": "Pankshin",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 1830.11,
+    "lat": 9.3054781,
+    "lon": 9.3794144
+  },
+  {
+    "name": "Patani",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 2585.34,
+    "lat": 5.1745322,
+    "lon": 6.0940441
+  },
+  {
+    "name": "Pategi",
+    "rp": 2,
+    "isUrban": 0,
+    "riverDistance": 6623.4,
+    "lat": 8.6704602,
+    "lon": 5.8172728
+  },
+  {
+    "name": "Port-Harcourt",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 1122.63,
+    "lat": 4.7676576,
+    "lon": 7.0188527
+  },
+  {
+    "name": "Potiskum",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 1198.99,
+    "lat": 11.7122553,
+    "lon": 11.0762744
+  },
+  {
+    "name": "Qua'an Pan",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 4281.65,
+    "lat": 8.7664165,
+    "lon": 9.1244816
+  },
+  {
+    "name": "Rabah",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 1735.19,
+    "lat": 13.0019668,
+    "lon": 5.7945252
+  },
+  {
+    "name": "Rafi",
+    "rp": 4,
+    "isUrban": 0,
+    "riverDistance": 3299.61,
+    "lat": 10.2138948,
+    "lon": 6.2071102
+  },
+  {
+    "name": "Rano",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 6968.33,
+    "lat": 11.4850802,
+    "lon": 8.5136042
+  },
+  {
+    "name": "Remo North",
+    "rp": 15,
+    "isUrban": 0,
+    "riverDistance": 1445.82,
+    "lat": 6.9954504,
+    "lon": 3.7177572
+  },
+  {
+    "name": "Rijau",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 2331.74,
+    "lat": 11.0430889,
+    "lon": 5.2174572
+  },
+  {
+    "name": "Rimi",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 1118.93,
+    "lat": 12.8919095,
+    "lon": 7.7145423
+  },
+  {
+    "name": "Rimin Gado",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 5485.36,
+    "lat": 11.9243341,
+    "lon": 8.3318596
+  },
+  {
+    "name": "Ringim",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 6703.5,
+    "lat": 12.1658289,
+    "lon": 9.1100548
+  },
+  {
+    "name": "Riyom",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 608.27,
+    "lat": 9.5564637,
+    "lon": 8.704925
+  },
+  {
+    "name": "Rogo",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 127.83,
+    "lat": 11.5090482,
+    "lon": 7.8533616
+  },
+  {
+    "name": "Roni",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 6689.99,
+    "lat": 12.563882,
+    "lon": 8.3709345
+  },
+  {
+    "name": "Sabon Birni",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 7551.99,
+    "lat": 13.5311002,
+    "lon": 6.2175118
+  },
+  {
+    "name": "Sabon-Gari",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 2911.32,
+    "lat": 11.1665682,
+    "lon": 7.7068114
+  },
+  {
+    "name": "Sabuwa",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 10839.79,
+    "lat": 11.3401382,
+    "lon": 7.0754897
+  },
+  {
+    "name": "Safana",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 19071.17,
+    "lat": 12.5182313,
+    "lon": 7.2324827
+  },
+  {
+    "name": "Sagbama",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 240.92,
+    "lat": 5.0969489,
+    "lon": 6.1267442
+  },
+  {
+    "name": "Sakaba",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 5572.72,
+    "lat": 11.1775635,
+    "lon": 5.5420716
+  },
+  {
+    "name": "Saki East",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 9195.58,
+    "lat": 8.710249,
+    "lon": 3.5676274
+  },
+  {
+    "name": "Saki West",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 16966.37,
+    "lat": 8.6429222,
+    "lon": 3.2031583
+  },
+  {
+    "name": "Sandamu",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 6165.31,
+    "lat": 12.9326254,
+    "lon": 8.4056984
+  },
+  {
+    "name": "Sanga",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 6214.19,
+    "lat": 9.2458822,
+    "lon": 8.4593907
+  },
+  {
+    "name": "Sapele",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 976.33,
+    "lat": 5.8948144,
+    "lon": 5.6795885
+  },
+  {
+    "name": "Sardauna",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 12270.13,
+    "lat": 6.929532,
+    "lon": 11.2229288
+  },
+  {
+    "name": "Shagamu",
+    "rp": 5,
+    "isUrban": 1,
+    "riverDistance": 1213.61,
+    "lat": 6.8477165,
+    "lon": 3.6440551
+  },
+  {
+    "name": "Shagari",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 11046.44,
+    "lat": 12.5426651,
+    "lon": 5.0724551
+  },
+  {
+    "name": "Shanga",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 150.92,
+    "lat": 11.1964232,
+    "lon": 4.6058888
+  },
+  {
+    "name": "Shani",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 1819.28,
+    "lat": 10.151198,
+    "lon": 11.9796686
+  },
+  {
+    "name": "Shanono",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 667.94,
+    "lat": 12.097207,
+    "lon": 7.9264412
+  },
+  {
+    "name": "Shelleng",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 57.94,
+    "lat": 9.9784484,
+    "lon": 12.1080891
+  },
+  {
+    "name": "Shendam",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 2507.48,
+    "lat": 8.7365546,
+    "lon": 9.5155524
+  },
+  {
+    "name": "Shinkafi",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 7812.77,
+    "lat": 13.0373049,
+    "lon": 6.3704843
+  },
+  {
+    "name": "Shira",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 13090.77,
+    "lat": 11.4648844,
+    "lon": 10.0629941
+  },
+  {
+    "name": "Shiroro",
+    "rp": 10,
+    "isUrban": 0,
+    "riverDistance": 5230.74,
+    "lat": 10.0841804,
+    "lon": 6.7189286
+  },
+  {
+    "name": "Shomolu",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 4400.84,
+    "lat": 6.5335645,
+    "lon": 3.3841634
+  },
+  {
+    "name": "Silame",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 5945.46,
+    "lat": 12.9891629,
+    "lon": 4.8202412
+  },
+  {
+    "name": "Soba",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 10875.1,
+    "lat": 10.9579962,
+    "lon": 8.0299052
+  },
+  {
+    "name": "Sokoto North",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 1204.02,
+    "lat": 13.0665791,
+    "lon": 5.2331985
+  },
+  {
+    "name": "Sokoto South",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 3395.34,
+    "lat": 13.03565,
+    "lon": 5.2629592
+  },
+  {
+    "name": "Song",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 861.23,
+    "lat": 9.7789798,
+    "lon": 12.642119
+  },
+  {
+    "name": "Southern Ijaw",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 2527.28,
+    "lat": 4.7132198,
+    "lon": 5.8767913
+  },
+  {
+    "name": "Sule-Tankarkar",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 20000,
+    "lat": 12.6512968,
+    "lon": 9.2475428
+  },
+  {
+    "name": "Suleja",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 2761.24,
+    "lat": 9.2081657,
+    "lon": 7.1871897
+  },
+  {
+    "name": "Sumaila",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 10349.7,
+    "lat": 11.2581601,
+    "lon": 8.8702242
+  },
+  {
+    "name": "Suru",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 223.68,
+    "lat": 11.7923495,
+    "lon": 4.1460127
+  },
+  {
+    "name": "Surulere",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 2654.96,
+    "lat": 6.4855737,
+    "lon": 3.3539907
+  },
+  {
+    "name": "Tafa",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 9287.63,
+    "lat": 9.2379532,
+    "lon": 7.2587751
+  },
+  {
+    "name": "Tafawa-Balewa",
+    "rp": 3,
+    "isUrban": 1,
+    "riverDistance": 3819.79,
+    "lat": 9.8441524,
+    "lon": 9.5933061
+  },
+  {
+    "name": "Tai",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 7111.8,
+    "lat": 4.7698464,
+    "lon": 7.261975
+  },
+  {
+    "name": "Takai",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 7546.86,
+    "lat": 11.4853125,
+    "lon": 9.1560448
+  },
+  {
+    "name": "Takum",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 13510.01,
+    "lat": 7.2549376,
+    "lon": 9.9852661
+  },
+  {
+    "name": "Talata Mafara",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 11669.93,
+    "lat": 12.3990101,
+    "lon": 6.0825831
+  },
+  {
+    "name": "Tambuwal",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 20000,
+    "lat": 12.3986484,
+    "lon": 4.9429866
+  },
+  {
+    "name": "Tangaza",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 13643.38,
+    "lat": 13.4791553,
+    "lon": 4.9704261
+  },
+  {
+    "name": "Tarauni",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 3388.78,
+    "lat": 11.9614371,
+    "lon": 8.565161
+  },
+  {
+    "name": "Tarka",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 8378.64,
+    "lat": 7.6149052,
+    "lon": 8.823735
+  },
+  {
+    "name": "Tarmua",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 20000,
+    "lat": 12.226929,
+    "lon": 11.8318975
+  },
+  {
+    "name": "Taura",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 8908.14,
+    "lat": 12.2724893,
+    "lon": 9.3624188
+  },
+  {
+    "name": "Tofa",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 3209.32,
+    "lat": 12.0245844,
+    "lon": 8.341578
+  },
+  {
+    "name": "Toro",
+    "rp": 7,
+    "isUrban": 1,
+    "riverDistance": 6570.21,
+    "lat": 10.3502951,
+    "lon": 9.328662
+  },
+  {
+    "name": "Toto",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 14957.96,
+    "lat": 8.2616496,
+    "lon": 7.1971572
+  },
+  {
+    "name": "Toungo",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 1091.07,
+    "lat": 8.11751,
+    "lon": 12.0469523
+  },
+  {
+    "name": "Tsafe",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 18633.81,
+    "lat": 11.8234446,
+    "lon": 6.9042433
+  },
+  {
+    "name": "Tsanyawa",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 530.47,
+    "lat": 12.2847503,
+    "lon": 7.9963794
+  },
+  {
+    "name": "Tudun Wada",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 4095.9,
+    "lat": 11.315692,
+    "lon": 8.5239039
+  },
+  {
+    "name": "Tureta",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 8413.98,
+    "lat": 12.5190328,
+    "lon": 5.4949963
+  },
+  {
+    "name": "Udenu",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 20000,
+    "lat": 6.8958276,
+    "lon": 7.5608051
+  },
+  {
+    "name": "Udi",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 5388.5,
+    "lat": 6.4361489,
+    "lon": 7.3987364
+  },
+  {
+    "name": "Udu",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 4420.25,
+    "lat": 5.477352,
+    "lon": 5.821686
+  },
+  {
+    "name": "Udung Uko",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 3312.72,
+    "lat": 4.7505095,
+    "lon": 8.2631939
+  },
+  {
+    "name": "Ughelli North",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 7930.97,
+    "lat": 5.4868836,
+    "lon": 6.0175259
+  },
+  {
+    "name": "Ughelli South",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 5492.09,
+    "lat": 5.3602094,
+    "lon": 5.9677787
+  },
+  {
+    "name": "Ugwunagbo",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 6304.89,
+    "lat": 5.0223494,
+    "lon": 7.3554656
+  },
+  {
+    "name": "Uhunmwonde",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 20000,
+    "lat": 6.5259362,
+    "lon": 5.9000732
+  },
+  {
+    "name": "Ukanafun",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 6573.28,
+    "lat": 4.9038458,
+    "lon": 7.6055028
+  },
+  {
+    "name": "Ukum",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 14037.74,
+    "lat": 7.6077266,
+    "lon": 9.6059233
+  },
+  {
+    "name": "Ukwa East",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 6919.26,
+    "lat": 4.9369271,
+    "lon": 7.4028023
+  },
+  {
+    "name": "Ukwa West",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 9954.7,
+    "lat": 4.9791653,
+    "lon": 7.2646812
+  },
+  {
+    "name": "Ukwuani",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 4000.92,
+    "lat": 5.84944,
+    "lon": 6.2520583
+  },
+  {
+    "name": "Umu-Nneochi",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 17902.57,
+    "lat": 5.9731936,
+    "lon": 7.4053403
+  },
+  {
+    "name": "Umuahia North",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 3700.42,
+    "lat": 5.6078214,
+    "lon": 7.4762003
+  },
+  {
+    "name": "Umuahia South",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 7155.01,
+    "lat": 5.4980793,
+    "lon": 7.4618449
+  },
+  {
+    "name": "Ungogo",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 4715.78,
+    "lat": 12.0916,
+    "lon": 8.49534
+  },
+  {
+    "name": "Unuimo",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 3006.09,
+    "lat": 5.7964888,
+    "lon": 7.2302642
+  },
+  {
+    "name": "Uruan",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 8.99,
+    "lat": 5.0038805,
+    "lon": 8.0774824
+  },
+  {
+    "name": "Urue-Offong/Oruko",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 6817.86,
+    "lat": 4.7223909,
+    "lon": 8.1688014
+  },
+  {
+    "name": "Ushongo",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 19233.86,
+    "lat": 7.1040666,
+    "lon": 9.097224
+  },
+  {
+    "name": "Ussa",
+    "rp": 3,
+    "isUrban": 0,
+    "riverDistance": 3677.15,
+    "lat": 7.1040816,
+    "lon": 10.0535879
+  },
+  {
+    "name": "Uvwie",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 1309.27,
+    "lat": 5.5639359,
+    "lon": 5.7838249
+  },
+  {
+    "name": "Uyo",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 7872.53,
+    "lat": 4.990237,
+    "lon": 7.9974399
+  },
+  {
+    "name": "Uzo-Uwani",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 19948.47,
+    "lat": 6.6896644,
+    "lon": 7.1623308
+  },
+  {
+    "name": "Vandeikya",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 7615.12,
+    "lat": 6.8334444,
+    "lon": 9.0458344
+  },
+  {
+    "name": "Wamako",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 1789.62,
+    "lat": 13.0821193,
+    "lon": 5.1071233
+  },
+  {
+    "name": "Wamba",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 2107.15,
+    "lat": 9.0034175,
+    "lon": 8.7170567
+  },
+  {
+    "name": "Warawa",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 2193,
+    "lat": 11.9046272,
+    "lon": 8.7934017
+  },
+  {
+    "name": "Warji",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 4336.92,
+    "lat": 11.1465091,
+    "lon": 9.7588179
+  },
+  {
+    "name": "Warri North",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 3494.72,
+    "lat": 5.9235306,
+    "lon": 5.1348618
+  },
+  {
+    "name": "Warri South",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 184.46,
+    "lat": 5.626158,
+    "lon": 5.6514533
+  },
+  {
+    "name": "Warri South West",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 591.03,
+    "lat": 5.6042278,
+    "lon": 5.3230331
+  },
+  {
+    "name": "Wasagu/Danko",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 8982,
+    "lat": 11.3811742,
+    "lon": 5.7464525
+  },
+  {
+    "name": "Wase",
+    "rp": 3,
+    "isUrban": 0,
+    "riverDistance": 4298.75,
+    "lat": 9.0070529,
+    "lon": 10.2440209
+  },
+  {
+    "name": "Wudil",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 3238.7,
+    "lat": 11.76688,
+    "lon": 8.8390149
+  },
+  {
+    "name": "Wukari",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 6459.27,
+    "lat": 7.8705196,
+    "lon": 9.7775523
+  },
+  {
+    "name": "Wurno",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 5367.74,
+    "lat": 13.2428503,
+    "lon": 5.4760516
+  },
+  {
+    "name": "Wushishi",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 1596.58,
+    "lat": 9.7113466,
+    "lon": 5.9103153
+  },
+  {
+    "name": "Yabo",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 6065.95,
+    "lat": 12.7727698,
+    "lon": 4.9280534
+  },
+  {
+    "name": "Yagba East",
+    "rp": 2,
+    "isUrban": 0,
+    "riverDistance": 9426.04,
+    "lat": 8.1347528,
+    "lon": 5.7048151
+  },
+  {
+    "name": "Yagba West",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 11986.99,
+    "lat": 8.2763953,
+    "lon": 5.5564206
+  },
+  {
+    "name": "Yakurr",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 6420.14,
+    "lat": 5.8176086,
+    "lon": 8.1779057
+  },
+  {
+    "name": "Yala",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 2335.82,
+    "lat": 6.5895948,
+    "lon": 8.4959311
+  },
+  {
+    "name": "Yamaltu/Deba",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 2702.43,
+    "lat": 10.3071708,
+    "lon": 11.3732153
+  },
+  {
+    "name": "Yankwashi",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 20000,
+    "lat": 12.7396442,
+    "lon": 8.5605791
+  },
+  {
+    "name": "Yauri",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 2927.43,
+    "lat": 10.7769052,
+    "lon": 4.734335
+  },
+  {
+    "name": "Yenegoa",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 971.62,
+    "lat": 4.9334651,
+    "lon": 6.2747786
+  },
+  {
+    "name": "Yola North",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 827.46,
+    "lat": 9.266285,
+    "lon": 12.251132
+  },
+  {
+    "name": "Yola South",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 3932.09,
+    "lat": 9.2581806,
+    "lon": 12.4082125
+  },
+  {
+    "name": "Yorro",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 4525.17,
+    "lat": 8.8803048,
+    "lon": 11.5067844
+  },
+  {
+    "name": "Yunusari",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 13093.01,
+    "lat": 13.114159,
+    "lon": 11.7686413
+  },
+  {
+    "name": "Yusufari",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 14799.81,
+    "lat": 13.156975,
+    "lon": 10.4922742
+  },
+  {
+    "name": "Zaki",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 3974.24,
+    "lat": 12.1874661,
+    "lon": 10.2448206
+  },
+  {
+    "name": "Zango",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 18073.66,
+    "lat": 12.95365,
+    "lon": 8.5446236
+  },
+  {
+    "name": "Zango-Kataf",
+    "rp": 2,
+    "isUrban": 1,
+    "riverDistance": 5832.04,
+    "lat": 9.8374975,
+    "lon": 8.4065268
+  },
+  {
+    "name": "Zaria",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 1500.61,
+    "lat": 11.0248119,
+    "lon": 7.6518533
+  },
+  {
+    "name": "Zing",
+    "rp": 1.5,
+    "isUrban": 0,
+    "riverDistance": 20000,
+    "lat": 8.8585802,
+    "lon": 11.7650828
+  },
+  {
+    "name": "Zurmi",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 1830.29,
+    "lat": 12.8632427,
+    "lon": 6.7601807
+  },
+  {
+    "name": "Zuru",
+    "rp": 1.5,
+    "isUrban": 1,
+    "riverDistance": 6305.4,
+    "lat": 11.436776,
+    "lon": 5.2311774
+  }
+]

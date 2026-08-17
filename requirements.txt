@@ -1,0 +1,22 @@
+# API Backend & Networking
+fastapi==0.141.1
+uvicorn==0.52.3
+pydantic==2.13.4
+httpx==0.28.1
+requests==2.34.2
+
+# Machine Learning & Data Processing
+pandas==3.0.5
+numpy==2.5.2
+scikit-learn==1.9.0
+xgboost==3.4.1
+joblib==1.5.3
+imbalanced-learn>=0.11.0
+optuna>=3.5.0
+shap==0.44.0
+
+# Geospatial Mapping & Geocoding
+geopy>=2.4.0
+geopandas>=0.14.1
+shapely>=2.0.2
+rasterio>=1.3.9

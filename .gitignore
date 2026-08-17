@@ -225,7 +225,7 @@ __marimo__/
 data/*.csv
 !data/master_lga_static_lookup.csv
 data/*.json
-
+!data/latest_predictions.json
 # Model checkpoints (ignore large serialized models)
 models/*.joblib
 models/*.pkl

@@ -1,31 +1,42 @@
+import uvicorn
+from fastapi import FastAPI, HTTPException, BackgroundTasks
+from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
+import joblib
 import pandas as pd
 import httpx
-import asyncio
-import joblib
-import time
 from datetime import datetime
 import numpy as np
 import os
+import subprocess
+import sys
 from supabase import create_client, Client
 
-print("--- Starting Daily Flood Prediction Batch Processor ---")
+# --- 1. INITIALIZE APP IMMEDIATELY ---
+app = FastAPI(title="Flood Forecast ML API", description="AI Backend for 3MTT Capstone")
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# --- PATH CONFIGURATION ---
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+MODEL_PATH = os.path.join(BASE_DIR, "..", "models", "deployed_flood_model.joblib")
 
 # --- SUPABASE CONFIGURATION ---
 SUPABASE_URL = os.environ.get("SUPABASE_URL")
 SUPABASE_KEY = os.environ.get("SUPABASE_KEY")
 
-if not SUPABASE_URL or not SUPABASE_KEY:
-    print("CRITICAL ERROR: Supabase credentials missing. Batch process cannot save data.")
-    exit()
+if SUPABASE_URL and SUPABASE_KEY:
+    supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
+else:
+    supabase = None
+    print("Warning: SUPABASE_URL or SUPABASE_KEY environment variables not found.")
 
-supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
-
-# --- PATH CONFIGURATION ---
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-MODEL_PATH = os.path.join(BASE_DIR, "..", "models", "deployed_flood_model.joblib")
-CSV_PATH = os.path.join(BASE_DIR, "..", "data", "master_lga_static_lookup.csv")
-
-# 1. Load the Model
 try:
     print(f"Loading Machine Learning Model from: {MODEL_PATH}")
     model_package = joblib.load(MODEL_PATH)
@@ -33,19 +44,81 @@ try:
     feature_cols = model_package.get('features', None)
     print("Model loaded successfully!")
 except Exception as e:
-    print(f"CRITICAL ERROR: Could not load model. {e}")
-    exit()
+    print(f"Warning: Could not load model. Error: {e}")
+    model = None
 
-# 2. Load the Static LGA Database
-try:
-    print(f"Loading LGA database from: {CSV_PATH}")
-    df_lgas = pd.read_csv(CSV_PATH)
-    print(f"Loaded {len(df_lgas)} LGAs for processing.")
-except Exception as e:
-    print(f"CRITICAL ERROR: Could not load LGA database. {e}")
-    exit()
 
-async def fetch_weather_for_lga(client, lat, lon, max_retries=3):
+@app.get("/trigger-batch-update")
+async def trigger_batch_update(background_tasks: BackgroundTasks, key: str = ""):
+    if key != "3mtt-capstone-secure-key":
+        raise HTTPException(status_code=401, detail="Unauthorized")
+    
+    def run_worker():
+        print("Starting background batch worker via API trigger...", flush=True)
+        script_path = os.path.join(BASE_DIR, "batch_update_worker.py")
+        subprocess.run(["python", "-u", script_path], stdout=sys.stdout, stderr=sys.stderr)
+        print("Background batch worker finished and pushed data to Supabase!", flush=True)
+        
+    background_tasks.add_task(run_worker)
+    return {"status": "success", "message": "Batch update triggered successfully in the background."}
+
+
+@app.get("/bulk-forecasts")
+async def get_bulk_forecasts():
+    """
+    Fetches pre-computed predictions directly from the permanent Supabase database.
+    Formats the output perfectly so the Next.js frontend doesn't need to be changed!
+    """
+    if not supabase:
+        print("Database not connected. Returning empty dataset.")
+        return {"last_updated": None, "total_locations": 0, "predictions": {}}
+
+    try:
+        # Fetch all rows from the database
+        response = supabase.table("flood_predictions").select("*").execute()
+        rows = response.data
+        
+        if not rows:
+            return {"last_updated": None, "total_locations": 0, "predictions": {}}
+
+        # Reconstruct the exact JSON dictionary format the frontend expects
+        predictions = {}
+        last_updated = rows[0].get("last_updated") 
+        
+        for row in rows:
+            predictions[row["lga_name"]] = {
+                "status": row["status"],
+                "tier": row["tier"],
+                "probability_percent": float(row["probability_percent"]),
+                "weather": {
+                    "rainfall_7d": float(row["rainfall_7d"]),
+                    "soil_moisture_7d": float(row["soil_moisture_7d"]),
+                    "elevation": float(row["elevation"])
+                },
+                "explanation": row["explanation"],
+                "raw_inputs": row["raw_inputs"]
+            }
+            
+        return {
+            "last_updated": last_updated,
+            "total_locations": len(predictions),
+            "predictions": predictions
+        }
+        
+    except Exception as e:
+        print(f"Warning: Failed to fetch from Supabase. Error: {e}")
+        return {"last_updated": None, "total_locations": 0, "predictions": {}}
+
+
+class PredictRequest(BaseModel):
+    lat: float
+    lon: float
+    Elevation_m: float 
+    Distance_to_River_m: float
+    Is_Urban: int
+    RP: float = 1.0 
+
+async def fetch_and_calculate_weather(lat: float, lon: float, is_urban: int, river_dist: float, frontend_elev: float):
     url = "https://api.open-meteo.com/v1/forecast"
     params = {
         "latitude": lat,
@@ -56,33 +129,17 @@ async def fetch_weather_for_lga(client, lat, lon, max_retries=3):
         "timezone": "Africa/Lagos"
     }
     
-    for attempt in range(max_retries):
-        try:
-            response = await client.get(url, params=params, timeout=15.0)
-            
-            if response.status_code == 200:
-                return response.json()
-            elif response.status_code == 429:
-                # Rate limit hit! Pause longer and retry.
-                wait_time = 5 * (attempt + 1)
-                print(f"      -> [Rate Limit 429] Pausing for {wait_time}s...")
-                await asyncio.sleep(wait_time)
-            else:
-                print(f"      -> [API Error {response.status_code}] Retrying...")
-                await asyncio.sleep(2.0)
-                
-        except Exception as e:
-            print(f"      -> [Network Error] Retrying... ({e})")
-            await asyncio.sleep(2.0)
-            
-    return None # Failed after all retries
-
-def calculate_physics(weather_data, is_urban, river_dist, frontend_elev):
-    true_elevation = weather_data.get('elevation', frontend_elev)
+    async with httpx.AsyncClient() as client:
+        response = await client.get(url, params=params, timeout=10.0)
+    
+    if response.status_code != 200: raise ValueError(f"API Error: {response.text}")
+    res = response.json()
+    
+    true_elevation = res.get('elevation', frontend_elev)
     if true_elevation == 0.0 or true_elevation is None: true_elevation = 45.0 
         
-    daily_rain = [x if x is not None else 0.0 for x in weather_data['daily']['precipitation_sum']]
-    daily_soil = [x if x is not None else 0.0 for x in weather_data['daily']['soil_moisture_0_to_7cm_mean']]
+    daily_rain = [x if x is not None else 0.0 for x in res['daily']['precipitation_sum']]
+    daily_soil = [x if x is not None else 0.0 for x in res['daily']['soil_moisture_0_to_7cm_mean']]
     
     p3 = sum(daily_rain[-4:-1])
     p7 = sum(daily_rain[-8:-1]) 
@@ -104,16 +161,11 @@ def calculate_physics(weather_data, is_urban, river_dist, frontend_elev):
     basin_risk = (max_elev - true_elevation) / (river_dist + 10.0)
     
     return {
-        'True_Elevation': true_elevation,
-        'Past_3D_Rainfall_mm': p3,
-        'Past_7D_Rainfall_mm': p7,
-        'Past_14D_Rainfall_mm': p14,
-        'Past_30D_Rainfall_mm': p30,
-        'Past_7D_Soil_Moisture': soil7,
-        'Soil_Moisture_Velocity': soil_vel,
-        'Rainfall_Anomaly_Z': rain_z,
-        'Runoff_Potential': runoff,
-        'Basin_Accumulation_Risk': basin_risk
+        'True_Elevation': true_elevation, 'Past_3D_Rainfall_mm': p3,
+        'Past_7D_Rainfall_mm': p7, 'Past_14D_Rainfall_mm': p14,
+        'Past_30D_Rainfall_mm': p30, 'Past_7D_Soil_Moisture': soil7,
+        'Soil_Moisture_Velocity': soil_vel, 'Rainfall_Anomaly_Z': rain_z,
+        'Runoff_Potential': runoff, 'Basin_Accumulation_Risk': basin_risk
     }
 
 def generate_human_insights(input_data, is_at_risk):
@@ -124,14 +176,14 @@ def generate_human_insights(input_data, is_at_risk):
     is_urban = input_data.get('Is_Urban', 0)
 
     if is_at_risk:
-        if rain > 35: insights.append(f"Severe active rainfall ({round(rain)}mm) is heavily overloading drainage capacity.")
-        elif rain > 15: insights.append(f"Moderate active rainfall ({round(rain)}mm) is contributing to rising water levels.")
-        if soil > 0.55: insights.append(f"High soil saturation ({round(soil*100)}%) is limiting the ground's ability to absorb new rain.")
+        if rain > 50: insights.append(f"Severe active rainfall ({round(rain)}mm) is heavily overloading drainage capacity.")
+        elif rain > 25: insights.append(f"Moderate active rainfall ({round(rain)}mm) is contributing to rising water levels.")
+        if soil > 0.60: insights.append(f"High soil saturation ({round(soil*100)}%) is limiting the ground's ability to absorb new rain.")
         if river_dist < 1000: insights.append(f"Proximity to the river ({round(river_dist)}m) poses a potential overflow threat.")
-        if is_urban == 1 and rain > 10: insights.append("Concrete urban surfaces are preventing natural water absorption, increasing runoff risk.")
+        if is_urban == 1 and rain > 15: insights.append("Concrete urban surfaces are preventing natural water absorption, increasing runoff risk.")
     else:
-        if rain < 40: insights.append(f"Low active rainfall ({round(rain)}mm) is keeping river and drainage levels stable.")
-        if soil < 0.65: insights.append(f"Healthy soil capacity ({round(soil*100)}%) means the ground can safely absorb upcoming rain.")
+        if rain < 20: insights.append(f"Low active rainfall ({round(rain)}mm) is keeping river and drainage levels stable.")
+        if soil < 0.50: insights.append(f"Healthy soil capacity ({round(soil*100)}%) means the ground can safely absorb upcoming rain.")
         if river_dist > 1000: insights.append(f"The community is safely situated far away from major river overflow zones.")
 
     if not insights:
@@ -139,84 +191,52 @@ def generate_human_insights(input_data, is_at_risk):
         else: insights.append("Environmental metrics are currently stable and within historical safety baselines.")
     return insights[:3]
 
-async def process_all_lgas():
-    db_rows = []
-    timestamp = datetime.now().isoformat()
-    
-    async with httpx.AsyncClient() as client:
-        for index, row in df_lgas.iterrows():
-            lga_name = row['ADM2_NAME']
-            lat = row['Latitude']
-            lon = row['Longitude']
-            
-            print(f"[{index + 1}/{len(df_lgas)}] Processing {lga_name}...")
-            
-            weather_data = await fetch_weather_for_lga(client, lat, lon)
-            
-            # MANDATORY SLEEP: Even if it fails, we MUST pause to prevent chain-reaction rate limits!
-            await asyncio.sleep(1.5)
-            
-            if not weather_data:
-                print(f"  -> CRITICAL: Failed to fetch weather for {lga_name} after retries. Skipping.")
-                continue
-                
-            weather_features = calculate_physics(
-                weather_data, row.get('Is_Urban', 0), row.get('Distance_to_River_m', 5000), row.get('Elevation_m', 45)
-            )
-            
-            input_data = {
-                'Distance_to_River_m': row.get('Distance_to_River_m', 5000),
-                'Is_Urban': row.get('Is_Urban', 0),
-                'RP': row.get('RP', 5.0),
-                'AEP': 1.0 / row.get('RP', 5.0) if row.get('RP', 5.0) > 0 else 0.2
-            }
-            input_data.update(weather_features)
-            
-            df_input = pd.DataFrame([input_data])
-            if feature_cols:
-                for col in feature_cols:
-                    if col not in df_input.columns: df_input[col] = 0.0
-                X_input = df_input[feature_cols]
-            else:
-                X_input = df_input.drop(columns=['Elevation_m', 'True_Elevation'], errors='ignore')
+@app.post("/predict")
+async def predict_flood_risk(data: PredictRequest):
+    if model is None: raise HTTPException(status_code=500, detail="ML Model not loaded on server.")
 
-            prob = float(model.predict_proba(X_input)[0][1])
-            is_at_risk = prob >= 0.50
-            
-            if prob >= 0.75: tier = "HIGH RISK"
-            elif prob >= 0.50: tier = "MODERATE RISK"
-            else: tier = "SAFE"
-            
-            explanation = generate_human_insights(input_data, is_at_risk)
-            
-            db_rows.append({
-                "lga_name": lga_name,
-                "status": "AT RISK" if is_at_risk else "SAFE",
-                "tier": tier,
-                "probability_percent": round(prob * 100, 1),
+    try:
+        weather_features = await fetch_and_calculate_weather(
+            lat=data.lat, lon=data.lon, is_urban=data.Is_Urban, 
+            river_dist=data.Distance_to_River_m, frontend_elev=data.Elevation_m
+        )
+        
+        input_data = {
+            'Distance_to_River_m': data.Distance_to_River_m, 'Is_Urban': data.Is_Urban,
+            'RP': data.RP, 'AEP': 1.0 / data.RP if data.RP > 0 else 0.2
+        }
+        input_data.update(weather_features)
+
+        df = pd.DataFrame([input_data])
+        if feature_cols:
+            for col in feature_cols:
+                if col not in df.columns: df[col] = 0.0
+            X_input = df[feature_cols]
+        else:
+            X_input = df.drop(columns=['Elevation_m', 'True_Elevation'], errors='ignore')
+
+        prob = float(model.predict_proba(X_input)[0][1])
+        is_at_risk = prob >= 0.50
+        
+        if prob >= 0.75: tier = "HIGH RISK"
+        elif prob >= 0.50: tier = "MODERATE RISK"
+        else: tier = "SAFE"
+
+        insights = generate_human_insights(input_data, is_at_risk)
+
+        return {
+            "status": "AT RISK" if is_at_risk else "SAFE", "tier": tier,
+            "probability_percent": round(prob * 100, 1), "risk_level": 1 if is_at_risk else 0,
+            "weather": {
                 "rainfall_7d": round(weather_features['Past_7D_Rainfall_mm'], 1),
                 "soil_moisture_7d": round(weather_features['Past_7D_Soil_Moisture'] * 100, 1),
-                "elevation": round(weather_features['True_Elevation'], 1),
-                "explanation": explanation,
-                "raw_inputs": input_data,
-                "last_updated": timestamp
-            })
-
-    # Push all 700+ rows to the permanent database in one bulk UPSERT!
-    if db_rows:
-        print(f"Pushing {len(db_rows)} records to Supabase...")
-        try:
-            # We insert in chunks of 200 just to be safe with Supabase limits
-            chunk_size = 200
-            for i in range(0, len(db_rows), chunk_size):
-                chunk = db_rows[i:i + chunk_size]
-                supabase.table("flood_predictions").upsert(chunk).execute()
-                print(f"  -> Successfully pushed chunk {i} to {i + len(chunk)}")
-            print(f"\n--- Batch Complete! Data safely secured in Supabase at {timestamp} ---")
-        except Exception as e:
-             print(f"CRITICAL ERROR saving to database: {e}")
-    else:
-        print("No valid rows were generated. Skipping database push.")
+                "runoff_potential": round(weather_features['Runoff_Potential'], 1),
+                "elevation": round(weather_features['True_Elevation'], 1)
+            },
+            "explanation": insights
+        }
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))
 
 if __name__ == "__main__":
-    asyncio.run(process_all_lgas())
+    uvicorn.run("fastapi_ml_backend:app", host="127.0.0.1", port=8000, reload=True)

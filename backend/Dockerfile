@@ -11,11 +11,11 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 
 
-COPY . .
-COPY ../models models/
-COPY ../data data/
+COPY . /app/backend
+COPY ../models /app/models
+COPY ../data /app/data
 
-WORKDIR /app
+WORKDIR /app/backend
 
 EXPOSE 8000
 

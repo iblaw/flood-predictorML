@@ -228,6 +228,7 @@ data/*.json
 !data/latest_predictions.json
 # Model checkpoints (ignore large serialized models)
 models/*.joblib
+!models/baseline_tree_model.joblib
 models/*.pkl
 models/*.pkl.gz
 models/*.pb

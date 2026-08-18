@@ -7,15 +7,24 @@ import pandas as pd
 import httpx
 from datetime import datetime
 import numpy as np
-import json
 import os
 import subprocess
 import sys
+from supabase import create_client, Client
 
 # --- PATH CONFIGURATION ---
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 MODEL_PATH = os.path.join(BASE_DIR, "..", "models", "deployed_flood_model.joblib")
-JSON_OUTPUT_PATH = os.path.join(BASE_DIR, "..", "data", "latest_predictions.json")
+
+# --- SUPABASE CONFIGURATION ---
+SUPABASE_URL = os.environ.get("SUPABASE_URL")
+SUPABASE_KEY = os.environ.get("SUPABASE_KEY")
+
+if SUPABASE_URL and SUPABASE_KEY:
+    supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
+else:
+    supabase = None
+    print("Warning: SUPABASE_URL or SUPABASE_KEY environment variables not found.")
 
 app = FastAPI(title="Flood Forecast ML API", description="AI Backend for 3MTT Capstone")
 
@@ -38,7 +47,6 @@ except Exception as e:
     model = None
 
 
-# --- BACKGROUND TASK TRIGGER WITH UNBUFFERED LOGS ---
 @app.get("/trigger-batch-update")
 async def trigger_batch_update(background_tasks: BackgroundTasks, key: str = ""):
     if key != "3mtt-capstone-secure-key":
@@ -47,32 +55,59 @@ async def trigger_batch_update(background_tasks: BackgroundTasks, key: str = "")
     def run_worker():
         print("Starting background batch worker via API trigger...", flush=True)
         script_path = os.path.join(BASE_DIR, "batch_update_worker.py")
-        
-        # The "-u" flag tells Python not to buffer the output, pushing it instantly to Render logs
         subprocess.run(["python", "-u", script_path], stdout=sys.stdout, stderr=sys.stderr)
-        
-        print("Background batch worker finished and updated the JSON!", flush=True)
+        print("Background batch worker finished and pushed data to Supabase!", flush=True)
         
     background_tasks.add_task(run_worker)
-    return {"status": "success", "message": "Batch update triggered successfully in the background. It will finish in ~15 minutes."}
+    return {"status": "success", "message": "Batch update triggered successfully in the background."}
 
 
 @app.get("/bulk-forecasts")
 async def get_bulk_forecasts():
     """
-    Instantly returns the pre-computed predictions.
-    Includes a fallback if the JSON file has been deleted or not created yet.
+    Fetches pre-computed predictions directly from the permanent Supabase database.
+    Formats the output perfectly so the Next.js frontend doesn't need to be changed!
     """
+    if not supabase:
+        print("Database not connected. Returning empty dataset.")
+        return {"last_updated": None, "total_locations": 0, "predictions": {}}
+
     try:
-        with open(JSON_OUTPUT_PATH, "r") as f:
-            data = json.load(f)
-        return data
-    except FileNotFoundError:
-        print(f"Warning: {JSON_OUTPUT_PATH} not found. Returning empty dataset.")
+        # Fetch all rows from the database
+        response = supabase.table("flood_predictions").select("*").execute()
+        rows = response.data
+        
+        if not rows:
+            return {"last_updated": None, "total_locations": 0, "predictions": {}}
+
+        # Reconstruct the exact JSON dictionary format the frontend expects
+        predictions = {}
+        last_updated = rows[0].get("last_updated") 
+        
+        for row in rows:
+            predictions[row["lga_name"]] = {
+                "status": row["status"],
+                "tier": row["tier"],
+                "probability_percent": float(row["probability_percent"]),
+                "weather": {
+                    "rainfall_7d": float(row["rainfall_7d"]),
+                    "soil_moisture_7d": float(row["soil_moisture_7d"]),
+                    "elevation": float(row["elevation"])
+                },
+                "explanation": row["explanation"],
+                "raw_inputs": row["raw_inputs"]
+            }
+            
+        return {
+            "last_updated": last_updated,
+            "total_locations": len(predictions),
+            "predictions": predictions
+        }
+        
+    except Exception as e:
+        print(f"Warning: Failed to fetch from Supabase. Error: {e}")
         return {"last_updated": None, "total_locations": 0, "predictions": {}}
-    except json.JSONDecodeError:
-        print(f"Warning: {JSON_OUTPUT_PATH} is corrupted. Returning empty dataset.")
-        return {"last_updated": None, "total_locations": 0, "predictions": {}}
+
 
 class PredictRequest(BaseModel):
     lat: float
@@ -182,7 +217,6 @@ async def predict_flood_risk(data: PredictRequest):
         prob = float(model.predict_proba(X_input)[0][1])
         is_at_risk = prob >= 0.50
         
-        # --- NEW TERMINOLOGY UPDATE ---
         if prob >= 0.75: tier = "HIGH RISK"
         elif prob >= 0.50: tier = "MODERATE RISK"
         else: tier = "SAFE"

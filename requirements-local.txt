@@ -20,3 +20,6 @@ geopy>=2.4.0
 geopandas>=0.14.1
 shapely>=2.0.2
 rasterio>=1.3.9
+
+#database
+supabase

@@ -4,6 +4,8 @@ import path from 'path';
 import ForecastClient from './ForecastClient';
 import { LGA } from './ForecastCard';
 
+export const dynamic = 'force-dynamic';
+
 export default async function ForecastsPage() {
   // Read the parsed JSON from the server side
   const lgasFilePath = path.join(process.cwd(), 'src', 'data', 'lgas.json');

@@ -2,19 +2,28 @@ import pandas as pd
 import httpx
 import asyncio
 import joblib
-import json
 import time
-from datetime import datetime, timedelta
+from datetime import datetime
 import numpy as np
 import os
+from supabase import create_client, Client
 
 print("--- Starting Daily Flood Prediction Batch Processor ---")
+
+# --- SUPABASE CONFIGURATION ---
+SUPABASE_URL = os.environ.get("SUPABASE_URL")
+SUPABASE_KEY = os.environ.get("SUPABASE_KEY")
+
+if not SUPABASE_URL or not SUPABASE_KEY:
+    print("CRITICAL ERROR: Supabase credentials missing. Batch process cannot save data.")
+    exit()
+
+supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
 
 # --- PATH CONFIGURATION ---
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 MODEL_PATH = os.path.join(BASE_DIR, "..", "models", "deployed_flood_model.joblib")
 CSV_PATH = os.path.join(BASE_DIR, "..", "data", "master_lga_static_lookup.csv")
-JSON_OUTPUT_PATH = os.path.join(BASE_DIR, "..", "data", "latest_predictions.json")
 
 # 1. Load the Model
 try:
@@ -37,7 +46,6 @@ except Exception as e:
     exit()
 
 async def fetch_weather_for_lga(client, lat, lon):
-    """Fetches weather data for a single LGA."""
     url = "https://api.open-meteo.com/v1/forecast"
     params = {
         "latitude": lat,
@@ -47,14 +55,12 @@ async def fetch_weather_for_lga(client, lat, lon):
         "daily": ["precipitation_sum", "soil_moisture_0_to_7cm_mean"],
         "timezone": "Africa/Lagos"
     }
-    
     response = await client.get(url, params=params, timeout=15.0)
     if response.status_code != 200:
         return None
     return response.json()
 
 def calculate_physics(weather_data, is_urban, river_dist, frontend_elev):
-    """Replicates your exact ML physics feature engineering."""
     true_elevation = weather_data.get('elevation', frontend_elev)
     if true_elevation == 0.0 or true_elevation is None: true_elevation = 45.0 
         
@@ -99,7 +105,6 @@ def generate_human_insights(input_data, is_at_risk):
     soil = input_data.get('Past_7D_Soil_Moisture', 0)
     river_dist = input_data.get('Distance_to_River_m', 1000)
     is_urban = input_data.get('Is_Urban', 0)
-    elevation = input_data.get('True_Elevation', 45)
 
     if is_at_risk:
         if rain > 35: insights.append(f"Severe active rainfall ({round(rain)}mm) is heavily overloading drainage capacity.")
@@ -118,7 +123,7 @@ def generate_human_insights(input_data, is_at_risk):
     return insights[:3]
 
 async def process_all_lgas():
-    results = {}
+    db_rows = []
     timestamp = datetime.now().isoformat()
     
     async with httpx.AsyncClient() as client:
@@ -129,18 +134,15 @@ async def process_all_lgas():
             
             print(f"[{index + 1}/{len(df_lgas)}] Processing {lga_name}...")
             
-            # Fetch weather
             weather_data = await fetch_weather_for_lga(client, lat, lon)
             if not weather_data:
                 print(f"  -> Failed to fetch weather for {lga_name}")
                 continue
                 
-            # Calculate features
             weather_features = calculate_physics(
                 weather_data, row.get('Is_Urban', 0), row.get('Distance_to_River_m', 5000), row.get('Elevation_m', 45)
             )
             
-            # Combine for model
             input_data = {
                 'Distance_to_River_m': row.get('Distance_to_River_m', 5000),
                 'Is_Urban': row.get('Is_Urban', 0),
@@ -157,47 +159,38 @@ async def process_all_lgas():
             else:
                 X_input = df_input.drop(columns=['Elevation_m', 'True_Elevation'], errors='ignore')
 
-            # Predict
             prob = float(model.predict_proba(X_input)[0][1])
             is_at_risk = prob >= 0.50
             
-            # --- NEW TERMINOLOGY UPDATE ---
             if prob >= 0.75: tier = "HIGH RISK"
             elif prob >= 0.50: tier = "MODERATE RISK"
             else: tier = "SAFE"
             
-            # Generate XAI explanation array
             explanation = generate_human_insights(input_data, is_at_risk)
             
-            # Save to dictionary
-            results[lga_name] = {
+            # Format exactly as our SQL table expects
+            db_rows.append({
+                "lga_name": lga_name,
                 "status": "AT RISK" if is_at_risk else "SAFE",
                 "tier": tier,
                 "probability_percent": round(prob * 100, 1),
-                "weather": {
-                    "rainfall_7d": round(weather_features['Past_7D_Rainfall_mm'], 1),
-                    "soil_moisture_7d": round(weather_features['Past_7D_Soil_Moisture'] * 100, 1),
-                    "elevation": round(weather_features['True_Elevation'], 1)
-                },
+                "rainfall_7d": round(weather_features['Past_7D_Rainfall_mm'], 1),
+                "soil_moisture_7d": round(weather_features['Past_7D_Soil_Moisture'] * 100, 1),
+                "elevation": round(weather_features['True_Elevation'], 1),
                 "explanation": explanation,
-                "raw_inputs": input_data 
-            }
+                "raw_inputs": input_data,
+                "last_updated": timestamp
+            })
             
-            # Polite API pause
             await asyncio.sleep(1.0)
 
-    # Save the master JSON file inside data/
-    output_data = {
-        "last_updated": timestamp,
-        "total_locations": len(results),
-        "predictions": results
-    }
-    
-    os.makedirs(os.path.dirname(JSON_OUTPUT_PATH), exist_ok=True)
-    with open(JSON_OUTPUT_PATH, "w") as f:
-        json.dump(output_data, f, indent=4)
-        
-    print(f"\n--- Batch Complete! Saved to {JSON_OUTPUT_PATH} at {timestamp} ---")
+    # Push all 700+ rows to the permanent database in one bulk UPSERT!
+    print(f"Pushing {len(db_rows)} records to Supabase...")
+    try:
+        response = supabase.table("flood_predictions").upsert(db_rows).execute()
+        print(f"\n--- Batch Complete! Data safely secured in Supabase at {timestamp} ---")
+    except Exception as e:
+         print(f"CRITICAL ERROR saving to database: {e}")
 
 if __name__ == "__main__":
     asyncio.run(process_all_lgas())

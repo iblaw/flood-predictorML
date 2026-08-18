@@ -152,7 +152,7 @@ const blocks = [
     svg: (
       <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full max-w-[200px] overflow-visible">
         {/* Forward arrow / Expansion */}
-        <motion.path d="M20 50 L70 50 M50 30 L70 50 L50 70" stroke="black" strokeWidth="6" strokeLinecap="round" strokeLinejoin="round" fill="none" variants={{ hover: { x: 10, stroke: "#2563eb", transition: { duration: 0.3, yoyo: Infinity } } }} />
+        <motion.path d="M20 50 L70 50 M50 30 L70 50 L50 70" stroke="black" strokeWidth="6" strokeLinecap="round" strokeLinejoin="round" fill="none" variants={{ hover: { x: 10, stroke: "#2563eb", transition: { duration: 0.3, repeat: Infinity, repeatType: 'reverse' } } }} />
         <circle cx="85" cy="50" r="4" fill="#2563eb" />
       </svg>
     )

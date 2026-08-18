@@ -1,5 +1,5 @@
 import uvicorn
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, BackgroundTasks
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import joblib
@@ -9,6 +9,7 @@ from datetime import datetime
 import numpy as np
 import json
 import os
+import subprocess
 
 # --- PATH CONFIGURATION ---
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -34,6 +35,29 @@ try:
 except Exception as e:
     print(f"Warning: Could not load model. Error: {e}")
     model = None
+
+
+# --- NEW: BACKGROUND TASK TRIGGER ---
+@app.get("/trigger-batch-update")
+async def trigger_batch_update(background_tasks: BackgroundTasks, key: str = ""):
+    """
+    A secured endpoint that triggers the nightly batch processor.
+    We use a query parameter 'key' to prevent random people from triggering it.
+    """
+    if key != "3mtt-capstone-secure-key":
+        raise HTTPException(status_code=401, detail="Unauthorized")
+    
+    def run_worker():
+        print("Starting background batch worker via API trigger...")
+        # This tells the server to run the batch script quietly in the background
+        script_path = os.path.join(BASE_DIR, "batch_update_worker.py")
+        subprocess.run(["python", script_path])
+        print("Background batch worker finished and updated the JSON!")
+        
+    # Adds the function to a background queue so the API responds instantly
+    background_tasks.add_task(run_worker)
+    return {"status": "success", "message": "Batch update triggered successfully in the background. It will finish in ~15 minutes."}
+
 
 @app.get("/bulk-forecasts")
 async def get_bulk_forecasts():

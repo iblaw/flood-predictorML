@@ -23,7 +23,8 @@ export default function ForecastClient({ lgas }: ForecastClientProps) {
 
   useEffect(() => {
     // Fetch bulk predictions once on mount
-    fetch('http://127.0.0.1:8000/bulk-forecasts')
+    const backendUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000';
+    fetch(`${backendUrl}/bulk-forecasts`)
       .then(res => res.json())
       .then(data => {
         if (data && data.predictions) {

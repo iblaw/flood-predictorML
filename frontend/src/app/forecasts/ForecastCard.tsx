@@ -54,7 +54,8 @@ export default function ForecastCard({ lga, bulkData, isBulkLoaded }: ForecastCa
     if (loading) return;
     setLoading(true);
     try {
-      const res = await fetch('http://127.0.0.1:8000/predict', {
+      const backendUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000';
+      const res = await fetch(`${backendUrl}/predict`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

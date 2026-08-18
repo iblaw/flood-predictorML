@@ -223,7 +223,7 @@ __marimo__/
 
 # Data exclusions (ignore large CSVs & JSONs, but track lookup metadata)
 data/*.csv
-!data/master_lga_static_lookup.csv
+#data/master_lga_static_lookup.csv
 data/*.json
 !data/latest_predictions.json
 

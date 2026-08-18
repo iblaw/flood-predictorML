@@ -20,6 +20,7 @@ export default function ForecastClient({ lgas }: ForecastClientProps) {
   
   const [bulkPredictions, setBulkPredictions] = useState<Record<string, any>>({});
   const [isBulkLoaded, setIsBulkLoaded] = useState(false);
+  const [lastUpdated, setLastUpdated] = useState<string | null>(null);
 
   useEffect(() => {
     // Fetch bulk predictions once on mount
@@ -29,6 +30,18 @@ export default function ForecastClient({ lgas }: ForecastClientProps) {
       .then(data => {
         if (data && data.predictions) {
           setBulkPredictions(data.predictions);
+        }
+        if (data && data.last_updated) {
+          const date = new Date(data.last_updated);
+          const formatted = date.toLocaleString('en-US', {
+            month: 'short',
+            day: 'numeric',
+            year: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            hour12: true
+          });
+          setLastUpdated(formatted);
         }
       })
       .catch(err => console.error("Failed to fetch bulk predictions", err))
@@ -93,6 +106,11 @@ export default function ForecastClient({ lgas }: ForecastClientProps) {
       
       {/* Header & Search */}
       <div className="flex flex-col items-center w-full max-w-2xl text-center mb-16 relative">
+        {lastUpdated && (
+          <div className="mb-4 bg-blue-100 border-2 border-black text-black px-4 py-1.5 text-xs sm:text-sm font-mono rounded-full font-bold shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] inline-block">
+            Last Forecast: {lastUpdated}
+          </div>
+        )}
         <h1 className="text-3xl sm:text-5xl lg:text-7xl font-black text-black mb-8 tracking-tight">Flood Forecasts</h1>
         <div className="relative w-full px-4 sm:px-0">
           <input 
@@ -166,8 +184,8 @@ export default function ForecastClient({ lgas }: ForecastClientProps) {
           {(() => {
             const counts = {
               'ALL': filteredLgas.length,
-              'EVACUATION WARNING': 0,
-              'FLOOD WATCH': 0,
+              'HIGH RISK': 0,
+              'MODERATE RISK': 0,
               'SAFE': 0
             };
 
@@ -181,7 +199,7 @@ export default function ForecastClient({ lgas }: ForecastClientProps) {
               }
             });
 
-            return ['ALL', 'EVACUATION WARNING', 'FLOOD WATCH', 'SAFE'].map((filterType) => {
+            return ['ALL', 'HIGH RISK', 'MODERATE RISK', 'SAFE'].map((filterType) => {
               const count = counts[filterType as keyof typeof counts];
               const isDisabled = filterType !== 'ALL' && count === 0;
               return (
@@ -191,7 +209,7 @@ export default function ForecastClient({ lgas }: ForecastClientProps) {
                   disabled={isDisabled}
                   className={`flex items-center gap-2 border-2 border-black font-bold px-4 py-2 text-sm rounded-lg transition-colors ${statusFilter === filterType ? 'bg-black text-white' : 'bg-white text-black hover:bg-gray-100'} ${isDisabled ? 'opacity-40 cursor-not-allowed' : ''}`}
                 >
-                  {filterType === 'ALL' ? 'All' : filterType === 'EVACUATION WARNING' ? 'Evacuation Warning' : filterType === 'FLOOD WATCH' ? 'Flood Watch' : 'Safe'}
+                  {filterType === 'ALL' ? 'All' : filterType === 'HIGH RISK' ? 'High Risk' : filterType === 'MODERATE RISK' ? 'Moderate Risk' : 'Safe'}
                   <span className={`text-xs px-2 py-0.5 rounded-full ${statusFilter === filterType ? 'bg-white/20 text-white' : 'bg-black/10 text-black'}`}>
                     {count}
                   </span>

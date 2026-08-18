@@ -38,7 +38,7 @@ except Exception as e:
     model = None
 
 
-# --- NEW: BACKGROUND TASK TRIGGER WITH UNBUFFERED LOGS ---
+# --- BACKGROUND TASK TRIGGER WITH UNBUFFERED LOGS ---
 @app.get("/trigger-batch-update")
 async def trigger_batch_update(background_tasks: BackgroundTasks, key: str = ""):
     if key != "3mtt-capstone-secure-key":
@@ -49,7 +49,6 @@ async def trigger_batch_update(background_tasks: BackgroundTasks, key: str = "")
         script_path = os.path.join(BASE_DIR, "batch_update_worker.py")
         
         # The "-u" flag tells Python not to buffer the output, pushing it instantly to Render logs
-        # We also pipe stdout and stderr directly to the FastAPI server's console
         subprocess.run(["python", "-u", script_path], stdout=sys.stdout, stderr=sys.stderr)
         
         print("Background batch worker finished and updated the JSON!", flush=True)
@@ -60,12 +59,20 @@ async def trigger_batch_update(background_tasks: BackgroundTasks, key: str = "")
 
 @app.get("/bulk-forecasts")
 async def get_bulk_forecasts():
-    if not os.path.exists(JSON_OUTPUT_PATH):
+    """
+    Instantly returns the pre-computed predictions.
+    Includes a fallback if the JSON file has been deleted or not created yet.
+    """
+    try:
+        with open(JSON_OUTPUT_PATH, "r") as f:
+            data = json.load(f)
+        return data
+    except FileNotFoundError:
+        print(f"Warning: {JSON_OUTPUT_PATH} not found. Returning empty dataset.")
         return {"last_updated": None, "total_locations": 0, "predictions": {}}
-        
-    with open(JSON_OUTPUT_PATH, "r") as f:
-        data = json.load(f)
-    return data
+    except json.JSONDecodeError:
+        print(f"Warning: {JSON_OUTPUT_PATH} is corrupted. Returning empty dataset.")
+        return {"last_updated": None, "total_locations": 0, "predictions": {}}
 
 class PredictRequest(BaseModel):
     lat: float
@@ -175,8 +182,9 @@ async def predict_flood_risk(data: PredictRequest):
         prob = float(model.predict_proba(X_input)[0][1])
         is_at_risk = prob >= 0.50
         
-        if prob >= 0.75: tier = "EVACUATION WARNING"
-        elif prob >= 0.50: tier = "FLOOD WATCH"
+        # --- NEW TERMINOLOGY UPDATE ---
+        if prob >= 0.75: tier = "HIGH RISK"
+        elif prob >= 0.50: tier = "MODERATE RISK"
         else: tier = "SAFE"
 
         insights = generate_human_insights(input_data, is_at_risk)

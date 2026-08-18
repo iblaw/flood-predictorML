@@ -110,8 +110,8 @@ export default function ForecastCard({ lga, bulkData, isBulkLoaded }: ForecastCa
 
   // Derived properties from BFF data
   const predictionStatus = data?.tier ? data.tier.toUpperCase() : "PENDING";
-  const isEvacuation = predictionStatus === "EVACUATION WARNING";
-  const isWatch = predictionStatus === "FLOOD WATCH";
+  const isEvacuation = predictionStatus === "HIGH RISK";
+  const isWatch = predictionStatus === "MODERATE RISK";
   const isSafe = predictionStatus === "SAFE";
   const isUnavailable = predictionStatus === "UNAVAILABLE";
   const statusText = isDataMissing ? "ANALYZING..." : predictionStatus;

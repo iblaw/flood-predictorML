@@ -161,8 +161,9 @@ async def process_all_lgas():
             prob = float(model.predict_proba(X_input)[0][1])
             is_at_risk = prob >= 0.50
             
-            if prob >= 0.75: tier = "EVACUATION WARNING"
-            elif prob >= 0.50: tier = "FLOOD WATCH"
+            # --- NEW TERMINOLOGY UPDATE ---
+            if prob >= 0.75: tier = "HIGH RISK"
+            elif prob >= 0.50: tier = "MODERATE RISK"
             else: tier = "SAFE"
             
             # Generate XAI explanation array

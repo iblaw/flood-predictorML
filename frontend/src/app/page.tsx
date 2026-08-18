@@ -245,10 +245,10 @@ export default function Home() {
       <footer className="w-full bg-black text-white border-t-2 border-black py-12 px-6 text-center space-y-6 mt-32 relative overflow-hidden flex flex-col items-center justify-center">
         
         <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 relative z-40">
-           <a href="#" className="border-2 border-white shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] rounded-full px-6 sm:px-8 py-2 sm:py-3 bg-black text-white font-bold text-sm sm:text-base tracking-wide hover:-translate-y-1 hover:-translate-x-1 hover:shadow-[6px_6px_0px_0px_rgba(255,255,255,1)] transition-all">
+           <a href="https://www.linkedin.com/in/ibrahim-lawal-83b3623bb?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" rel="noopener noreferrer" className="border-2 border-white shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] rounded-full px-6 sm:px-8 py-2 sm:py-3 bg-black text-white font-bold text-sm sm:text-base tracking-wide hover:-translate-y-1 hover:-translate-x-1 hover:shadow-[6px_6px_0px_0px_rgba(255,255,255,1)] transition-all">
              LinkedIn
            </a>
-           <a href="#" className="border-2 border-white shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] rounded-full px-6 sm:px-8 py-2 sm:py-3 bg-black text-white font-bold text-sm sm:text-base tracking-wide hover:-translate-y-1 hover:-translate-x-1 hover:shadow-[6px_6px_0px_0px_rgba(255,255,255,1)] transition-all">
+           <a href="https://www.instagram.com/miharbileo35/" target="_blank" rel="noopener noreferrer" className="border-2 border-white shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] rounded-full px-6 sm:px-8 py-2 sm:py-3 bg-black text-white font-bold text-sm sm:text-base tracking-wide hover:-translate-y-1 hover:-translate-x-1 hover:shadow-[6px_6px_0px_0px_rgba(255,255,255,1)] transition-all">
              Instagram
            </a>
         </div>

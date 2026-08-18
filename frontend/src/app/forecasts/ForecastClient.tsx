@@ -106,12 +106,12 @@ export default function ForecastClient({ lgas }: ForecastClientProps) {
       
       {/* Header & Search */}
       <div className="flex flex-col items-center w-full max-w-2xl text-center mb-16 relative">
+        <h1 className="text-3xl sm:text-5xl lg:text-7xl font-black text-black mb-2 tracking-tight">Flood Forecasts</h1>
         {lastUpdated && (
-          <div className="mb-4 bg-blue-100 border-2 border-black text-black px-4 py-1.5 text-xs sm:text-sm font-mono rounded-full font-bold shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] inline-block">
+          <div className="text-sm font-medium text-black/80 font-mono mt-2 mb-6">
             Last Forecast: {lastUpdated}
           </div>
         )}
-        <h1 className="text-3xl sm:text-5xl lg:text-7xl font-black text-black mb-8 tracking-tight">Flood Forecasts</h1>
         <div className="relative w-full px-4 sm:px-0">
           <input 
             type="text" 

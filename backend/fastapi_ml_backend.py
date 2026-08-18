@@ -10,6 +10,7 @@ import numpy as np
 import json
 import os
 import subprocess
+import sys
 
 # --- PATH CONFIGURATION ---
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -37,34 +38,28 @@ except Exception as e:
     model = None
 
 
-# --- NEW: BACKGROUND TASK TRIGGER ---
+# --- NEW: BACKGROUND TASK TRIGGER WITH UNBUFFERED LOGS ---
 @app.get("/trigger-batch-update")
 async def trigger_batch_update(background_tasks: BackgroundTasks, key: str = ""):
-    """
-    A secured endpoint that triggers the nightly batch processor.
-    We use a query parameter 'key' to prevent random people from triggering it.
-    """
     if key != "3mtt-capstone-secure-key":
         raise HTTPException(status_code=401, detail="Unauthorized")
     
     def run_worker():
-        print("Starting background batch worker via API trigger...")
-        # This tells the server to run the batch script quietly in the background
+        print("Starting background batch worker via API trigger...", flush=True)
         script_path = os.path.join(BASE_DIR, "batch_update_worker.py")
-        subprocess.run(["python", script_path])
-        print("Background batch worker finished and updated the JSON!")
         
-    # Adds the function to a background queue so the API responds instantly
+        # The "-u" flag tells Python not to buffer the output, pushing it instantly to Render logs
+        # We also pipe stdout and stderr directly to the FastAPI server's console
+        subprocess.run(["python", "-u", script_path], stdout=sys.stdout, stderr=sys.stderr)
+        
+        print("Background batch worker finished and updated the JSON!", flush=True)
+        
     background_tasks.add_task(run_worker)
     return {"status": "success", "message": "Batch update triggered successfully in the background. It will finish in ~15 minutes."}
 
 
 @app.get("/bulk-forecasts")
 async def get_bulk_forecasts():
-    """
-    Instantly returns pre-computed predictions for all LGAs from the data folder.
-    Takes < 5ms to execute.
-    """
     if not os.path.exists(JSON_OUTPUT_PATH):
         return {"last_updated": None, "total_locations": 0, "predictions": {}}
         

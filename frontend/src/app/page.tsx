@@ -195,14 +195,14 @@ export default function Home() {
             onClick={() => document.getElementById('technical-stuff')?.scrollIntoView({ behavior: 'smooth' })}
             className="text-blue-600 font-medium text-base sm:text-lg lg:text-xl border-b-[1.5px] border-blue-600 pb-1 hover:text-blue-800 transition-colors bg-transparent"
           >
-            Scroll to read the technical stuff
+            Scroll to read about the project
           </button>
         </motion.div>
         
       </section>
 
       {/* Technical Writeup Section */}
-      <section id="technical-stuff" className="flex flex-col gap-8 sm:gap-12 w-full pt-12 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section id="technical-stuff" className="flex flex-col gap-8 sm:gap-12 w-full pt-12 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-32">
         {blocks.map((block, idx) => (
           <motion.div 
             key={idx}
@@ -240,47 +240,7 @@ export default function Home() {
           </motion.div>
         ))}
       </section>
-
-      {/* Footer Section */}
-      <footer className="w-full bg-black text-white border-t-2 border-black py-12 px-6 text-center space-y-6 mt-32 relative overflow-hidden flex flex-col items-center justify-center">
-        
-        <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 relative z-40">
-           <a href="https://www.linkedin.com/in/ibrahim-lawal-83b3623bb?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" rel="noopener noreferrer" className="border-2 border-white shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] rounded-full px-6 sm:px-8 py-2 sm:py-3 bg-black text-white font-bold text-sm sm:text-base tracking-wide hover:-translate-y-1 hover:-translate-x-1 hover:shadow-[6px_6px_0px_0px_rgba(255,255,255,1)] transition-all">
-             LinkedIn
-           </a>
-           <a href="https://www.instagram.com/miharbileo35/" target="_blank" rel="noopener noreferrer" className="border-2 border-white shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] rounded-full px-6 sm:px-8 py-2 sm:py-3 bg-black text-white font-bold text-sm sm:text-base tracking-wide hover:-translate-y-1 hover:-translate-x-1 hover:shadow-[6px_6px_0px_0px_rgba(255,255,255,1)] transition-all">
-             Instagram
-           </a>
-        </div>
-
-        <div className="border-2 border-white shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] rounded-full px-6 py-2 inline-block bg-black text-white font-bold text-sm sm:text-base tracking-widest uppercase relative z-40 mt-8 mb-4">
-          a 3mtt capstone project
-        </div>
-
-        {/* Blueprint Marquee Banner */}
-        <div className="w-full flex overflow-hidden whitespace-nowrap opacity-60 relative z-20 mt-8 pt-4 border-y-2 border-white border-dashed">
-          <motion.div
-            className="flex whitespace-nowrap"
-            animate={{ x: ["0%", "-50%"] }}
-            transition={{ ease: "linear", duration: 30, repeat: Infinity }}
-          >
-            <div className="flex items-center gap-12 sm:gap-16 pr-12 sm:pr-16">
-              {[...Array(4)].map((_, i) => (
-                 <span key={i} className="text-5xl sm:text-7xl lg:text-[8rem] font-black tracking-tighter uppercase select-none" style={{ WebkitTextStroke: '2px white', color: 'transparent' }}>
-                    FLOOD FORECAST ML
-                 </span>
-              ))}
-            </div>
-            <div className="flex items-center gap-12 sm:gap-16 pr-12 sm:pr-16">
-              {[...Array(4)].map((_, i) => (
-                 <span key={i} className="text-5xl sm:text-7xl lg:text-[8rem] font-black tracking-tighter uppercase select-none" style={{ WebkitTextStroke: '2px white', color: 'transparent' }}>
-                    FLOOD FORECAST ML
-                 </span>
-              ))}
-            </div>
-          </motion.div>
-        </div>
-      </footer>
     </div>
   );
 }
+

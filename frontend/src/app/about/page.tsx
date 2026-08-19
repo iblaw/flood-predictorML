@@ -1,14 +1,14 @@
 "use client";
 
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 const skills = [
   { name: "Python", width: "100%" },
   { name: "Machine Learning", width: "85%" },
   { name: "Next.js", width: "95%" },
   { name: "Geospatial GIS", width: "75%" },
-  { name: "Streamlit / FastAPI", width: "90%" },
+  { name: "FastAPI", width: "90%" },
   { name: "UI/UX Design", width: "80%" },
 ];
 
@@ -18,28 +18,30 @@ export default function About() {
   return (
     <div className="flex flex-col min-h-screen pt-20 pb-48 px-6 sm:px-8 max-w-6xl mx-auto w-full">
       
-      <h1 className="text-3xl sm:text-5xl lg:text-7xl font-black text-black md:text-center tracking-tight">About</h1>
+      <h1 className="text-3xl sm:text-5xl lg:text-7xl font-black text-black md:text-center tracking-tight mb-12">About the Fellow</h1>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 lg:gap-x-16 gap-y-10 sm:gap-y-12 w-full mt-12 md:mt-16">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 lg:gap-x-16 gap-y-10 sm:gap-y-12 w-full mt-4">
         
-        {/* Bio (Top on Mobile, Top-Right on Desktop) */}
-        <div className="order-1 md:order-none md:col-start-2 md:row-start-1 flex flex-col justify-end">
-          <div className="text-xl sm:text-2xl lg:text-[26px] leading-snug font-medium text-black">
-            <p className="mb-2 text-blue-600 font-bold">Hi there!</p>
-            <p>
-              My Name is Lawal Ibrahim a 3mtt fellow Nextgen cohort.
-              Fellow number: [82832893894]. I am on the AI/ML track
-              and this is my capstone project.
-            </p>
-          </div>
-        </div>
-
-        {/* Profile Image Container (Middle on Mobile, Left spanning on Desktop) */}
+        {/* Profile Image Container (Left spanning on Desktop) */}
         <div className="order-2 md:order-none md:col-start-1 md:row-start-1 md:row-span-2">
           <div className="w-full aspect-square bg-black rounded-[2.5rem] sm:rounded-[3rem]"></div>
         </div>
 
-        {/* Skill Tree (Bottom on Mobile, Bottom-Right on Desktop) */}
+        {/* Neo-brutalist Profile Card (Top-Right on Desktop) */}
+        <div className="order-1 md:order-none md:col-start-2 md:row-start-1 flex flex-col justify-end">
+          <div className="border-2 border-black p-8 rounded-2xl shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] bg-white text-xl sm:text-2xl lg:text-[26px] leading-snug font-medium text-black">
+            <p>
+              Hi there! I am Lawal Ibrahim, a 3MTT NextGen Cohort Fellow specializing in the AI/ML track. This Flood Forecast ML system serves as my capstone project.
+            </p>
+            <div className="mt-6">
+              <span className="bg-yellow-300 border-2 border-black px-3 py-1 font-mono text-sm font-bold inline-block">
+                Fellow ID: FE/26/5038794255
+              </span>
+            </div>
+          </div>
+        </div>
+
+        {/* Skill Tree (Bottom-Right on Desktop) */}
         <div className="order-3 md:order-none md:col-start-2 md:row-start-2 flex flex-col justify-start md:mt-4">
           <h2 className="text-2xl sm:text-3xl font-bold tracking-tight mb-4">Skill tree</h2>
           <div className="flex flex-col gap-3 sm:gap-4 w-full relative">

@@ -209,22 +209,27 @@ async def process_all_lgas():
                 "last_updated": timestamp
             })
 
-    # ONLY push if we have rows to prevent Supabase PGRST100 crash
+            # --- THE NEW RESILIENCE UPGRADE ---
+            # Save to database in chunks of 50 as we go.
+            # If Render shuts down the server at minute 14, we don't lose the work!
+            if len(db_rows) >= 50:
+                print(f"  -> Saving checkpoint: Pushing 50 records to Supabase...")
+                try:
+                    supabase.table("flood_predictions").upsert(db_rows).execute()
+                    db_rows = [] # Clear the list for the next batch
+                except Exception as e:
+                    print(f"  [!] Checkpoint push failed: {e}")
+
+    # Push any remaining rows at the very end
     if len(db_rows) > 0:
-        print(f"Pushing {len(db_rows)} records to Supabase...")
+        print(f"Pushing final {len(db_rows)} records to Supabase...")
         try:
-            chunk_size = 200
-            for i in range(0, len(db_rows), chunk_size):
-                chunk = db_rows[i:i + chunk_size]
-                # Ensure the chunk is not empty before executing
-                if len(chunk) > 0:
-                    supabase.table("flood_predictions").upsert(chunk).execute()
-                    print(f"  -> Successfully pushed chunk {i} to {i + len(chunk)}")
-            print(f"\n--- Batch Complete! Data safely secured in Supabase at {timestamp} ---")
+            supabase.table("flood_predictions").upsert(db_rows).execute()
+            print(f"\n--- Batch Complete! All data safely secured in Supabase at {timestamp} ---")
         except Exception as e:
              print(f"CRITICAL ERROR saving to database: {e}")
     else:
-        print("No valid rows were generated. Skipping database push.")
+        print("\n--- Batch Complete! All chunks successfully saved. ---")
 
 if __name__ == "__main__":
     asyncio.run(process_all_lgas())

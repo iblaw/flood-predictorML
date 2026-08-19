@@ -222,43 +222,60 @@ export default function ForecastClient({ lgas }: ForecastClientProps) {
 
       {/* Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 w-full">
-        {(() => {
-          let finalLgas = filteredLgas;
-          if (statusFilter !== 'ALL') {
-            finalLgas = filteredLgas.filter(lga => {
-              const data = bulkPredictions[lga.name];
-              if (!data) return false;
-              const tier = data.tier ? data.tier.toUpperCase() : "PENDING";
-              return tier === statusFilter;
-            });
-          }
-
-          if (finalLgas.length === 0) {
-            return (
-              <div className="col-span-full bg-white border-2 border-black rounded-3xl p-12 text-center shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] space-y-4">
-                <div className="w-16 h-16 bg-red-100 border-2 border-black rounded-full flex items-center justify-center mx-auto">
-                  <SearchX className="w-8 h-8 text-black" />
-                </div>
-                <h3 className="text-2xl font-black heading-font">No Communities Match This Filter</h3>
-                <p className="text-gray-600 max-w-md mx-auto text-sm">
-                  We couldn't find any local government areas matching this criteria. Try clearing your filters or searching for a different area.
-                </p>
-                <div className="pt-4">
-                  <button
-                    onClick={() => { setSearchValue(''); setStatusFilter('ALL'); }}
-                    className="border-2 border-black bg-black text-white font-bold px-6 py-3 rounded-lg hover:bg-gray-800 transition-colors shadow-[4px_4px_0px_0px_rgba(0,0,0,0.3)]"
-                  >
-                    Clear Search & Filters
-                  </button>
-                </div>
+        {!isBulkLoaded ? (
+          [...Array(6)].map((_, i) => (
+            <div key={i} className="bg-gray-200 animate-pulse border-2 border-black rounded-3xl h-64 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] p-6 flex flex-col gap-4">
+              <div className="flex justify-between items-start w-full">
+                <div className="w-1/2 h-8 bg-gray-300 rounded-md"></div>
+                <div className="w-16 h-8 bg-gray-300 rounded-full"></div>
               </div>
-            );
-          }
+              <div className="flex-1 flex flex-col gap-3 mt-4">
+                <div className="w-full h-4 bg-gray-300 rounded-md"></div>
+                <div className="w-5/6 h-4 bg-gray-300 rounded-md"></div>
+                <div className="w-4/6 h-4 bg-gray-300 rounded-md"></div>
+              </div>
+              <div className="w-full h-10 bg-gray-300 rounded-xl mt-auto"></div>
+            </div>
+          ))
+        ) : (
+          (() => {
+            let finalLgas = filteredLgas;
+            if (statusFilter !== 'ALL') {
+              finalLgas = filteredLgas.filter(lga => {
+                const data = bulkPredictions[lga.name];
+                if (!data) return false;
+                const tier = data.tier ? data.tier.toUpperCase() : "PENDING";
+                return tier === statusFilter;
+              });
+            }
 
-          return finalLgas.map((lga, idx) => (
-            <ForecastCard key={`${lga.name}-${idx}`} lga={lga} bulkData={bulkPredictions[lga.name]} isBulkLoaded={isBulkLoaded} />
-          ));
-        })()}
+            if (finalLgas.length === 0) {
+              return (
+                <div className="col-span-full bg-white border-2 border-black rounded-3xl p-12 text-center shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] space-y-4">
+                  <div className="w-16 h-16 bg-red-100 border-2 border-black rounded-full flex items-center justify-center mx-auto">
+                    <SearchX className="w-8 h-8 text-black" />
+                  </div>
+                  <h3 className="text-2xl font-black heading-font">No Communities Match This Filter</h3>
+                  <p className="text-gray-600 max-w-md mx-auto text-sm">
+                    We couldn't find any local government areas matching this criteria. Try clearing your filters or searching for a different area.
+                  </p>
+                  <div className="pt-4">
+                    <button
+                      onClick={() => { setSearchValue(''); setStatusFilter('ALL'); }}
+                      className="border-2 border-black bg-black text-white font-bold px-6 py-3 rounded-lg hover:bg-gray-800 transition-colors shadow-[4px_4px_0px_0px_rgba(0,0,0,0.3)]"
+                    >
+                      Clear Search & Filters
+                    </button>
+                  </div>
+                </div>
+              );
+            }
+
+            return finalLgas.map((lga, idx) => (
+              <ForecastCard key={`${lga.name}-${idx}`} lga={lga} bulkData={bulkPredictions[lga.name]} isBulkLoaded={isBulkLoaded} />
+            ));
+          })()
+        )}
       </div>
     </div>
   );

@@ -3,45 +3,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 
-function TypewriterHeading() {
-  const fullText = "Flood Forecast ML";
-  const [length, setLength] = useState(0);
-
-  useEffect(() => {
-    if (length < fullText.length) {
-      const timeout = setTimeout(() => {
-        setLength(l => l + 1);
-      }, 100);
-      return () => clearTimeout(timeout);
-    }
-  }, [length]);
-
-  const p1 = fullText.slice(0, 6).slice(0, Math.min(length, 6)); 
-  const p2 = length > 6 ? fullText.slice(6, 14).slice(0, Math.min(length - 6, 8)) : ""; 
-  const p3 = length > 14 ? fullText.slice(14).slice(0, length - 14) : ""; 
-
-  return (
-    <div className="relative w-full flex flex-col items-center justify-center text-center">
-      {/* Hidden placeholder to prevent layout shift */}
-      <h1 className="text-3xl sm:text-5xl lg:text-7xl font-black text-transparent leading-[1.1] tracking-tighter select-none pointer-events-none w-full">
-        Flood <span className="text-transparent">Forecast</span> ML
-      </h1>
-
-      {/* Visible typewriter text */}
-      <h1 className="absolute top-0 left-1/2 -translate-x-1/2 text-3xl sm:text-5xl lg:text-7xl font-black text-black leading-[1.1] tracking-tighter w-full">
-        {p1}
-        <span className="text-blue-600">{p2}</span>
-        {p3}
-        <motion.span
-          animate={{ opacity: [1, 0, 1] }}
-          transition={{ repeat: Infinity, duration: 0.8, ease: "linear" }}
-          className="inline-block w-[0.25em] h-[0.8em] bg-blue-600 ml-1 sm:ml-2 align-baseline"
-        />
-      </h1>
-    </div>
-  );
-}
-
 const blocks = [
   {
     num: "01",
@@ -166,13 +127,20 @@ export default function Home() {
       {/* Hero Section */}
       <section className="w-full max-w-5xl mx-auto px-4 py-20 flex flex-col items-center justify-center text-center space-y-8 min-h-[60vh] mb-24 z-10 relative">
         
-        <TypewriterHeading />
+        <motion.h1 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3, ease: 'easeOut' }}
+          className="text-4xl sm:text-6xl lg:text-[5.5rem] font-black text-black leading-[1] tracking-tighter w-full"
+        >
+          Flood <span className="text-blue-600">Forecast</span> ML
+        </motion.h1>
 
         {/* Badge & Arrow directly beneath heading */}
         <motion.div 
-          initial={{ opacity: 0, y: 20 }} 
+          initial={{ opacity: 0, y: 10 }} 
           animate={{ opacity: 1, y: 0 }} 
-          transition={{ delay: 2, duration: 0.5 }} 
+          transition={{ delay: 0.1, duration: 0.3 }} 
           className="flex flex-row items-center justify-center gap-3 sm:gap-4 mt-8 lg:mt-12"
         >
           <svg width="40" height="40" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="animate-pulse shrink-0">
@@ -184,18 +152,35 @@ export default function Home() {
           </span>
         </motion.div>
 
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.2, duration: 0.3 }}
+          className="max-w-2xl mx-auto text-lg sm:text-xl text-gray-700 mt-6 font-medium"
+        >
+          An AI-powered early warning system leveraging geospatial telemetry and machine learning to preemptively predict flood risks across vulnerable Nigerian communities.
+        </motion.p>
+
         {/* Scroll link */}
         <motion.div 
-          initial={{ opacity: 0, y: 20 }} 
-          animate={{ opacity: 1, y: 0 }} 
-          transition={{ delay: 2, duration: 0.5 }} 
-          className="pt-8 w-full flex justify-center"
+          initial={{ opacity: 0 }} 
+          animate={{ opacity: 1 }} 
+          transition={{ delay: 0.3, duration: 0.3 }} 
+          className="pt-12 w-full flex justify-center"
         >
           <button 
             onClick={() => document.getElementById('technical-stuff')?.scrollIntoView({ behavior: 'smooth' })}
-            className="text-blue-600 font-medium text-base sm:text-lg lg:text-xl border-b-[1.5px] border-blue-600 pb-1 hover:text-blue-800 transition-colors bg-transparent"
+            className="group flex flex-col items-center gap-2 text-blue-600 font-medium text-base sm:text-lg lg:text-xl hover:text-blue-800 transition-colors bg-transparent"
           >
-            Scroll to read about the project
+            <span className="border-b-[1.5px] border-blue-600 pb-1 group-hover:border-blue-800 transition-colors">Scroll to read more about the project</span>
+            <motion.svg 
+              width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
+              animate={{ y: [0, 5, 0] }}
+              transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+            >
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <polyline points="19 12 12 19 5 12"></polyline>
+            </motion.svg>
           </button>
         </motion.div>
         

@@ -33,10 +33,30 @@ export default function About() {
             <p>
               Hi there! I am Lawal Ibrahim, a 3MTT NextGen Cohort Fellow specializing in the AI/ML track. This Flood Forecast ML system serves as my capstone project.
             </p>
-            <div className="mt-6">
-              <span className="bg-yellow-300 border-2 border-black px-3 py-1 font-mono text-sm font-bold inline-block">
-                Fellow ID: FE/26/5038794255
-              </span>
+            <div className="mt-6 flex flex-col gap-4">
+              <div>
+                <span className="bg-yellow-300 border-2 border-black px-3 py-1 font-mono text-sm font-bold inline-block">
+                  Fellow ID: FE/26/5038794255
+                </span>
+              </div>
+              <div className="flex flex-wrap gap-3 mt-2">
+                <a 
+                  href="https://www.linkedin.com/in/ibrahim-lawal-83b3623bb?utm_source=share_via&utm_content=profile&utm_medium=member_android" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="border-2 border-black bg-blue-600 text-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] hover:translate-x-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all px-4 py-2 text-sm font-bold inline-block"
+                >
+                  LinkedIn
+                </a>
+                <a 
+                  href="https://www.instagram.com/miharbileo35/" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="border-2 border-black bg-[#E1306C] text-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] hover:translate-x-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all px-4 py-2 text-sm font-bold inline-block"
+                >
+                  Instagram
+                </a>
+              </div>
             </div>
           </div>
         </div>

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Space_Grotesk } from "next/font/google";
 import "./globals.css";
-import Navigation from "./Navigation";
+import Navbar from "../components/Navbar";
 import PageTransition from "./PageTransition";
 import Footer from "./Footer";
 
@@ -30,7 +30,7 @@ export default function RootLayout({
           backgroundSize: '48px 48px'
         }}
       >
-        <Navigation />
+        <Navbar />
         
         <PageTransition>
           {children}

@@ -7,6 +7,9 @@ from datetime import datetime
 import numpy as np
 import os
 from supabase import create_client, Client
+from dotenv import load_dotenv
+
+load_dotenv() # This reads the .env file if it exists!
 
 print("--- Starting Daily Flood Prediction Batch Processor ---")
 

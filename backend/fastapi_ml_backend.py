@@ -11,6 +11,9 @@ import os
 import subprocess
 import sys
 from supabase import create_client, Client
+from dotenv import load_dotenv
+
+load_dotenv() # This reads the .env file if it exists!
 
 # --- 1. INITIALIZE APP IMMEDIATELY ---
 app = FastAPI(title="Flood Forecast ML API", description="AI Backend for 3MTT Capstone")

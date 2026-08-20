@@ -6,7 +6,7 @@ import { SearchX } from 'lucide-react';
 import { LGA, BFFData } from './ForecastCard';
 import dynamic from 'next/dynamic';
 
-const VirtualizedGrid = dynamic(() => import('../../components/VirtualizedForecastGrid'), { ssr: false });
+import ForecastGrid from '../../components/ForecastGrid';
 
 interface ForecastClientProps {
   lgas: LGA[];
@@ -138,7 +138,7 @@ export default function ForecastClient({ lgas }: ForecastClientProps) {
   const isTransitioning = isPending || searchValue !== deferredSearchValue;
 
   return (
-    <div className="flex flex-col flex-1 h-full w-full overflow-hidden items-center pt-24 pb-6 px-6 sm:px-8 max-w-6xl mx-auto">
+    <div className="flex flex-col w-full min-h-screen items-center pt-24 pb-12 px-6 sm:px-8 max-w-[1400px] mx-auto">
       <div className="w-full shrink-0 z-10 bg-white pb-6 flex flex-col items-center">
         <div className="flex flex-col items-center w-full max-w-2xl text-center relative">
           <h1 className="text-3xl sm:text-5xl lg:text-7xl font-black text-black mb-2 tracking-tight">Flood Forecasts</h1>
@@ -235,7 +235,7 @@ export default function ForecastClient({ lgas }: ForecastClientProps) {
       </div>
       </div>
       
-      <div className={`w-full flex-1 flex flex-col relative transition-opacity duration-200 ${isTransitioning ? 'opacity-50 pointer-events-none' : 'opacity-100'}`}>
+      <div className={`w-full relative transition-opacity duration-200 ${isTransitioning ? 'opacity-50 pointer-events-none' : 'opacity-100'}`}>
         {!isBulkLoaded ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 w-full">
             {[...Array(6)].map((_, i) => (
@@ -277,7 +277,7 @@ export default function ForecastClient({ lgas }: ForecastClientProps) {
             </div>
           </div>
         ) : (
-          <VirtualizedGrid 
+          <ForecastGrid 
             lgas={finalLgas}
             bulkPredictions={bulkPredictions}
             isBulkLoaded={isBulkLoaded}

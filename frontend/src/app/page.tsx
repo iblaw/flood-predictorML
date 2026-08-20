@@ -3,12 +3,13 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import { TerminalSquare } from 'lucide-react';
 
 const blocks = [
   {
     num: "01",
     title: "Introduction | Defining the Problem",
-    text: "Predicting floods isn't just about knowing when it's going to rain. It's about understanding how that rain interacts with the ground, the infrastructure, and local river systems. I started building Flood Forecast ML because I wanted to move away from reactive disaster response and see if we could actually process environmental data fast enough to predict these events before they get out of hand. But to do that, I first had to figure out how to teach a model what a flood actually looks like on paper.",
+    text: "The idea behind Flood Forecast ML came from a simple question: can we predict a flood before it becomes a disaster? Flood risk isn't determined by rainfall alone. It depends on how much rain has fallen, what the soil is like, the terrain, how wet the ground already is, and how all these factors interact. So the goal of this project was to see if we could bring these different environmental signals together and use them to predict flood risk early enough to actually be useful.",
     svg: (
       <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full max-w-[200px] overflow-visible">
         <motion.path d="M10 50 Q 30 20 50 50 T 90 50" stroke="black" strokeWidth="4" fill="none" strokeLinecap="round" variants={{ hover: { pathLength: [0, 1], transition: { duration: 1.5, ease: "easeInOut" } } }} />
@@ -20,7 +21,7 @@ const blocks = [
   {
     num: "02",
     title: "Solution Approach | Framing the Target",
-    text: "That turned out to be the biggest hurdle right out of the gate—figuring out our \"ground truth.\" We don't have perfect, historical flood logs for every local government area in Nigeria. To get around this, I used satellite-derived data from SFED and built a proxy target using Return Periods (RP) and Annual Exceedance Probabilities (AEP). It required a lot of data wrangling, but it finally gave the model a solid, objective target to learn from. Of course, having a target is useless without the underlying weather data, which led me straight into my next major headache.",
+    text: "One of the first problems I had to solve was figuring out what the model should actually learn. I needed an objective flood-risk target for over 700 Nigerian local government areas, but comprehensive historical flood records weren't readily available. So I built a proxy target using historical Return Periods (RP) and satellite-derived hydrological data. This gave the model a consistent way to learn how different environmental conditions relate to flood probability across Nigeria.",
     svg: (
       <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full max-w-[200px] overflow-visible">
         <circle cx="50" cy="50" r="35" stroke="black" strokeWidth="4" strokeDasharray="8 8" />
@@ -34,7 +35,7 @@ const blocks = [
   {
     num: "03",
     title: "Data Pipeline | Dealing with APIs and Limits",
-    text: "Pulling historical and forecast weather telemetry for over 700 communities sounds straightforward until you hit API rate limits. Watching a script run for hours only to crash halfway through because of a timeout from Open-Meteo is incredibly frustrating. I had to rewrite the backend pipeline to be much more resilient—adding exponential backoffs, chunking the requests, and saving checkpoints to Supabase so a network blip wouldn't force me to start over from scratch. Once the data was safely flowing, I quickly realized that raw numbers weren't going to be enough.",
+    text: "Getting the data was another challenge. A production system needs a pipeline that can reliably pull weather and environmental data, but requesting data for hundreds of locations at once quickly runs into API and network limitations. I built a Backend For Frontend (BFF) layer around the data pipeline and added things like request chunking and exponential backoff. This meant the system could keep fetching data reliably without falling apart whenever the API was slow or requests failed.",
     svg: (
       <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full max-w-[200px] overflow-visible">
         <motion.rect x="20" y="20" width="60" height="15" rx="4" stroke="black" strokeWidth="4" fill="white" variants={{ hover: { y: -5, transition: { duration: 0.3 } } }} />
@@ -49,7 +50,7 @@ const blocks = [
   {
     num: "04",
     title: "Feature Engineering | Modeling How Water Behaves",
-    text: "Feeding basic rainfall totals into a model doesn't work well because the ground doesn't hold water forever. A heavy storm yesterday is a much bigger risk than a heavy storm three weeks ago that has already drained. I spent a lot of time engineering features to account for this, like soil moisture velocity and decaying precipitation indexes. It was really about teaching the model how the environment naturally retains and loses water over time. With these complex hydrological features in place, I needed an algorithm that could actually make sense of them.",
+    text: "This was one of the parts I found most interesting. Raw rainfall values don't tell the whole story. 50mm of rain falling on already saturated soil is very different from 50mm falling on dry soil. So instead of feeding the model only raw measurements, I engineered features that capture how water behaves over time, including soil moisture changes and decaying precipitation accumulation. The idea was to give the model a better representation of the actual conditions that contribute to flooding.",
     svg: (
       <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full max-w-[200px] overflow-visible">
         <motion.circle cx="35" cy="50" r="20" stroke="black" strokeWidth="4" strokeDasharray="8 8" fill="none" variants={{ hover: { rotate: 360, transition: { duration: 4, ease: "linear", repeat: Infinity } } }} style={{ originX: '35px', originY: '50px' }} />
@@ -62,7 +63,7 @@ const blocks = [
   {
     num: "05",
     title: "Building the Brain | Why an Ensemble?",
-    text: "Because weather is chaotic, no single algorithm handles all its edge cases perfectly. Instead of trying to force everything through one model, I set up a Stacking Ensemble. By combining XGBoost, Random Forest, and Decision Trees with a Soft Voting Classifier, the models essentially cross-validate each other. It made the predictions much more stable and reliable across different types of terrain. But building a stable model is only part of the equation; I still had to prove it wasn't just blindly guessing.",
+    text: "I didn't want to rely on a single model to make the prediction. Different algorithms pick up different patterns, and flood behaviour can be pretty messy. I experimented with tree-based models including XGBoost, Random Forest, and Decision Trees, and combined them into an ensemble approach. The final system uses their combined predictions to produce a more stable forecast than relying on one model alone.",
     svg: (
       <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full max-w-[200px] overflow-visible">
         <circle cx="50" cy="20" r="8" stroke="black" strokeWidth="4" fill="white" />
@@ -78,7 +79,7 @@ const blocks = [
   {
     num: "06",
     title: "Evaluation & Interpretability | The Right Metrics",
-    text: "In flood prediction, standard accuracy is dangerously misleading. Out of over 13,000 evaluation samples in my dataset, only 375 were actual floods. A model that just guesses \"Safe\" every single time would look highly accurate but be completely useless. I focused heavily on the Precision-Recall curve (PR-AUC) and tuned my decision threshold to 0.904, which let me catch over 70% of actual floods while keeping false alarms low. Looking at the SHAP values also confirmed the model was making decisions based on the right factors—like AEP and topographic wetness—rather than just random noise. With a model I could finally trust, the last step was getting it out of my notebook and onto the web.",
+    text: "Accuracy wasn't a useful metric on its own because the dataset is heavily imbalanced. With less than 3% of the observations representing flood events, a model could achieve impressive-looking accuracy while still missing most actual floods. So I focused more heavily on the Precision-Recall curve and PR-AUC. I also tuned the decision threshold to 0.904 to improve flood detection while keeping false alarms under control. Finally, I used SHAP to understand what the model was actually paying attention to. The results showed that factors such as topographic wetness and accumulated precipitation were among the important predictors, which gave me more confidence that the model was learning meaningful environmental patterns rather than random correlations.",
     svg: (
       <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full max-w-[200px] overflow-visible">
         <motion.rect x="15" y="60" width="15" height="30" stroke="black" strokeWidth="4" fill="white" variants={{ hover: { height: 50, y: -20, fill: "#2563eb", transition: { duration: 0.5 } } }} />
@@ -91,7 +92,7 @@ const blocks = [
   {
     num: "07",
     title: "Production | Bringing It Online",
-    text: "Getting the code working locally was great, but the goal was always a live tool. I hooked the machine learning core up to a FastAPI backend, managed the database with Supabase, and built the interface using Next.js. Navigating free-tier server limits and optimizing the UI so it wouldn't lag under heavy data loads was a massive challenge. But seeing it finally run—calculating 24, 48, and 72-hour flood risk horizons across the country in milliseconds—made all the debugging completely worth it.",
+    text: "The final step was turning the model from something that worked in a Jupyter notebook into something people could actually use. I built the product using Next.js for the interface, FastAPI for the ML backend, and Supabase for data management. Since I was working with free-tier infrastructure, I had to be careful about server resources, API calls, and how data was processed. The result is a live system that can take current environmental conditions and generate flood-risk forecasts across 24, 48, and 72-hour horizons.",
     svg: (
       <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full max-w-[200px] overflow-visible">
         <motion.path d="M20 50 L40 50 L40 30 L60 30 L60 50 L80 50" stroke="black" strokeWidth="6" fill="none" strokeLinejoin="round" variants={{ hover: { stroke: "#2563eb", pathLength: [0, 1], transition: { duration: 1 } } }} />
@@ -158,6 +159,14 @@ export default function Home() {
           >
             Watch Demo Video
           </Link>
+          <a
+            href="https://colab.research.google.com/drive/1gtRA5ohLVmmIgA07jwwrTtQZhmb32uFZ?usp=sharing"
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="border-2 border-black bg-yellow-400 text-black px-8 py-4 font-bold text-lg font-mono hover:-translate-y-1 hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all flex items-center justify-center gap-2 uppercase"
+          >
+            <TerminalSquare size={20} /> VIEW COLAB NOTEBOOK
+          </a>
         </motion.div>
 
         <motion.div 

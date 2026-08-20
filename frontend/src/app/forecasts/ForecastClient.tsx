@@ -8,6 +8,7 @@ import { LGA, BFFData } from './ForecastCard';
 import dynamic from 'next/dynamic';
 
 import ForecastGrid from '../../components/ForecastGrid';
+import ForecastFilters from '../../components/ForecastFilters';
 
 interface ForecastClientProps {
   lgas: LGA[];
@@ -23,7 +24,6 @@ export default function ForecastClient({ lgas }: ForecastClientProps) {
 
   const [isLocating, setIsLocating] = useState(false);
 
-  const [statusFilter, setStatusFilter] = useState('ALL');
   const [isPending, startTransition] = useTransition();
 
   const [bulkPredictions, setBulkPredictions] = useState<Record<string, BFFData>>({});
@@ -80,12 +80,6 @@ export default function ForecastClient({ lgas }: ForecastClientProps) {
     );
   }, []);
 
-  const handleSetStatusFilter = useCallback((filterType: string) => {
-    startTransition(() => {
-      setStatusFilter(filterType);
-    });
-  }, []);
-
   const filteredLgas = useMemo(() => {
     if (!deferredSearchValue) return lgas;
 
@@ -111,30 +105,77 @@ export default function ForecastClient({ lgas }: ForecastClientProps) {
     return lgas.filter((lga) => lga.name.toLowerCase().includes(lowerSearch));
   }, [lgas, deferredSearchValue]);
 
-  const filterCounts = useMemo(() => {
-    const counts = { 'ALL': filteredLgas.length, 'HIGH RISK': 0, 'MODERATE RISK': 0, 'SAFE': 0 };
-    filteredLgas.forEach(lga => {
-      const data = bulkPredictions[lga.name];
-      if (data && data.tier) {
-        const tier = data.tier.toUpperCase();
-        if (counts[tier as keyof typeof counts] !== undefined) {
-          counts[tier as keyof typeof counts]++;
-        }
-      }
+  const [filters, setFilters] = useState<{ riskLevels: string[], timeHorizons: string[] }>({ riskLevels: [], timeHorizons: [] });
+
+  const handleApplyFilters = useCallback((newFilters: { riskLevels: string[], timeHorizons: string[] }) => {
+    startTransition(() => {
+      setFilters(newFilters);
     });
-    return counts;
-  }, [filteredLgas, bulkPredictions]);
+  }, []);
 
   const finalLgas = useMemo(() => {
-    if (statusFilter === 'ALL') return filteredLgas;
-
     return filteredLgas.filter(lga => {
       const data = bulkPredictions[lga.name];
       if (!data) return false;
-      const tier = data.tier ? data.tier.toUpperCase() : "PENDING";
-      return tier === statusFilter;
+      
+      const r_cur = data.risk_level ?? 0;
+      const r_24 = data.risk_24h ?? 0;
+      const r_48 = data.risk_48h ?? 0;
+      const r_72 = data.risk_72h ?? 0;
+
+      // Max risk calculation identical to ForecastCard
+      let maxRisk = -1;
+      let finalTier = "PENDING";
+      if (data.tier !== "UNAVAILABLE") {
+        const horizons = [r_cur, r_24, r_48, r_72];
+        maxRisk = Math.max(...horizons);
+        if (maxRisk >= 0.7) finalTier = "HIGH RISK";
+        else if (maxRisk >= 0.4) finalTier = "MODERATE RISK";
+        else finalTier = "SAFE";
+      } else {
+        finalTier = "UNAVAILABLE";
+      }
+
+      // 1. Risk Level Filter (OR within group)
+      const riskMatch = filters.riskLevels.length === 0 || filters.riskLevels.includes(finalTier);
+
+      // 2. Time Horizon Filter (OR within group, AND between groups)
+      let timeMatch = filters.timeHorizons.length === 0;
+      if (!timeMatch && data.tier !== "UNAVAILABLE") {
+        const timeChecks = [];
+        if (filters.timeHorizons.includes("CURRENT")) timeChecks.push(r_cur);
+        if (filters.timeHorizons.includes("24H")) timeChecks.push(r_24);
+        if (filters.timeHorizons.includes("48H")) timeChecks.push(r_48);
+        if (filters.timeHorizons.includes("72H")) timeChecks.push(r_72);
+        
+        // Find if ANY of the selected horizons match the required risk levels
+        // If riskLevels is empty, ANY selected horizon is fine.
+        // If riskLevels has items, AT LEAST ONE selected horizon must match one of the selected risk levels.
+        if (filters.riskLevels.length === 0) {
+          timeMatch = true; 
+        } else {
+          timeMatch = timeChecks.some(val => {
+            let tier = "SAFE";
+            if (val >= 0.7) tier = "HIGH RISK";
+            else if (val >= 0.4) tier = "MODERATE RISK";
+            return filters.riskLevels.includes(tier);
+          });
+        }
+      } else if (!timeMatch && data.tier === "UNAVAILABLE") {
+         // If time horizon filtered but data unavailable, it fails the time horizon filter usually
+         timeMatch = false;
+      }
+
+      // If user selected ONLY Risk Levels (e.g. HIGH RISK) but no Time Horizons, 
+      // the `timeMatch` is true, so it will just return `riskMatch`.
+      // If user selected BOTH (e.g. HIGH RISK and 24H), it must be High Risk at 24H (handled by timeMatch logic above).
+      // Wait, if both are selected, `timeMatch` checks if 24H is High Risk. But what if it's High Risk at 24H, does it satisfy `riskMatch`?
+      // `riskMatch` checks `finalTier`. If 24H is High Risk, `maxRisk` is >= High Risk, so `finalTier` is High Risk. So `riskMatch` is also true!
+      // This is logically sound.
+
+      return riskMatch && timeMatch;
     });
-  }, [filteredLgas, statusFilter, bulkPredictions]);
+  }, [filteredLgas, filters, bulkPredictions]);
 
   const isTransitioning = isPending || searchValue !== deferredSearchValue;
 
@@ -214,24 +255,8 @@ export default function ForecastClient({ lgas }: ForecastClientProps) {
             {isLocating ? 'Locating...' : 'my current location'}
           </button>
 
-          <div className="flex gap-4 mt-8 flex-wrap justify-center">
-            {['ALL', 'HIGH RISK', 'MODERATE RISK', 'SAFE'].map((filterType) => {
-              const count = filterCounts[filterType as keyof typeof filterCounts];
-              const isDisabled = filterType !== 'ALL' && count === 0;
-              return (
-                <button
-                  key={filterType}
-                  onClick={() => !isDisabled && handleSetStatusFilter(filterType)}
-                  disabled={isDisabled}
-                  className={`flex items-center gap-2 border-2 border-black font-bold px-4 py-2 text-sm rounded-lg transition-colors ${statusFilter === filterType ? 'bg-black text-white' : 'bg-white text-black hover:bg-gray-100'} ${isDisabled ? 'opacity-40 cursor-not-allowed' : ''}`}
-                >
-                  {filterType === 'ALL' ? 'All' : filterType === 'HIGH RISK' ? 'High Risk' : filterType === 'MODERATE RISK' ? 'Moderate Risk' : 'Safe'}
-                  <span className={`text-xs px-2 py-0.5 rounded-full ${statusFilter === filterType ? 'bg-white/20 text-white' : 'bg-black/10 text-black'}`}>
-                    {count}
-                  </span>
-                </button>
-              );
-            })}
+          <div className="flex gap-4 mt-8 flex-wrap justify-center w-full relative z-30">
+            <ForecastFilters onApply={handleApplyFilters} initialFilters={filters} />
           </div>
         </div>
       </div>
@@ -268,7 +293,7 @@ export default function ForecastClient({ lgas }: ForecastClientProps) {
                 onClick={() => {
                   setSearchValue('');
                   startTransition(() => {
-                    setStatusFilter('ALL');
+                    setFilters({ riskLevels: [], timeHorizons: [] });
                   });
                 }}
                 className="border-2 border-black bg-black text-white font-bold px-6 py-3 rounded-lg hover:bg-gray-800 transition-colors shadow-[4px_4px_0px_0px_rgba(0,0,0,0.3)]"

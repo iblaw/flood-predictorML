@@ -104,12 +104,44 @@ export default function ForecastCard({ lga, bulkData, isBulkLoaded }: ForecastCa
   const data = bulkData || localData;
   const isDataMissing = !data;
 
-  const predictionStatus = data?.tier ? data.tier.toUpperCase() : "PENDING";
+  // WATERFALL MAX RULE: Find highest risk across all time horizons
+  let maxRisk = -1;
+  let maxTimeframe = "CURRENT STATE";
+  let finalTier = "PENDING";
+
+  if (data && data.tier !== "UNAVAILABLE") {
+    const horizons = [
+      { name: "CURRENT STATE", val: data.risk_level ?? 0 },
+      { name: "24H FORECAST", val: data.risk_24h ?? 0 },
+      { name: "48H FORECAST", val: data.risk_48h ?? 0 },
+      { name: "72H FORECAST", val: data.risk_72h ?? 0 }
+    ];
+
+    for (const h of horizons) {
+      if (h.val > maxRisk) {
+        maxRisk = h.val;
+        maxTimeframe = h.name;
+      }
+    }
+    
+    // Map maxRisk back to tier (using identical thresholds: 0.7 = HIGH, 0.4 = MODERATE)
+    if (maxRisk >= 0.7) finalTier = "HIGH RISK";
+    else if (maxRisk >= 0.4) finalTier = "MODERATE RISK";
+    else finalTier = "SAFE";
+  } else if (data && data.tier === "UNAVAILABLE") {
+    finalTier = "UNAVAILABLE";
+    maxTimeframe = "ANYTIME";
+  }
+
+  const predictionStatus = finalTier;
   const isEvacuation = predictionStatus === "HIGH RISK";
   const isWatch = predictionStatus === "MODERATE RISK";
   const isSafe = predictionStatus === "SAFE";
   const isUnavailable = predictionStatus === "UNAVAILABLE";
-  const statusText = isDataMissing ? "ANALYZING..." : predictionStatus;
+  
+  const statusText = isDataMissing 
+    ? "ANALYZING..." 
+    : (isUnavailable ? "UNAVAILABLE" : `${predictionStatus} • ${maxTimeframe}`);
 
   const rainfall7d = data?.weather?.rainfall_7d || 0;
   const soilMoisture = data?.weather?.soil_moisture_7d || 0;

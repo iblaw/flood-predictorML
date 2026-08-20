@@ -11,7 +11,7 @@ export interface LGA {
   riverDistance: number;
   lat: number;
   lon: number;
-  elevation?: number; // Added in case data has it
+  elevation?: number;
 }
 
 export interface BFFData {
@@ -35,80 +35,69 @@ interface ForecastCardProps {
 }
 
 export default function ForecastCard({ lga, bulkData, isBulkLoaded }: ForecastCardProps) {
-  const [data, setData] = useState<BFFData | null>(null);
-  const [loading, setLoading] = useState(false);
+  const [localData, setLocalData] = useState<BFFData | null>(null);
   const [showModal, setShowModal] = useState(false);
+  const hasFetched = React.useRef(false);
   
-  // Sync with bulkData instantly
   useEffect(() => {
-    if (bulkData) {
-      setData(bulkData);
-    } else if (isBulkLoaded) {
-      // If bulk is loaded but we have no data, it means it's a custom coordinate not in the dictionary.
-      // We must fetch it dynamically.
+    if (!bulkData && isBulkLoaded && !hasFetched.current) {
+      hasFetched.current = true;
+      const fetchBFF = async () => {
+        try {
+          const backendUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000';
+          const res = await fetch(`${backendUrl}/predict`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              lat: parseFloat(lga.lat.toString()),
+              lon: parseFloat(lga.lon.toString()),
+              Elevation_m: parseFloat((lga.elevation || 0).toString()),
+              Distance_to_River_m: parseFloat(lga.riverDistance.toString()),
+              Is_Urban: parseInt(lga.isUrban.toString(), 10),
+              RP: parseFloat((lga.rp || 10.0).toString())
+            })
+          });
+
+          if (!res.ok) throw new Error('Network response was not ok');
+
+          const backendData = await res.json();
+          
+          if (backendData && backendData.tier) {
+            setLocalData(backendData); 
+          } else {
+            setLocalData({
+              tier: "UNAVAILABLE",
+              risk_level: 0,
+              explanation: [],
+              weather: {
+                rainfall_7d: 0,
+                soil_moisture_7d: 0,
+                runoff_potential: 0
+              }
+            });
+          }
+        } catch (error) {
+          console.error("ML Fetch Error:", error);
+          setLocalData({
+            tier: "UNAVAILABLE",
+            risk_level: 0,
+            explanation: [],
+            weather: {
+              rainfall_7d: 0,
+              soil_moisture_7d: 0,
+              runoff_potential: 0
+            }
+          });
+        }
+      };
+
       fetchBFF();
     }
-  }, [bulkData, isBulkLoaded]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [bulkData, isBulkLoaded, lga]);
 
-  const fetchBFF = async () => {
-    if (loading) return;
-    setLoading(true);
-    try {
-      const backendUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000';
-      const res = await fetch(`${backendUrl}/predict`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          lat: parseFloat(lga.lat.toString()),
-          lon: parseFloat(lga.lon.toString()),
-          Elevation_m: parseFloat((lga.elevation || 0).toString()),
-          Distance_to_River_m: parseFloat(lga.riverDistance.toString()),
-          Is_Urban: parseInt(lga.isUrban.toString(), 10),
-          RP: parseFloat((lga.rp || 10.0).toString())
-        })
-      });
-
-      if (!res.ok) throw new Error('Network response was not ok');
-
-      const backendData = await res.json();
-      
-      // Strictly check for the 'tier' key that our FastAPI backend returns
-      if (backendData && backendData.tier) {
-        setData(backendData); 
-      } else {
-        // Fallback state
-        setData({
-          tier: "UNAVAILABLE",
-          risk_level: 0,
-          explanation: [],
-          weather: {
-            rainfall_7d: 0,
-            soil_moisture_7d: 0,
-            runoff_potential: 0
-          }
-        });
-      }
-    } catch (error) {
-      console.error("ML Fetch Error:", error);
-      setData({
-        tier: "UNAVAILABLE",
-        risk_level: 0,
-        explanation: [],
-        weather: {
-          rainfall_7d: 0,
-          soil_moisture_7d: 0,
-          runoff_potential: 0
-        }
-      });
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  // If we haven't loaded bulk data yet and haven't fetched manually, we are 'LOADING'
+  const data = bulkData || localData;
   const isDataMissing = !data;
 
-  // Derived properties from BFF data
   const predictionStatus = data?.tier ? data.tier.toUpperCase() : "PENDING";
   const isEvacuation = predictionStatus === "HIGH RISK";
   const isWatch = predictionStatus === "MODERATE RISK";
@@ -119,8 +108,7 @@ export default function ForecastCard({ lga, bulkData, isBulkLoaded }: ForecastCa
   const rainfall7d = data?.weather?.rainfall_7d || 0;
   const soilMoisture = data?.weather?.soil_moisture_7d || 0;
   
-  // Synthesize UI values if backend omits them
-  const temperature = data?.weather?.temperature || 28.5; // fallback
+  const temperature = data?.weather?.temperature || 28.5;
   const weatherCode = data?.weather?.weather_code !== undefined ? data.weather.weather_code : (rainfall7d > 50 ? 65 : 3);
   const elevation = data?.weather?.elevation ?? lga.elevation ?? 0;
 
@@ -173,7 +161,6 @@ export default function ForecastCard({ lga, bulkData, isBulkLoaded }: ForecastCa
           </div>
         </div>
         
-        {/* Inline Weather Details */}
         <div className="w-full bg-zinc-900 border border-zinc-700 p-4 rounded-2xl flex justify-between items-center pointer-events-none group-hover:border-zinc-500 transition-colors">
           {isDataMissing ? (
             <div className="flex w-full justify-between items-center py-1">
@@ -207,7 +194,6 @@ export default function ForecastCard({ lga, bulkData, isBulkLoaded }: ForecastCa
         </div>
       </motion.div>
 
-      {/* Modal Overlay */}
       <AnimatePresence>
         {showModal && (
           <motion.div 

@@ -1,7 +1,8 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 
 const blocks = [
   {
@@ -10,7 +11,6 @@ const blocks = [
     text: "Flooding remains one of the most devastating natural disasters globally, causing massive economic loss and displacement. The core issue lies in the unpredictable nature of sudden climatic shifts. By building a robust ML pipeline, we aim to transition from reactive disaster management to proactive early warning systems, predicting events before they unfold.",
     svg: (
       <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full max-w-[200px] overflow-visible">
-        {/* River flow chart / topological lines */}
         <motion.path d="M10 50 Q 30 20 50 50 T 90 50" stroke="black" strokeWidth="4" fill="none" strokeLinecap="round" variants={{ hover: { pathLength: [0, 1], transition: { duration: 1.5, ease: "easeInOut" } } }} />
         <motion.path d="M10 65 Q 30 35 50 65 T 90 65" stroke="black" strokeWidth="3" strokeDasharray="6 6" fill="none" strokeLinecap="round" variants={{ hover: { x: [0, -10, 0], transition: { duration: 2, repeat: Infinity } } }} />
         <motion.circle cx="50" cy="50" r="6" fill="#2563eb" variants={{ hover: { scale: [1, 1.5, 1], transition: { duration: 1, repeat: Infinity } } }} />
@@ -23,7 +23,6 @@ const blocks = [
     text: "Our primary objective is to predict the likelihood of a flood event within a 7-day window. We approach this as a supervised binary classification problem. The target variable is derived from historical flood impact records, carefully aligned with leading meteorological indicators to train the model on preceding conditions.",
     svg: (
       <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full max-w-[200px] overflow-visible">
-        {/* Target crosshair / radar */}
         <circle cx="50" cy="50" r="35" stroke="black" strokeWidth="4" strokeDasharray="8 8" />
         <circle cx="50" cy="50" r="15" stroke="black" strokeWidth="4" />
         <motion.circle cx="50" cy="50" r="6" fill="#2563eb" variants={{ hover: { scale: [1, 2, 1], opacity: [1, 0.5, 1], transition: { duration: 1.5, repeat: Infinity } } }} />
@@ -38,7 +37,6 @@ const blocks = [
     text: "We sourced decades of climate data, including daily precipitation, soil moisture indexes, and upstream river discharge rates. The cleaning process involved aggressive imputation of missing values, aligning timestamps across multiple asynchronous sensors, and normalizing topographical datasets into a unified grid format.",
     svg: (
       <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full max-w-[200px] overflow-visible">
-        {/* Satellite nodes / Database cylinders */}
         <motion.rect x="20" y="20" width="60" height="15" rx="4" stroke="black" strokeWidth="4" fill="white" variants={{ hover: { y: -5, transition: { duration: 0.3 } } }} />
         <motion.rect x="20" y="45" width="60" height="15" rx="4" stroke="black" strokeWidth="4" fill="white" variants={{ hover: { y: 0, transition: { duration: 0.3 } } }} />
         <motion.rect x="20" y="70" width="60" height="15" rx="4" stroke="black" strokeWidth="4" fill="white" variants={{ hover: { y: 5, transition: { duration: 0.3 } } }} />
@@ -54,7 +52,6 @@ const blocks = [
     text: "Raw data rarely tells the whole story. We engineered synthetic features such as 7-day cumulative rainfall and rolling soil saturation ratios. Crucially, we applied SMOTE (Synthetic Minority Over-sampling Technique) to address class imbalance, ensuring the model doesn't ignore rare but catastrophic flood events.",
     svg: (
       <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full max-w-[200px] overflow-visible">
-        {/* Gears / Transformation */}
         <motion.circle cx="35" cy="50" r="20" stroke="black" strokeWidth="4" strokeDasharray="8 8" fill="none" variants={{ hover: { rotate: 360, transition: { duration: 4, ease: "linear", repeat: Infinity } } }} style={{ originX: '35px', originY: '50px' }} />
         <motion.circle cx="70" cy="50" r="12" stroke="black" strokeWidth="4" strokeDasharray="6 6" fill="none" variants={{ hover: { rotate: -360, transition: { duration: 3, ease: "linear", repeat: Infinity } } }} style={{ originX: '70px', originY: '50px' }} />
         <path d="M5 50 L15 50" stroke="black" strokeWidth="4" strokeLinecap="round" />
@@ -68,7 +65,6 @@ const blocks = [
     text: "We benchmarked three distinct algorithms: Logistic Regression (as a baseline), Random Forest (for robust nonlinear boundaries), and XGBoost (for aggressive sequential error correction). Models were trained using k-fold cross-validation to prevent overfitting on specific storm seasons.",
     svg: (
       <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full max-w-[200px] overflow-visible">
-        {/* Network / Branching tree */}
         <circle cx="50" cy="20" r="8" stroke="black" strokeWidth="4" fill="white" />
         <motion.circle cx="20" cy="80" r="8" stroke="black" strokeWidth="4" fill="white" variants={{ hover: { fill: "#2563eb", transition: { duration: 0.3 } } }} />
         <motion.circle cx="50" cy="80" r="8" stroke="black" strokeWidth="4" fill="white" variants={{ hover: { fill: "#2563eb", transition: { duration: 0.3 } } }} />
@@ -85,7 +81,6 @@ const blocks = [
     text: "Accuracy alone is misleading for imbalanced datasets. We focused heavily on Precision-Recall AUC and the F1-score. XGBoost emerged as the champion, achieving an F1-score of 0.88, striking the optimal balance between catching genuine threats and minimizing false alarms.",
     svg: (
       <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full max-w-[200px] overflow-visible">
-        {/* Bar chart / metrics */}
         <motion.rect x="15" y="60" width="15" height="30" stroke="black" strokeWidth="4" fill="white" variants={{ hover: { height: 50, y: -20, fill: "#2563eb", transition: { duration: 0.5 } } }} />
         <motion.rect x="42.5" y="40" width="15" height="50" stroke="black" strokeWidth="4" fill="white" variants={{ hover: { height: 70, y: -20, fill: "#2563eb", transition: { duration: 0.5, delay: 0.1 } } }} />
         <motion.rect x="70" y="20" width="15" height="70" stroke="black" strokeWidth="4" fill="white" variants={{ hover: { height: 90, y: -20, fill: "#2563eb", transition: { duration: 0.5, delay: 0.2 } } }} />
@@ -99,7 +94,6 @@ const blocks = [
     text: "The final model was exported and wrapped into a lightweight FastAPI backend. This Next.js frontend interacts directly with those endpoints, providing a seamless, real-time dashboard that visually maps the ML inferences for immediate human action.",
     svg: (
       <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full max-w-[200px] overflow-visible">
-        {/* Puzzle / Connection */}
         <motion.path d="M20 50 L40 50 L40 30 L60 30 L60 50 L80 50" stroke="black" strokeWidth="6" fill="none" strokeLinejoin="round" variants={{ hover: { stroke: "#2563eb", pathLength: [0, 1], transition: { duration: 1 } } }} />
         <circle cx="20" cy="50" r="6" fill="black" />
         <circle cx="80" cy="50" r="6" fill="black" />
@@ -112,7 +106,6 @@ const blocks = [
     text: "Our roadmap includes integrating real-time satellite imagery APIs, expanding the topological grid to neighboring regions, and implementing a reinforcement learning module that continuously adapts to changing climate patterns over time.",
     svg: (
       <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full max-w-[200px] overflow-visible">
-        {/* Forward arrow / Expansion */}
         <motion.path d="M20 50 L70 50 M50 30 L70 50 L50 70" stroke="black" strokeWidth="6" strokeLinecap="round" strokeLinejoin="round" fill="none" variants={{ hover: { x: 10, stroke: "#2563eb", transition: { duration: 0.3, repeat: Infinity, repeatType: 'reverse' } } }} />
         <circle cx="85" cy="50" r="4" fill="#2563eb" />
       </svg>
@@ -123,10 +116,7 @@ const blocks = [
 export default function Home() {
   return (
     <div className="flex flex-col min-h-screen pt-24 pb-0">
-      
-      {/* Hero Section */}
       <section className="w-full max-w-5xl mx-auto px-4 py-20 flex flex-col items-center justify-center text-center space-y-8 min-h-[60vh] mb-24 z-10 relative">
-        
         <motion.h1 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -136,7 +126,6 @@ export default function Home() {
           Flood <span className="text-blue-600">Forecast</span> ML
         </motion.h1>
 
-        {/* Badge & Arrow directly beneath heading */}
         <motion.div 
           initial={{ opacity: 0, y: 10 }} 
           animate={{ opacity: 1, y: 0 }} 
@@ -161,18 +150,38 @@ export default function Home() {
           An AI-powered early warning system leveraging geospatial telemetry and machine learning to preemptively predict flood risks across vulnerable Nigerian communities.
         </motion.p>
 
-        {/* Scroll link */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3, duration: 0.3 }}
+          className="flex flex-col sm:flex-row gap-4 mt-8"
+        >
+          <Link
+            href="https://github.com/iblaw/flood-predictorML"
+            target="_blank"
+            className="border-2 border-black bg-black text-white px-8 py-4 font-bold text-lg hover:-translate-y-1 hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all flex items-center justify-center"
+          >
+            View GitHub Repo
+          </Link>
+          <Link
+            href="#"
+            className="border-2 border-black bg-white text-black px-8 py-4 font-bold text-lg hover:-translate-y-1 hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all flex items-center justify-center"
+          >
+            Watch Demo Video
+          </Link>
+        </motion.div>
+
         <motion.div 
           initial={{ opacity: 0 }} 
           animate={{ opacity: 1 }} 
-          transition={{ delay: 0.3, duration: 0.3 }} 
+          transition={{ delay: 0.4, duration: 0.3 }} 
           className="pt-12 w-full flex justify-center"
         >
           <button 
             onClick={() => document.getElementById('technical-stuff')?.scrollIntoView({ behavior: 'smooth' })}
             className="group flex flex-col items-center gap-2 text-blue-600 font-medium text-base sm:text-lg lg:text-xl hover:text-blue-800 transition-colors bg-transparent"
           >
-            <span className="border-b-[1.5px] border-blue-600 pb-1 group-hover:border-blue-800 transition-colors">Scroll to read more about the project</span>
+            <span className="border-b-[1.5px] border-blue-600 pb-1 group-hover:border-blue-800 transition-colors">Scroll to read about the project</span>
             <motion.svg 
               width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
               animate={{ y: [0, 5, 0] }}
@@ -183,10 +192,9 @@ export default function Home() {
             </motion.svg>
           </button>
         </motion.div>
-        
       </section>
 
-      {/* Technical Writeup Section */}
+      {/* Renders technical methodology content blocks */}
       <section id="technical-stuff" className="flex flex-col gap-8 sm:gap-12 w-full pt-12 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-32">
         {blocks.map((block, idx) => (
           <motion.div 
@@ -200,7 +208,7 @@ export default function Home() {
             }}
             className={`flex flex-col ${idx % 2 !== 0 ? 'md:flex-row-reverse' : 'md:flex-row'} items-center gap-8 md:gap-16 w-full`}
           >
-            {/* Card Content */}
+            {/* Renders content block text card */}
             <div className="flex-1 w-full relative group max-w-full">
               <div className="bg-white border-2 border-black rounded-3xl p-6 sm:p-12 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] transition-transform duration-300 group-hover:-translate-y-2 group-hover:-translate-x-2 group-hover:shadow-[16px_16px_0px_0px_rgba(0,0,0,1)] max-w-full">
                 <div className="flex items-center gap-4 mb-6">
@@ -216,7 +224,7 @@ export default function Home() {
               </div>
             </div>
 
-            {/* SVG Visual */}
+            {/* Renders interactive SVG illustration */}
             <div className="flex-1 w-full flex justify-center items-center min-h-[250px] sm:min-h-[300px]">
               <motion.div whileHover="hover" className="w-full h-full flex justify-center items-center">
                 {block.svg}

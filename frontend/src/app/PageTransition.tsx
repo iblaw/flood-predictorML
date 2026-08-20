@@ -2,12 +2,12 @@
 
 import { motion, AnimatePresence } from 'framer-motion';
 import { usePathname } from 'next/navigation';
-import { useRef, useContext } from 'react';
+import { useState, useContext } from 'react';
 import { LayoutRouterContext } from 'next/dist/shared/lib/app-router-context.shared-runtime';
 
 function FrozenRouter({ children }: { children: React.ReactNode }) {
   const context = useContext(LayoutRouterContext);
-  const frozen = useRef(context).current;
+  const [frozen] = useState(context);
 
   if (!frozen) {
     return <>{children}</>;
@@ -29,18 +29,18 @@ const getRouteIndex = (path: string) => {
 
 export default function PageTransition({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
-  const prevPathRef = useRef(pathname);
+  const [currentPath, setCurrentPath] = useState(pathname);
+  const [prevPathname, setPrevPathname] = useState(pathname);
   
-  const currentIndex = getRouteIndex(pathname);
-  const prevIndex = getRouteIndex(prevPathRef.current);
-  
-  let direction = 1;
-  if (currentIndex < prevIndex) {
-    direction = -1;
+  if (pathname !== currentPath) {
+    setPrevPathname(currentPath);
+    setCurrentPath(pathname);
   }
+
+  const currentIndex = getRouteIndex(pathname);
+  const prevIndex = getRouteIndex(prevPathname);
   
-  // Update ref after determining direction
-  prevPathRef.current = pathname;
+  const direction = currentIndex < prevIndex ? -1 : 1;
 
   const variants = {
     initial: (dir: number) => ({

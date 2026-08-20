@@ -1,22 +1,22 @@
+import os
+import sys
+import subprocess
+from typing import Dict, Any, List, Optional
+import numpy as np
+import pandas as pd
+import joblib
+import httpx
 import uvicorn
 from fastapi import FastAPI, HTTPException, BackgroundTasks
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-import joblib
-import pandas as pd
-import httpx
-from datetime import datetime
-import numpy as np
-import os
-import subprocess
-import sys
 from supabase import create_client, Client
 from dotenv import load_dotenv
 
-load_dotenv() # This reads the .env file if it exists!
+load_dotenv()
 
-# --- 1. INITIALIZE APP IMMEDIATELY ---
-app = FastAPI(title="Flood Forecast ML API", description="AI Backend for 3MTT Capstone")
+# Initialize application and middleware
+app = FastAPI(title="Flood Forecast ML API", description="AI Backend for Flood Risk Classification")
 
 app.add_middleware(
     CORSMiddleware,
@@ -26,67 +26,72 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# --- PATH CONFIGURATION ---
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-MODEL_PATH = os.path.join(BASE_DIR, "..", "models", "deployed_flood_model.joblib")
+# Configure environment paths and database clients
+BASE_DIR: str = os.path.dirname(os.path.abspath(__file__))
+MODEL_PATH: str = os.path.join(BASE_DIR, "..", "models", "deployed_flood_model.joblib")
 
-# --- SUPABASE CONFIGURATION ---
-SUPABASE_URL = os.environ.get("SUPABASE_URL")
-SUPABASE_KEY = os.environ.get("SUPABASE_KEY")
+SUPABASE_URL: Optional[str] = os.environ.get("SUPABASE_URL")
+SUPABASE_KEY: Optional[str] = os.environ.get("SUPABASE_KEY")
 
+supabase: Optional[Client] = None
 if SUPABASE_URL and SUPABASE_KEY:
-    supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
+    supabase = create_client(SUPABASE_URL, SUPABASE_KEY)
 else:
-    supabase = None
-    print("Warning: SUPABASE_URL or SUPABASE_KEY environment variables not found.")
+    print("[WARN] Supabase credentials missing. Database functionality disabled.")
+
+# Load ML model pipeline
+model: Any = None
+feature_cols: Optional[List[str]] = None
 
 try:
-    print(f"Loading Machine Learning Model from: {MODEL_PATH}")
     model_package = joblib.load(MODEL_PATH)
     model = model_package.get('model', model_package)
     feature_cols = model_package.get('features', None)
-    print("Model loaded successfully!")
+    print("[INFO] Machine learning model loaded successfully.")
 except Exception as e:
-    print(f"Warning: Could not load model. Error: {e}")
-    model = None
+    print(f"[ERROR] Model initialization failed: {e}")
+
+class PredictRequest(BaseModel):
+    """ Defines the strict expected payload for custom coordinate predictions. """
+    lat: float
+    lon: float
+    Elevation_m: float 
+    Distance_to_River_m: float
+    Is_Urban: int
+    RP: float = 1.0 
 
 
 @app.get("/trigger-batch-update")
-async def trigger_batch_update(background_tasks: BackgroundTasks, key: str = ""):
+async def trigger_batch_update(background_tasks: BackgroundTasks, key: str = "") -> Dict[str, str]:
+    """ Authenticates and triggers the daily batch processing worker in the background. """
     if key != "3mtt-capstone-secure-key":
-        raise HTTPException(status_code=401, detail="Unauthorized")
+        raise HTTPException(status_code=401, detail="Unauthorized request")
     
-    def run_worker():
-        print("Starting background batch worker via API trigger...", flush=True)
+    def run_worker() -> None:
+        print("[INFO] Initializing background batch worker...", flush=True)
         script_path = os.path.join(BASE_DIR, "batch_update_worker.py")
         subprocess.run(["python", "-u", script_path], stdout=sys.stdout, stderr=sys.stderr)
-        print("Background batch worker finished and pushed data to Supabase!", flush=True)
+        print("[INFO] Background batch processing completed.", flush=True)
         
     background_tasks.add_task(run_worker)
-    return {"status": "success", "message": "Batch update triggered successfully in the background."}
+    return {"status": "success", "message": "Batch update sequence initiated."}
 
 
 @app.get("/bulk-forecasts")
-async def get_bulk_forecasts():
-    """
-    Fetches pre-computed predictions directly from the permanent Supabase database.
-    Formats the output perfectly so the Next.js frontend doesn't need to be changed!
-    """
+async def get_bulk_forecasts() -> Dict[str, Any]:
+    """ Retrieves pre-computed flood predictions from the Supabase database. """
     if not supabase:
-        print("Database not connected. Returning empty dataset.")
         return {"last_updated": None, "total_locations": 0, "predictions": {}}
 
     try:
-        # Fetch all rows from the database
         response = supabase.table("flood_predictions").select("*").execute()
         rows = response.data
         
         if not rows:
             return {"last_updated": None, "total_locations": 0, "predictions": {}}
 
-        # Reconstruct the exact JSON dictionary format the frontend expects
-        predictions = {}
-        last_updated = rows[0].get("last_updated") 
+        predictions: Dict[str, Any] = {}
+        last_updated: str = rows[0].get("last_updated") 
         
         for row in rows:
             predictions[row["lga_name"]] = {
@@ -109,19 +114,12 @@ async def get_bulk_forecasts():
         }
         
     except Exception as e:
-        print(f"Warning: Failed to fetch from Supabase. Error: {e}")
+        print(f"[ERROR] Database fetch failed: {e}")
         return {"last_updated": None, "total_locations": 0, "predictions": {}}
 
 
-class PredictRequest(BaseModel):
-    lat: float
-    lon: float
-    Elevation_m: float 
-    Distance_to_River_m: float
-    Is_Urban: int
-    RP: float = 1.0 
-
-async def fetch_and_calculate_weather(lat: float, lon: float, is_urban: int, river_dist: float, frontend_elev: float):
+async def fetch_and_calculate_weather(lat: float, lon: float, is_urban: int, river_dist: float, frontend_elev: float) -> Dict[str, float]:
+    """ Fetches live meteorological telemetry and calculates hydrological physics features. """
     url = "https://api.open-meteo.com/v1/forecast"
     params = {
         "latitude": lat,
@@ -135,11 +133,14 @@ async def fetch_and_calculate_weather(lat: float, lon: float, is_urban: int, riv
     async with httpx.AsyncClient() as client:
         response = await client.get(url, params=params, timeout=10.0)
     
-    if response.status_code != 200: raise ValueError(f"API Error: {response.text}")
+    if response.status_code != 200: 
+        raise ValueError(f"Upstream API Error: {response.status_code}")
+        
     res = response.json()
     
     true_elevation = res.get('elevation', frontend_elev)
-    if true_elevation == 0.0 or true_elevation is None: true_elevation = 45.0 
+    if not true_elevation: 
+        true_elevation = 45.0 
         
     daily_rain = [x if x is not None else 0.0 for x in res['daily']['precipitation_sum']]
     daily_soil = [x if x is not None else 0.0 for x in res['daily']['soil_moisture_0_to_7cm_mean']]
@@ -159,7 +160,6 @@ async def fetch_and_calculate_weather(lat: float, lon: float, is_urban: int, riv
     rain_z = (p30 - (loc_mean * 30)) / (loc_std * np.sqrt(30))
     
     runoff = p3 * (is_urban + 0.5) * (soil7 + 0.1)
-    
     max_elev = max(200.0, true_elevation + 50.0)
     basin_risk = (max_elev - true_elevation) / (river_dist + 10.0)
     
@@ -171,8 +171,10 @@ async def fetch_and_calculate_weather(lat: float, lon: float, is_urban: int, riv
         'Runoff_Potential': runoff, 'Basin_Accumulation_Risk': basin_risk
     }
 
-def generate_human_insights(input_data, is_at_risk):
-    insights = []
+
+def generate_human_insights(input_data: Dict[str, Any], is_at_risk: bool) -> List[str]:
+    """ Generates explainable AI (XAI) insights based on threshold triggers. """
+    insights: List[str] = []
     rain = input_data.get('Past_7D_Rainfall_mm', 0)
     soil = input_data.get('Past_7D_Soil_Moisture', 0)
     river_dist = input_data.get('Distance_to_River_m', 1000)
@@ -186,17 +188,21 @@ def generate_human_insights(input_data, is_at_risk):
         if is_urban == 1 and rain > 15: insights.append("Concrete urban surfaces are preventing natural water absorption, increasing runoff risk.")
     else:
         if rain < 20: insights.append(f"Low active rainfall ({round(rain)}mm) is keeping river and drainage levels stable.")
-        if soil < 0.50: insights.append(f"Healthy soil capacity ({round(soil*100)}%) means the ground can safely absorb upcoming rain.")
-        if river_dist > 1000: insights.append(f"The community is safely situated far away from major river overflow zones.")
+        if soil < 0.50: insights.append(f"Healthy soil capacity ({round(soil*100)}%) indicates safe absorption parameters.")
+        if river_dist > 1000: insights.append(f"Community distance from major river networks minimizes overflow threat.")
 
     if not insights:
-        if is_at_risk: insights.append("A complex combination of moderate rainfall, soil saturation, and local terrain is elevating the overall flood probability.")
+        if is_at_risk: insights.append("Complex interactions between moderate rainfall, soil saturation, and local terrain elevate flood probability.")
         else: insights.append("Environmental metrics are currently stable and within historical safety baselines.")
+        
     return insights[:3]
 
+
 @app.post("/predict")
-async def predict_flood_risk(data: PredictRequest):
-    if model is None: raise HTTPException(status_code=500, detail="ML Model not loaded on server.")
+async def predict_flood_risk(data: PredictRequest) -> Dict[str, Any]:
+    """ Fallback endpoint executing live model inference for custom coordinates. """
+    if model is None: 
+        raise HTTPException(status_code=500, detail="Inference model unavailable.")
 
     try:
         weather_features = await fetch_and_calculate_weather(
@@ -221,15 +227,14 @@ async def predict_flood_risk(data: PredictRequest):
         prob = float(model.predict_proba(X_input)[0][1])
         is_at_risk = prob >= 0.50
         
-        if prob >= 0.75: tier = "HIGH RISK"
-        elif prob >= 0.50: tier = "MODERATE RISK"
-        else: tier = "SAFE"
-
+        tier = "HIGH RISK" if prob >= 0.75 else "MODERATE RISK" if is_at_risk else "SAFE"
         insights = generate_human_insights(input_data, is_at_risk)
 
         return {
-            "status": "AT RISK" if is_at_risk else "SAFE", "tier": tier,
-            "probability_percent": round(prob * 100, 1), "risk_level": 1 if is_at_risk else 0,
+            "status": "AT RISK" if is_at_risk else "SAFE", 
+            "tier": tier,
+            "probability_percent": round(prob * 100, 1), 
+            "risk_level": 1 if is_at_risk else 0,
             "weather": {
                 "rainfall_7d": round(weather_features['Past_7D_Rainfall_mm'], 1),
                 "soil_moisture_7d": round(weather_features['Past_7D_Soil_Moisture'] * 100, 1),

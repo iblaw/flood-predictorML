@@ -9,9 +9,6 @@ export default function Footer() {
       <div className="font-bold text-sm">
         &copy; {new Date().getFullYear()} Flood Forecast ML
       </div>
-      <div className="flex gap-4">
-        {/* We can include links here if needed */}
-      </div>
       <button 
         onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}
         className="bg-black text-white p-3 hover:bg-blue-600 transition-colors shadow-[4px_4px_0px_0px_rgba(200,200,200,1)] flex items-center justify-center border-2 border-transparent"

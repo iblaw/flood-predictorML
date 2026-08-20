@@ -3,27 +3,27 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { SearchX } from 'lucide-react';
-import ForecastCard, { LGA } from './ForecastCard';
+import ForecastCard, { LGA, BFFData } from './ForecastCard';
 
 interface ForecastClientProps {
   lgas: LGA[];
 }
 
+const placeholders = ["LGA", "latitude and longitude"];
+
 export default function ForecastClient({ lgas }: ForecastClientProps) {
   const [searchValue, setSearchValue] = useState("");
   const [isFocused, setIsFocused] = useState(false);
   const [placeholderIndex, setPlaceholderIndex] = useState(0);
-  const placeholders = ["LGA", "latitude and longitude"];
 
   const [isLocating, setIsLocating] = useState(false);
   const [statusFilter, setStatusFilter] = useState('ALL');
   
-  const [bulkPredictions, setBulkPredictions] = useState<Record<string, any>>({});
+  const [bulkPredictions, setBulkPredictions] = useState<Record<string, BFFData>>({});
   const [isBulkLoaded, setIsBulkLoaded] = useState(false);
   const [lastUpdated, setLastUpdated] = useState<string | null>(null);
 
   useEffect(() => {
-    // Fetch bulk predictions once on mount
     const backendUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000';
     fetch(`${backendUrl}/bulk-forecasts`, { cache: 'no-store' })
       .then(res => res.json())
@@ -73,7 +73,6 @@ export default function ForecastClient({ lgas }: ForecastClientProps) {
     );
   };
 
-  // Filter the LGAs based on the search input or nearest coordinates
   let filteredLgas = lgas;
   
   if (searchValue) {
@@ -82,7 +81,6 @@ export default function ForecastClient({ lgas }: ForecastClientProps) {
       const lat = parseFloat(parts[0]);
       const lon = parseFloat(parts[1]);
       if (!isNaN(lat) && !isNaN(lon)) {
-        // Find nearest LGA
         let nearestLga = lgas[0];
         let minDistance = Infinity;
         for (const lga of lgas) {
@@ -103,8 +101,6 @@ export default function ForecastClient({ lgas }: ForecastClientProps) {
 
   return (
     <div className="flex flex-col min-h-screen items-center pt-24 pb-48 px-6 sm:px-8 max-w-6xl mx-auto w-full">
-      
-      {/* Header & Search */}
       <div className="flex flex-col items-center w-full max-w-2xl text-center mb-16 relative">
         <h1 className="text-3xl sm:text-5xl lg:text-7xl font-black text-black mb-2 tracking-tight">Flood Forecasts</h1>
         {lastUpdated && (
@@ -141,7 +137,6 @@ export default function ForecastClient({ lgas }: ForecastClientProps) {
             </div>
           )}
           
-          {/* Autocomplete Dropdown */}
           <AnimatePresence>
             {isFocused && searchValue && filteredLgas.length > 0 && !searchValue.includes(',') && (
               <motion.div 
@@ -156,7 +151,7 @@ export default function ForecastClient({ lgas }: ForecastClientProps) {
                     <div
                       key={idx}
                       onMouseDown={(e) => {
-                        e.preventDefault(); // Prevent onBlur from firing before onClick
+                        e.preventDefault();
                         setSearchValue(lga.name);
                         setIsFocused(false);
                       }}
@@ -179,7 +174,6 @@ export default function ForecastClient({ lgas }: ForecastClientProps) {
           {isLocating ? 'Locating...' : 'my current location'}
         </button>
 
-        {/* Risk Filter Buttons */}
         <div className="flex gap-4 mt-8 flex-wrap justify-center">
           {(() => {
             const counts = {
@@ -220,7 +214,6 @@ export default function ForecastClient({ lgas }: ForecastClientProps) {
         </div>
       </div>
 
-      {/* Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 w-full">
         {!isBulkLoaded ? (
           [...Array(6)].map((_, i) => (
@@ -257,7 +250,7 @@ export default function ForecastClient({ lgas }: ForecastClientProps) {
                   </div>
                   <h3 className="text-2xl font-black heading-font">No Communities Match This Filter</h3>
                   <p className="text-gray-600 max-w-md mx-auto text-sm">
-                    We couldn't find any local government areas matching this criteria. Try clearing your filters or searching for a different area.
+                    We couldn&apos;t find any local government areas matching this criteria. Try clearing your filters or searching for a different area.
                   </p>
                   <div className="pt-4">
                     <button

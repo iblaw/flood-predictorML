@@ -8,7 +8,7 @@ import { Menu, X } from 'lucide-react';
 const tabs = [
   { name: 'Home', path: '/' },
   { name: 'Forecasts', path: '/forecasts' },
-  { name: 'About', path: '/about' },
+  { name: 'Meet the Fellow', path: '/about' },
 ];
 
 export default function Navbar() {
@@ -21,7 +21,6 @@ export default function Navbar() {
         <Link href="/" onClick={() => setIsOpen(false)}>Flood Forecast ML</Link>
       </div>
       
-      {/* Desktop View */}
       <div className="hidden md:flex items-center gap-6">
         {tabs.map((tab) => {
           const isActive = pathname === tab.path;
@@ -39,7 +38,6 @@ export default function Navbar() {
         })}
       </div>
 
-      {/* Mobile Toggle Button */}
       <button 
         className="md:hidden block text-black focus:outline-none" 
         onClick={() => setIsOpen(!isOpen)}
@@ -48,7 +46,6 @@ export default function Navbar() {
         {isOpen ? <X size={28} /> : <Menu size={28} />}
       </button>
 
-      {/* Mobile Dropdown */}
       {isOpen && (
         <div className="absolute top-full left-0 w-full bg-white border-b-2 border-black flex flex-col p-6 gap-6 shadow-[0_8px_0_0_rgba(0,0,0,1)] z-50 animate-in slide-in-from-top-2 md:hidden">
           {tabs.map((tab) => {

@@ -1,4 +1,4 @@
-import { supabase } from "@/lib/supabase"; // Your initialized Supabase client
+import { supabase } from "../../lib/supabase"; // Your initialized Supabase client
 import { LGA } from "./ForecastCard";
 
 export interface FetchForecastsParams {

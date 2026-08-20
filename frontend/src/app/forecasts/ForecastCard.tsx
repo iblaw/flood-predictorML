@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { CloudRain, Cloud, Sun, CloudLightning, Loader2, MapPin, Droplets, Mountain, Waves, AlertTriangle, ShieldCheck, Siren, Clock } from 'lucide-react';
 
@@ -48,9 +49,11 @@ function riskLabel(value: number | undefined): { label: string; bg: string; text
 export default function ForecastCard({ lga, bulkData, isBulkLoaded }: ForecastCardProps) {
   const [localData, setLocalData] = useState<BFFData | null>(null);
   const [showModal, setShowModal] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const hasFetched = React.useRef(false);
-  
+
   useEffect(() => {
+    setMounted(true);
     if (!bulkData && isBulkLoaded && !hasFetched.current) {
       hasFetched.current = true;
       const fetchBFF = async () => {
@@ -221,18 +224,21 @@ export default function ForecastCard({ lga, bulkData, isBulkLoaded }: ForecastCa
         </div>
       </motion.div>
 
-      <AnimatePresence>
-        {showModal && (
-          <motion.div 
-            initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm"
-          >
+      {mounted && createPortal(
+        <AnimatePresence>
+          {showModal && (
             <motion.div 
-              initial={{ scale: 0.95, opacity: 0, y: 20 }} animate={{ scale: 1, opacity: 1, y: 0 }} exit={{ scale: 0.95, opacity: 0, y: 20 }}
-              transition={{ type: "spring", duration: 0.5, bounce: 0.3 }}
-              className="bg-white border-2 border-black rounded-[2rem] p-6 sm:p-8 w-[95%] sm:w-full max-w-lg max-h-[90vh] overflow-y-auto shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] flex flex-col gap-6"
+              initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+              className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm"
+              onClick={() => setShowModal(false)}
             >
-              <div className="flex justify-between items-center border-b-2 border-black pb-4">
+              <motion.div 
+                initial={{ scale: 0.95, opacity: 0, y: 20 }} animate={{ scale: 1, opacity: 1, y: 0 }} exit={{ scale: 0.95, opacity: 0, y: 20 }}
+                transition={{ type: "spring", duration: 0.5, bounce: 0.3 }}
+                onClick={(e) => e.stopPropagation()}
+                className="bg-white border-2 border-black rounded-[2rem] p-6 sm:p-8 w-[95%] sm:w-full max-w-lg max-h-[90vh] overflow-y-auto shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] flex flex-col gap-6"
+              >
+                <div className="flex justify-between items-center border-b-2 border-black pb-4">
                 <h2 className="text-3xl font-bold tracking-tight">{lga.name}</h2>
                 <span className={`text-xs font-bold tracking-widest px-3 py-1.5 rounded-full ${isEvacuation ? 'bg-red-500 text-white' : isWatch ? 'bg-orange-500 text-white' : isUnavailable ? 'bg-zinc-600 text-white' : 'bg-black text-white'}`}>
                   {statusText}
@@ -334,7 +340,9 @@ export default function ForecastCard({ lga, bulkData, isBulkLoaded }: ForecastCa
             </motion.div>
           </motion.div>
         )}
-      </AnimatePresence>
+      </AnimatePresence>,
+      document.body
+      )}
     </>
   );
 }

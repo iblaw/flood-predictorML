@@ -3,7 +3,7 @@ import { Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import Navbar from "../components/Navbar";
 import PageTransition from "./PageTransition";
-import Footer from "./Footer";
+import Footer from "../components/Footer";
 
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",
@@ -32,9 +32,11 @@ export default function RootLayout({
       >
         <Navbar />
         
-        <PageTransition>
-          {children}
-        </PageTransition>
+        <main className="pb-16 sm:pb-12 w-full flex-1 flex flex-col">
+          <PageTransition>
+            {children}
+          </PageTransition>
+        </main>
         
         <Footer />
       </body>

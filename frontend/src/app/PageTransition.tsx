@@ -67,7 +67,7 @@ export default function PageTransition({ children }: { children: React.ReactNode
         animate="animate"
         exit="exit"
         transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-        className="flex flex-col min-h-screen w-full"
+        className="flex flex-col flex-1 h-full w-full"
       >
         <FrozenRouter>{children}</FrozenRouter>
       </motion.div>

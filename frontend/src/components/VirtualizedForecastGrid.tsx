@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React from 'react';
 import { FixedSizeGrid } from 'react-window';
@@ -43,7 +43,7 @@ function CellRenderer({ columnIndex, rowIndex, style, data }: CellRendererProps)
 
 export default function VirtualizedForecastGrid({ lgas, bulkPredictions, isBulkLoaded }: VirtualizedForecastGridProps) {
   return (
-    <div className="w-full" style={{ height: '80vh', minHeight: '600px' }}>
+    <div className="flex-1 relative w-full">
       <AutoSizer>
         {({ height, width }: { height: number; width: number }) => {
           let columnCount = 1;

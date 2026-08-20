@@ -138,11 +138,12 @@ export default function ForecastClient({ lgas }: ForecastClientProps) {
   const isTransitioning = isPending || searchValue !== deferredSearchValue;
 
   return (
-    <div className="flex flex-col min-h-screen items-center pt-24 pb-48 px-6 sm:px-8 max-w-6xl mx-auto w-full">
-      <div className="flex flex-col items-center w-full max-w-2xl text-center mb-16 relative">
-        <h1 className="text-3xl sm:text-5xl lg:text-7xl font-black text-black mb-2 tracking-tight">Flood Forecasts</h1>
-        {lastUpdated && (
-          <div className="text-sm font-medium text-black/80 font-mono mt-2 mb-6">
+    <div className="flex flex-col flex-1 h-full w-full overflow-hidden items-center pt-24 pb-6 px-6 sm:px-8 max-w-6xl mx-auto">
+      <div className="w-full shrink-0 z-10 bg-white pb-6 flex flex-col items-center">
+        <div className="flex flex-col items-center w-full max-w-2xl text-center relative">
+          <h1 className="text-3xl sm:text-5xl lg:text-7xl font-black text-black mb-2 tracking-tight">Flood Forecasts</h1>
+          {lastUpdated && (
+            <div className="text-sm font-medium text-black/80 font-mono mt-2 mb-6">
             Last Forecast: {lastUpdated}
           </div>
         )}
@@ -232,8 +233,9 @@ export default function ForecastClient({ lgas }: ForecastClientProps) {
           })}
         </div>
       </div>
-
-      <div className={`w-full transition-opacity duration-200 ${isTransitioning ? 'opacity-50 pointer-events-none' : 'opacity-100'}`}>
+      </div>
+      
+      <div className={`w-full flex-1 flex flex-col relative transition-opacity duration-200 ${isTransitioning ? 'opacity-50 pointer-events-none' : 'opacity-100'}`}>
         {!isBulkLoaded ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 w-full">
             {[...Array(6)].map((_, i) => (

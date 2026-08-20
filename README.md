@@ -1,60 +1,121 @@
-# flood-predictorML
-This is my capstone project. I will come up with a better description later.
+🌊 Flood Forecast ML
 
-Folder Structure
-nigeria-flood-predictor/
-│
-├── data/               # Note: NEVER commit large data files to GitHub!
-│   ├── raw/            # Raw downloaded DEMs, CSVs, shapefiles
-│   └── processed/      # Cleaned data ready for model training
-│
-├── notebooks/          # Google Colab/Jupyter notebooks for experimentation
-│   ├── 01_data_exploration.ipynb
-│   └── 02_model_testing.ipynb
-│
-├── src/                # Reusable Python scripts (.py files)
-│   ├── data_pipeline.py # (This is where our Phase 2 script goes)
-│   └── features.py     
-│
-├── models/             # Saved/trained models (.joblib or .pkl)
-│
-├── app/                # Streamlit web application code
-│   └── main.py
-│
-├── requirements.txt    # List of dependencies
-├── README.md           # Project description for the judges
-└── .gitignore          # Tells Git to ignore large files and secret keys
+An AI-powered early warning system leveraging geospatial telemetry and machine learning to preemptively predict flood risks across vulnerable Nigerian communities.
+
+Built as a capstone project for the 3MTT (3 Million Technical Talent) NextGen Cohort (AI/ML Track).
+
+👨‍💻 Meet the Fellow
+
+Name: Lawal Ibrahim
+
+Track: Artificial Intelligence / Machine Learning
+
+3MTT Fellow ID: FE/26/5038794255
+
+Live Demo: [https://flood-forecast-ml.vercel.app/]
+
+Demo Video: [Insert YouTube Link Here]
+
+🎯 The Problem & Solution
+
+Nigeria's annual flood crises along the Niger-Benue river basins lead to catastrophic displacement and agricultural loss. Traditional reaction frameworks lack spatial precision.
+
+Flood Forecast ML is an automated, machine learning-driven early warning system aligned with NIHSA and NEMA standards. It shifts disaster management from reactive to preemptive by analyzing live meteorological data, topographical features, and soil saturation to predict flooding before it happens.
+
+🧠 Machine Learning Architecture
+
+Our model does not just look at rain; it understands hydrology.
+
+Target Variable: Trained on historical satellite water fraction data (FloodScan SFED).
+
+Feature Engineering: Computes complex physical interactions including:
+
+Runoff Potential (Rainfall × Urbanization × Soil Saturation)
+
+Basin Accumulation Risk (Elevation drop relative to river proximity)
+
+Soil Moisture Velocity
+
+The Model: A Soft Voting Ensemble combining the high-recall capabilities of Random Forest with the precision of XGBoost.
+
+Explainable AI (XAI): The backend dynamically generates human-readable insights (e.g., "High soil saturation (88%) is limiting the ground's ability to absorb new rain"), preventing the "black box" AI problem.
+
+🏗️ System Architecture
+
+The application uses a highly scalable, decoupled Backend-for-Frontend (BFF) architecture to ensure instant page loads.
+
+Nightly Batch Worker (Cron Job): A Python worker wakes up daily, queries the Open-Meteo API for 700+ Local Government Areas, engineers the features, runs the ML ensemble, and securely upserts the results to a cloud database.
+
+FastAPI Backend: A blazing-fast Python server that queries the database and serves pre-computed predictions to the frontend in under 10ms.
+
+Next.js Frontend: A React-based UI featuring a stark, highly legible neo-brutalist "blueprint" aesthetic, fetching live data dynamically without freezing the client.
+
+Tech Stack
+
+Frontend: Next.js (App Router), React, Tailwind CSS, Framer Motion, Lucide Icons, TypeScript.
+
+Backend: FastAPI, Python, Uvicorn.
+
+Machine Learning: Scikit-Learn, XGBoost, Pandas, Numpy, Joblib.
+
+Database: Supabase (PostgreSQL).
+
+Deployment: Vercel (Frontend), Render (Backend/Cron).
+
+🚀 How to Run Locally
+
+To test the application on your local machine, you will need to run both the backend API and the frontend client.
+
+1. Setup the Python Backend
+
+Navigate to the backend/ directory:
+
+cd backend
 
 
-The Scope (High Variance Strategy): To ensure the model learns true geographical risk factors (and doesn't just overfit to one region), select 5 states across different geopolitical zones with a strong mix of urban and rural environments:
+Create a virtual environment and install dependencies:
 
-Kogi (North Central): Confluence of the Niger & Benue rivers. Mix of semi-urban (Lokoja) and highly rural riverine communities.
-
-Bayelsa (South South): Niger Delta. Heavy rainfall, coastal/creek flooding. Mostly rural/semi-urban.
-
-Lagos (South West): Coastal and lagoon flooding. Highly urbanized, providing a stark contrast in Land Use/Land Cover (LULC) features (e.g., concrete vs. vegetation).
-
-Anambra (South East): River Niger banks. Offers an excellent split between dense urban commerce (Onitsha) and rural agricultural plains (Ogbaru).
-
-Adamawa (North East): Upper River Benue. Mostly rural and agricultural. Has a semi-arid climate but experiences severe seasonal riverine flooding, providing great weather variance compared to the deep South.
-
-The Target Variable ($y$): How are you classifying risk? We recommend mapping NIHSA's Annual Flood Outlook (AFO) terminology to integers for your model:
-
-Class 0: Low Flood Risk Area
-
-Class 1: Moderate Flood Risk Area
-
-Class 2: High Flood Risk Area
-
-Class 3: Highly Probable (Red Zones)
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+pip install -r requirements.txt
 
 
-Understanding the Problem 
-Flood is terrible but it is the same everywhere it is one of the most common disaster affects about a 5th of the global population
+Set up your environment variables by creating a .env file in the backend/ folder:
 
-The very first problem is that there is not enough data
+SUPABASE_URL=your_supabase_url
+SUPABASE_KEY=your_supabase_service_role_key
 
-several factors contribute to this phenomenon however since the phenomenon is physical and the same across the world we can train a single model on global data
 
-HOW DO WE GET THE GLOBAL DATA?
-Taking action before rivers risekbkj
+Start the FastAPI server:
+
+uvicorn fastapi_ml_backend:app --reload --port 8000
+
+
+The API will be available at http://127.0.0.1:8000
+
+2. Setup the Next.js Frontend
+
+Open a new terminal and navigate to the root directory (or your frontend folder):
+
+npm install
+
+
+Create a .env.local file in the frontend directory to point to your local API:
+
+NEXT_PUBLIC_API_URL=http://127.0.0.1:8000
+
+
+Start the development server:
+
+npm run dev
+
+
+The frontend will be available at http://localhost:3000
+
+📜 License & Acknowledgements
+
+Topographical data sourced from SRTM/OpenTopography.
+
+Meteorological telemetry powered by Open-Meteo.
+
+UI/UX inspired by architectural blueprint aesthetics and neo-brutalism.

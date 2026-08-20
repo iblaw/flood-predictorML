@@ -223,33 +223,33 @@ export default function ForecastCard({ lga, bulkData, isBulkLoaded }: ForecastCa
         )}
         
         {/* Weather summary bar */}
-        <div className="mt-auto w-full bg-zinc-900 border-2 border-zinc-700 p-5 rounded-2xl flex justify-between items-center pointer-events-none group-hover:border-zinc-500 transition-colors">
+        <div className="mt-auto w-full bg-zinc-900 border-2 border-zinc-700 p-4 rounded-2xl flex items-center justify-between pointer-events-none group-hover:border-zinc-500 transition-colors">
           {isDataMissing ? (
             <div className="flex w-full justify-between items-center py-1">
-              <div className="flex items-center gap-4">
+              <div className="shrink-0 mr-4">
                 <div className="w-10 h-10 rounded-full bg-zinc-800 animate-pulse"></div>
-                <div className="flex flex-col gap-2">
-                  <div className="w-12 h-4 bg-zinc-800 rounded animate-pulse"></div>
-                  <div className="w-16 h-3 bg-zinc-800 rounded animate-pulse"></div>
-                </div>
               </div>
-              <div className="flex flex-col items-end gap-2">
+              <div className="flex flex-col items-start flex-1 gap-1">
+                <div className="w-12 h-4 bg-zinc-800 rounded animate-pulse"></div>
+                <div className="w-16 h-3 bg-zinc-800 rounded animate-pulse"></div>
+              </div>
+              <div className="flex flex-col items-end flex-1 gap-1">
                 <div className="w-12 h-4 bg-zinc-800 rounded animate-pulse"></div>
                 <div className="w-10 h-3 bg-zinc-800 rounded animate-pulse"></div>
               </div>
             </div>
           ) : (
             <>
-              <div className="flex items-center gap-4">
+              <div className="shrink-0 mr-4">
                 {getWeatherIcon(weatherCode, "w-10 h-10 text-blue-400")}
-                <div className="flex flex-col gap-0.5">
-                  <span className="text-base font-bold text-white tracking-wide">{temperature}&#176;C</span>
-                  <span className="text-xs text-zinc-400 font-bold uppercase tracking-widest">{getWeatherText(weatherCode)}</span>
-                </div>
               </div>
-              <div className="flex flex-col items-end gap-0.5">
-                <span className="text-base font-bold text-white tracking-wide">{rainfall7d}mm</span>
-                <span className="text-xs text-zinc-400 font-bold uppercase tracking-widest">7d Rain</span>
+              <div className="flex flex-col items-start flex-1">
+                <span className="font-bold text-lg text-white">{temperature}&#176;C</span>
+                <span className="text-xs text-gray-400 uppercase tracking-widest">{getWeatherText(weatherCode)}</span>
+              </div>
+              <div className="flex flex-col items-end flex-1">
+                <span className="font-bold text-lg text-white">{rainfall7d}mm</span>
+                <span className="text-xs text-gray-400 uppercase tracking-widest">7D Rain</span>
               </div>
             </>
           )}

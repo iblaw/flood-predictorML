@@ -1,80 +1,62 @@
-import { supabase } from '@/lib/supabase';
-import { BFFData } from './ForecastCard';
+import { supabase } from "@/lib/supabase"; // Your initialized Supabase client
+import { LGA } from "./ForecastCard";
 
-export async function getForecastData(): Promise<{
-  last_updated: string | null;
-  total_locations: number;
-  predictions: Record<string, BFFData>;
-}> {
-  try {
-    const { data: rows, error } = await supabase
-      .from('flood_predictions')
-      .select('*');
+export interface FetchForecastsParams {
+    page?: number;
+    pageSize?: number;
+    searchQuery?: string;
+    filterRisk?: string;
+}
+
+export interface PaginatedResult {
+    data: LGA[] | null;
+    count: number | null;
+    nextPage: number | null;
+}
+
+export async function getPaginatedForecasts({
+    page = 0,
+    pageSize = 50, // Let's fetch 50 cards at a time
+    searchQuery = "",
+    filterRisk = "all",
+}: FetchForecastsParams): Promise<PaginatedResult> {
+
+    const rangeStart = page * pageSize;
+    const rangeEnd = rangeStart + pageSize - 1;
+
+    // 1. Build the query, ensuring we explicitly select all the new horizon columns!
+    let query = supabase
+        .from("flood_predictions")
+        .select("*, lga_metadata(*)", { count: "exact" }) // count: "exact" gets the total matching records
+        .order("probability_percent", { ascending: false }); // Sort by risk
+
+    // 2. Apply dynamic filters (if present)
+    if (searchQuery) {
+        query = query.ilike("lga_metadata.ADM2_NAME", `%${searchQuery}%`);
+    }
+
+    if (filterRisk !== "all") {
+        query = query.eq("status", filterRisk.toUpperCase()); // e.g., 'AT RISK', 'SAFE'
+    }
+
+    // 3. APPLY THE PAGINATION RANGE (The Infinite Loading core)
+    query = query.range(rangeStart, rangeEnd);
+
+    // 4. Execute the query
+    const { data, count, error } = await query;
 
     if (error) {
-      console.error("Database fetch failed from Supabase:", error);
-      return { last_updated: null, total_locations: 0, predictions: {} };
+        console.error("Error fetching paginated forecasts:", error);
+        return { data: null, count: null, nextPage: null };
     }
 
-    if (!rows || rows.length === 0) {
-      return { last_updated: null, total_locations: 0, predictions: {} };
-    }
-
-    const predictions: Record<string, BFFData> = {};
-    const last_updated = rows[0]?.last_updated || null;
-
-    for (const row of rows) {
-      // Parse explanation if it's stored as JSON string or fallback to array
-      let parsedExplanation: string[] = [];
-      if (row.explanation) {
-        if (typeof row.explanation === 'string') {
-          try {
-            parsedExplanation = JSON.parse(row.explanation);
-          } catch {
-            parsedExplanation = [row.explanation];
-          }
-        } else if (Array.isArray(row.explanation)) {
-          parsedExplanation = row.explanation;
-        }
-      }
-
-      // Parse raw_inputs if it's stored as JSON string
-      let parsedRawInputs: any = {};
-      if (row.raw_inputs) {
-        if (typeof row.raw_inputs === 'string') {
-          try {
-            parsedRawInputs = JSON.parse(row.raw_inputs);
-          } catch {
-            parsedRawInputs = {};
-          }
-        } else {
-          parsedRawInputs = row.raw_inputs;
-        }
-      }
-
-      predictions[row.lga_name] = {
-        tier: row.tier,
-        risk_level: row.status === "AT RISK" ? 1 : 0,
-        risk_24h: row.risk_24h !== null && row.risk_24h !== undefined ? parseFloat(row.risk_24h) : undefined,
-        risk_48h: row.risk_48h !== null && row.risk_48h !== undefined ? parseFloat(row.risk_48h) : undefined,
-        risk_72h: row.risk_72h !== null && row.risk_72h !== undefined ? parseFloat(row.risk_72h) : undefined,
-        weather: {
-          rainfall_7d: row.rainfall_7d !== null && row.rainfall_7d !== undefined ? parseFloat(row.rainfall_7d) : 0,
-          soil_moisture_7d: row.soil_moisture_7d !== null && row.soil_moisture_7d !== undefined ? parseFloat(row.soil_moisture_7d) : 0,
-          runoff_potential: parsedRawInputs.Runoff_Potential !== undefined ? parseFloat(parsedRawInputs.Runoff_Potential) : 0,
-          elevation: row.elevation !== null && row.elevation !== undefined ? parseFloat(row.elevation) : undefined,
-        },
-        explanation: parsedExplanation,
-      };
-    }
+    // 5. Calculate if there's a next page
+    const hasNextPage = count ? rangeEnd < count : false;
+    const nextPage = hasNextPage ? page + 1 : null;
 
     return {
-      last_updated,
-      total_locations: Object.keys(predictions).length,
-      predictions
+        data: data as LGA[], // cast to your specific type
+        count,
+        nextPage
     };
-  } catch (error) {
-    console.error("Failed to fetch forecast data:", error);
-    return { last_updated: null, total_locations: 0, predictions: {} };
-  }
 }

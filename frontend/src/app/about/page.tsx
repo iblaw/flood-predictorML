@@ -20,26 +20,8 @@ export default function About() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 lg:gap-x-16 gap-y-10 sm:gap-y-12 w-full mt-4">
         
         {/* Renders profile image placeholder */}
-        <div className="order-2 md:order-none md:col-start-1 md:row-start-1 md:row-span-2 flex flex-col items-center md:items-start">
-          <div className="w-full aspect-square bg-zinc-200 border-4 border-black rounded-[2.5rem] sm:rounded-[3rem] shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex items-center justify-center p-8 overflow-hidden relative">
-            <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full max-w-[70%]">
-              {/* Minimalist continuous stroke head and shoulders */}
-              <motion.path 
-                initial={{ pathLength: 0 }}
-                animate={{ pathLength: 1 }}
-                transition={{ duration: 2, ease: "easeInOut" }}
-                d="M30 85 C 30 65, 40 55, 50 55 C 60 55, 70 65, 70 85 M 50 55 C 35 55, 35 25, 50 25 C 65 25, 65 55, 50 55" 
-                stroke="black" 
-                strokeWidth="8" 
-                strokeLinecap="round" 
-                strokeLinejoin="round" 
-              />
-            </svg>
-          </div>
-          <div className="mt-8 flex flex-col bg-white border-2 border-black rounded-xl p-4 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] w-full max-w-sm">
-            <span className="font-mono font-black text-2xl sm:text-3xl uppercase tracking-tighter text-black">Ibrahim Lawal</span>
-            <span className="font-mono font-bold text-sm sm:text-base text-blue-600 mt-1 uppercase">FE/26/5038794255</span>
-          </div>
+        <div className="order-2 md:order-none md:col-start-1 md:row-start-1 md:row-span-2">
+          <div className="w-full aspect-square bg-black rounded-[2.5rem] sm:rounded-[3rem]"></div>
         </div>
 
         {/* Renders fellow biography card */}

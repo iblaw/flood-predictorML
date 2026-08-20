@@ -2,8 +2,8 @@
 
 import React from 'react';
 import { Grid } from 'react-window';
-import type { CellComponentProps } from 'react-window';
 import { AutoSizer } from 'react-virtualized-auto-sizer';
+
 import ForecastCard, { LGA, BFFData } from '../app/forecasts/ForecastCard';
 
 interface VirtualizedForecastGridProps {
@@ -14,38 +14,20 @@ interface VirtualizedForecastGridProps {
 
 export default function VirtualizedForecastGrid({ lgas, bulkPredictions, isBulkLoaded }: VirtualizedForecastGridProps) {
   return (
-    <div className="w-full h-[80vh] min-h-[600px]">
-      <AutoSizer renderProp={({ height, width }) => {
-          if (!height || !width) return null;
-          
-          let columnCount = 1;
-          if (width >= 1024) { // lg
-            columnCount = 3;
-          } else if (width >= 640) { // sm
-            columnCount = 2;
+    <div style={{ height: 'calc(100vh - 300px)', minHeight: '600px', width: '100%' }}>
+      <AutoSizer
+        renderProp={({ height, width }: { height: number | undefined; width: number | undefined }) => {
+          if (width === undefined || height === undefined) {
+            return null;
           }
-          
+
+          let columnCount = 1;
+          if (width >= 1024) columnCount = 3;
+          else if (width >= 640) columnCount = 2;
+
           const rowCount = Math.ceil(lgas.length / columnCount);
           const columnWidth = width / columnCount;
-          const rowHeight = width >= 640 ? columnWidth : 350; // Try to maintain aspect-square roughly on sm+, else 350px
-
-          const Cell = ({ columnIndex, rowIndex, style }: CellComponentProps) => {
-            const index = rowIndex * columnCount + columnIndex;
-            if (index >= lgas.length) return null;
-
-            const lga = lgas[index];
-            return (
-              <div style={{ ...style, padding: '16px' }}>
-                <div className="w-full h-full">
-                  <ForecastCard 
-                    lga={lga} 
-                    bulkData={bulkPredictions[lga.name]} 
-                    isBulkLoaded={isBulkLoaded} 
-                  />
-                </div>
-              </div>
-            );
-          };
+          const rowHeight = width >= 640 ? columnWidth : 350;
 
           return (
             <Grid
@@ -54,9 +36,25 @@ export default function VirtualizedForecastGrid({ lgas, bulkPredictions, isBulkL
               rowCount={rowCount}
               rowHeight={rowHeight}
               className="scrollbar-hide"
-              cellComponent={Cell}
-              cellProps={{}}
-              style={{ width, height }}
+              style={{ height, width }}
+              cellProps={{ lgas, bulkPredictions, isBulkLoaded, columnCount }}
+              cellComponent={({ columnIndex, rowIndex, style, lgas, bulkPredictions, isBulkLoaded, columnCount }: any) => {
+                const index = rowIndex * columnCount + columnIndex;
+                if (index >= lgas.length) return null;
+
+                const lga = lgas[index];
+                const data = bulkPredictions[lga.name];
+
+                return (
+                  <div style={{ ...style, padding: '12px' }}>
+                    <ForecastCard 
+                      lga={lga} 
+                      bulkData={data} 
+                      isBulkLoaded={isBulkLoaded} 
+                    />
+                  </div>
+                );
+              }}
             />
           );
         }}

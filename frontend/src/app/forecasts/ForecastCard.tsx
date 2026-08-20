@@ -146,8 +146,8 @@ export default function ForecastCard({ lga, bulkData, isBulkLoaded }: ForecastCa
             <span className={`text-xs sm:text-sm font-bold tracking-widest mt-1 ${isEvacuation ? 'text-red-400' : isWatch ? 'text-orange-500' : isUnavailable ? 'text-zinc-500' : 'text-green-400'}`}>
               {statusText}
             </span>
-            {!isDataMissing && data?.risk_24h !== undefined && data?.risk_48h !== undefined && data?.risk_72h !== undefined && (
-              <TimeBadges risk24={data.risk_24h} risk48={data.risk_48h} risk72={data.risk_72h} />
+            {!isDataMissing && (data.risk_24h !== undefined || data.risk_48h !== undefined || data.risk_72h !== undefined) && (
+              <TimeBadges risk_24h={data.risk_24h} risk_48h={data.risk_48h} risk_72h={data.risk_72h} />
             )}
           </div>
           <div className="shrink-0 w-12 h-12 sm:w-16 sm:h-16 mt-1 ml-2 flex items-center justify-center">

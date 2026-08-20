@@ -1,33 +1,35 @@
-"use client";
-
 import React from 'react';
 
 interface TimeBadgesProps {
-  risk24: number;
-  risk48: number;
-  risk72: number;
+  risk_24h?: number;
+  risk_48h?: number;
+  risk_72h?: number;
 }
 
-export default function TimeBadges({ risk24, risk48, risk72 }: TimeBadgesProps) {
-  const getBadgeStyle = (score: number) => {
-    if (score >= 0.904) return "bg-red-500 text-white border-red-900 border-2 border-b-4";
-    if (score >= 0.600) return "bg-yellow-400 text-black border-yellow-900 border-2 border-b-4";
-    return "bg-green-100 text-green-900 border-green-800 border-2 border-b-4";
-  };
+const getBadgeStyles = (score: number | undefined) => {
+  if (score === undefined || score === null) return 'bg-zinc-800 text-zinc-400 border-zinc-600 border-2 border-b-4'; // Fallback
+  if (score >= 0.904) return 'bg-red-500 text-white border-red-900 border-2 border-b-4';
+  if (score >= 0.600) return 'bg-yellow-400 text-black border-yellow-900 border-2 border-b-4';
+  return 'bg-green-100 text-green-900 border-green-800 border-2 border-b-4';
+};
 
-  const formatScore = (score: number) => `${Math.round(score * 100)}%`;
+const formatPercentage = (score: number | undefined) => {
+  if (score === undefined || score === null) return '--%';
+  return `${Math.round(score * 100)}%`;
+};
 
+export default function TimeBadges({ risk_24h, risk_48h, risk_72h }: TimeBadgesProps) {
   return (
-    <div className="flex flex-row gap-2 mt-3 z-10 relative pointer-events-none">
-      <div className={`px-2 py-1 rounded-full text-[10px] sm:text-xs font-bold font-mono tracking-wider ${getBadgeStyle(risk24)}`}>
-        24H: {formatScore(risk24)}
-      </div>
-      <div className={`px-2 py-1 rounded-full text-[10px] sm:text-xs font-bold font-mono tracking-wider ${getBadgeStyle(risk48)}`}>
-        48H: {formatScore(risk48)}
-      </div>
-      <div className={`px-2 py-1 rounded-full text-[10px] sm:text-xs font-bold font-mono tracking-wider ${getBadgeStyle(risk72)}`}>
-        72H: {formatScore(risk72)}
-      </div>
+    <div className="flex flex-row gap-2 mt-3 flex-wrap pointer-events-auto">
+      <span className={`px-2 py-0.5 rounded font-mono text-[10px] sm:text-xs font-bold whitespace-nowrap ${getBadgeStyles(risk_24h)}`}>
+        24H: {formatPercentage(risk_24h)}
+      </span>
+      <span className={`px-2 py-0.5 rounded font-mono text-[10px] sm:text-xs font-bold whitespace-nowrap ${getBadgeStyles(risk_48h)}`}>
+        48H: {formatPercentage(risk_48h)}
+      </span>
+      <span className={`px-2 py-0.5 rounded font-mono text-[10px] sm:text-xs font-bold whitespace-nowrap ${getBadgeStyles(risk_72h)}`}>
+        72H: {formatPercentage(risk_72h)}
+      </span>
     </div>
   );
 }

@@ -1,8 +1,8 @@
-"use client";
+﻿"use client";
 
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { CloudRain, Cloud, Sun, CloudLightning, Loader2, MapPin, Droplets, Mountain, Waves, AlertTriangle, ShieldCheck, Siren } from 'lucide-react';
+import { CloudRain, Cloud, Sun, CloudLightning, Loader2, MapPin, Droplets, Mountain, Waves, AlertTriangle, ShieldCheck, Siren, Clock } from 'lucide-react';
 
 export interface LGA {
   name: string;
@@ -35,6 +35,14 @@ interface ForecastCardProps {
   lga: LGA;
   bulkData?: BFFData;
   isBulkLoaded?: boolean;
+}
+
+/** Converts a raw 0-1 probability into a display label + Tailwind colour classes. */
+function riskLabel(value: number | undefined): { label: string; bg: string; text: string } {
+  if (value === undefined || value === null) return { label: '-', bg: 'bg-zinc-700', text: 'text-zinc-300' };
+  if (value >= 0.7) return { label: 'HIGH', bg: 'bg-red-600', text: 'text-white' };
+  if (value >= 0.4) return { label: 'MOD', bg: 'bg-orange-500', text: 'text-white' };
+  return { label: 'LOW', bg: 'bg-green-600', text: 'text-white' };
 }
 
 export default function ForecastCard({ lga, bulkData, isBulkLoaded }: ForecastCardProps) {
@@ -72,11 +80,7 @@ export default function ForecastCard({ lga, bulkData, isBulkLoaded }: ForecastCa
               tier: "UNAVAILABLE",
               risk_level: 0,
               explanation: [],
-              weather: {
-                rainfall_7d: 0,
-                soil_moisture_7d: 0,
-                runoff_potential: 0
-              }
+              weather: { rainfall_7d: 0, soil_moisture_7d: 0, runoff_potential: 0 }
             });
           }
         } catch (error) {
@@ -85,11 +89,7 @@ export default function ForecastCard({ lga, bulkData, isBulkLoaded }: ForecastCa
             tier: "UNAVAILABLE",
             risk_level: 0,
             explanation: [],
-            weather: {
-              rainfall_7d: 0,
-              soil_moisture_7d: 0,
-              runoff_potential: 0
-            }
+            weather: { rainfall_7d: 0, soil_moisture_7d: 0, runoff_potential: 0 }
           });
         }
       };
@@ -110,10 +110,14 @@ export default function ForecastCard({ lga, bulkData, isBulkLoaded }: ForecastCa
 
   const rainfall7d = data?.weather?.rainfall_7d || 0;
   const soilMoisture = data?.weather?.soil_moisture_7d || 0;
-  
   const temperature = data?.weather?.temperature || 28.5;
   const weatherCode = data?.weather?.weather_code !== undefined ? data.weather.weather_code : (rainfall7d > 50 ? 65 : 3);
   const elevation = data?.weather?.elevation ?? lga.elevation ?? 0;
+
+  const h24 = riskLabel(data?.risk_24h);
+  const h48 = riskLabel(data?.risk_48h);
+  const h72 = riskLabel(data?.risk_72h);
+  const hasHorizons = data && (data.risk_24h !== undefined || data.risk_48h !== undefined || data.risk_72h !== undefined);
 
   const getWeatherIcon = (code: number, className: string) => {
     if (code === 0 || code === 1) return <Sun className={className} />;
@@ -139,7 +143,8 @@ export default function ForecastCard({ lga, bulkData, isBulkLoaded }: ForecastCa
         whileTap={{ scale: 0.98 }}
         className="bg-black cursor-pointer text-white rounded-3xl p-6 sm:p-8 flex flex-col justify-between relative group hover:ring-4 hover:ring-blue-600 transition-all shadow-[8px_8px_0px_0px_rgba(0,0,0,0.15)] h-auto sm:aspect-square"
       >
-        <div className="flex justify-between items-start w-full pointer-events-none mb-8 sm:mb-0">
+        {/* Header: name + status icon */}
+        <div className="flex justify-between items-start w-full pointer-events-none mb-4 sm:mb-0">
           <div className="flex flex-col">
             <span className="text-2xl sm:text-3xl font-light tracking-tight">{lga.name}</span>
             <span className={`text-xs sm:text-sm font-bold tracking-widest mt-1 ${isEvacuation ? 'text-red-400' : isWatch ? 'text-orange-500' : isUnavailable ? 'text-zinc-500' : 'text-green-400'}`}>
@@ -148,10 +153,7 @@ export default function ForecastCard({ lga, bulkData, isBulkLoaded }: ForecastCa
           </div>
           <div className="shrink-0 w-12 h-12 sm:w-16 sm:h-16 mt-1 ml-2 flex items-center justify-center">
             {isEvacuation ? (
-              <motion.div
-                animate={{ scale: [1, 1.1, 1], opacity: [0.7, 1, 0.7] }}
-                transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-              >
+              <motion.div animate={{ scale: [1, 1.1, 1], opacity: [0.7, 1, 0.7] }} transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}>
                 <Siren className="w-10 h-10 sm:w-14 sm:h-14 text-red-500" strokeWidth={2.5} />
               </motion.div>
             ) : isWatch ? (
@@ -163,8 +165,31 @@ export default function ForecastCard({ lga, bulkData, isBulkLoaded }: ForecastCa
             )}
           </div>
         </div>
+
+        {/* Time-horizon risk badge strip */}
+        {hasHorizons ? (
+          <div className="pointer-events-none flex items-center gap-2 mb-4 sm:mb-3">
+            <Clock className="w-3 h-3 text-zinc-400 shrink-0" />
+            {[{ window: '24h', ...h24 }, { window: '48h', ...h48 }, { window: '72h', ...h72 }].map(({ window, bg, text, label }) => (
+              <span key={window} className={`inline-flex items-center gap-1 ${bg} ${text} text-[10px] font-black tracking-widest px-2 py-0.5 rounded`}>
+                <span className="opacity-60">{window}</span>
+                <span>{label}</span>
+              </span>
+            ))}
+          </div>
+        ) : !isDataMissing && (
+          <div className="pointer-events-none flex items-center gap-2 mb-4 sm:mb-3">
+            <Clock className="w-3 h-3 text-zinc-600 shrink-0" />
+            {['24h', '48h', '72h'].map(h => (
+              <span key={h} className="inline-flex items-center gap-1 bg-zinc-800 text-[10px] font-black tracking-widest px-2 py-0.5 rounded text-zinc-500">
+                <span>{h}</span><span>-</span>
+              </span>
+            ))}
+          </div>
+        )}
         
-        <div className="w-full bg-zinc-900 border border-zinc-700 p-4 rounded-2xl flex flex-col pointer-events-none group-hover:border-zinc-500 transition-colors">
+        {/* Weather summary bar */}
+        <div className="w-full bg-zinc-900 border border-zinc-700 p-4 rounded-2xl flex justify-between items-center pointer-events-none group-hover:border-zinc-500 transition-colors">
           {isDataMissing ? (
             <div className="flex w-full justify-between items-center py-1">
               <div className="flex items-center gap-3">
@@ -181,42 +206,17 @@ export default function ForecastCard({ lga, bulkData, isBulkLoaded }: ForecastCa
             </div>
           ) : (
             <>
-              <div className="flex justify-between items-center w-full">
-                <div className="flex items-center gap-3">
-                  {getWeatherIcon(weatherCode, "w-8 h-8 text-blue-400")}
-                  <div className="flex flex-col">
-                    <span className="text-sm font-bold text-white">{temperature}°C</span>
-                    <span className="text-[10px] text-zinc-400 font-bold uppercase tracking-wider">{getWeatherText(weatherCode)}</span>
-                  </div>
-                </div>
-                <div className="flex flex-col items-end">
-                  <span className="text-sm font-bold text-white">{rainfall7d}mm</span>
-                  <span className="text-[10px] text-zinc-400 font-bold uppercase tracking-wider">7d Rain</span>
+              <div className="flex items-center gap-3">
+                {getWeatherIcon(weatherCode, "w-8 h-8 text-blue-400")}
+                <div className="flex flex-col">
+                  <span className="text-sm font-bold text-white">{temperature}&#176;C</span>
+                  <span className="text-[10px] text-zinc-400 font-bold uppercase tracking-wider">{getWeatherText(weatherCode)}</span>
                 </div>
               </div>
-              
-              {data.risk_24h !== undefined && (
-                <div className="flex justify-between gap-2 mt-3 pt-3 border-t border-zinc-700/50">
-                  <div className="flex flex-col items-center flex-1 bg-black/50 rounded-lg py-1.5">
-                    <span className="text-[9px] text-zinc-400 font-bold uppercase tracking-wider">24H</span>
-                    <span className={`text-xs font-black mt-0.5 ${data.risk_24h > 0.7 ? 'text-red-400' : data.risk_24h > 0.4 ? 'text-orange-400' : 'text-green-400'}`}>
-                      {(data.risk_24h * 100).toFixed(0)}%
-                    </span>
-                  </div>
-                  <div className="flex flex-col items-center flex-1 bg-black/50 rounded-lg py-1.5">
-                    <span className="text-[9px] text-zinc-400 font-bold uppercase tracking-wider">48H</span>
-                    <span className={`text-xs font-black mt-0.5 ${(data.risk_48h || 0) > 0.7 ? 'text-red-400' : (data.risk_48h || 0) > 0.4 ? 'text-orange-400' : 'text-green-400'}`}>
-                      {((data.risk_48h || 0) * 100).toFixed(0)}%
-                    </span>
-                  </div>
-                  <div className="flex flex-col items-center flex-1 bg-black/50 rounded-lg py-1.5">
-                    <span className="text-[9px] text-zinc-400 font-bold uppercase tracking-wider">72H</span>
-                    <span className={`text-xs font-black mt-0.5 ${(data.risk_72h || 0) > 0.7 ? 'text-red-400' : (data.risk_72h || 0) > 0.4 ? 'text-orange-400' : 'text-green-400'}`}>
-                      {((data.risk_72h || 0) * 100).toFixed(0)}%
-                    </span>
-                  </div>
-                </div>
-              )}
+              <div className="flex flex-col items-end">
+                <span className="text-sm font-bold text-white">{rainfall7d}mm</span>
+                <span className="text-[10px] text-zinc-400 font-bold uppercase tracking-wider">7d Rain</span>
+              </div>
             </>
           )}
         </div>
@@ -225,15 +225,11 @@ export default function ForecastCard({ lga, bulkData, isBulkLoaded }: ForecastCa
       <AnimatePresence>
         {showModal && (
           <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+            initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
             className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm"
           >
             <motion.div 
-              initial={{ scale: 0.95, opacity: 0, y: 20 }}
-              animate={{ scale: 1, opacity: 1, y: 0 }}
-              exit={{ scale: 0.95, opacity: 0, y: 20 }}
+              initial={{ scale: 0.95, opacity: 0, y: 20 }} animate={{ scale: 1, opacity: 1, y: 0 }} exit={{ scale: 0.95, opacity: 0, y: 20 }}
               transition={{ type: "spring", duration: 0.5, bounce: 0.3 }}
               className="bg-white border-2 border-black rounded-[2rem] p-6 sm:p-8 w-[95%] sm:w-full max-w-lg max-h-[90vh] overflow-y-auto shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] flex flex-col gap-6"
             >
@@ -250,16 +246,37 @@ export default function ForecastCard({ lga, bulkData, isBulkLoaded }: ForecastCa
                     <Loader2 className="w-12 h-12 text-blue-600" />
                   </motion.div>
                 ) : (
-                  <motion.div 
-                    initial={{ scale: 0.8, opacity: 0 }} 
-                    animate={{ scale: 1, opacity: 1 }} 
-                    className="flex flex-col items-center gap-2"
-                  >
+                  <motion.div initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className="flex flex-col items-center gap-2">
                     {getWeatherIcon(weatherCode, "w-16 h-16 text-black")}
-                    <span className="font-bold text-xl">{temperature}°C</span>
+                    <span className="font-bold text-xl">{temperature}&#176;C</span>
                   </motion.div>
                 )}
               </div>
+
+              {/* Predictive time-horizon panel */}
+              {!isDataMissing && (
+                <div className="flex flex-col gap-3">
+                  <div className="flex items-center gap-2">
+                    <Clock className="w-4 h-4 text-black" />
+                    <h3 className="font-black text-sm tracking-widest uppercase">Predictive Horizon</h3>
+                  </div>
+                  <div className="grid grid-cols-3 gap-3">
+                    {[
+                      { window: '24-Hour', ...h24, raw: data?.risk_24h },
+                      { window: '48-Hour', ...h48, raw: data?.risk_48h },
+                      { window: '72-Hour', ...h72, raw: data?.risk_72h },
+                    ].map(({ window, bg, text, label, raw }) => (
+                      <div key={window} className={`flex flex-col items-center justify-center gap-1 ${bg} rounded-xl p-3 border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]`}>
+                        <span className={`text-[10px] font-black tracking-widest uppercase ${text} opacity-75`}>{window}</span>
+                        <span className={`text-xl font-black ${text}`}>{label}</span>
+                        {raw !== undefined && (
+                          <span className={`text-[10px] font-mono ${text} opacity-60`}>{(raw * 100).toFixed(0)}%</span>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 font-mono text-sm bg-gray-50 border-2 border-black rounded-xl p-4 sm:p-6 shadow-inner">
                 {isDataMissing ? (
@@ -290,43 +307,18 @@ export default function ForecastCard({ lga, bulkData, isBulkLoaded }: ForecastCa
                       <div className="flex items-center gap-2 font-sans font-bold text-xs uppercase tracking-widest">Return Period (RP)</div>
                       <span className="font-bold text-blue-400 text-lg">{lga.rp}</span>
                     </div>
-                    
-                    {data.risk_24h !== undefined && (
-                      <div className="col-span-1 sm:col-span-2 grid grid-cols-3 gap-2 mt-2">
-                         <div className="flex flex-col items-center justify-center bg-white border-2 border-black rounded-lg py-2 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
-                            <span className="text-[10px] text-zinc-500 font-bold uppercase tracking-widest">24H Risk</span>
-                            <span className={`text-lg font-black mt-1 ${data.risk_24h > 0.7 ? 'text-red-600' : data.risk_24h > 0.4 ? 'text-orange-500' : 'text-green-600'}`}>
-                              {(data.risk_24h * 100).toFixed(0)}%
-                            </span>
-                         </div>
-                         <div className="flex flex-col items-center justify-center bg-white border-2 border-black rounded-lg py-2 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
-                            <span className="text-[10px] text-zinc-500 font-bold uppercase tracking-widest">48H Risk</span>
-                            <span className={`text-lg font-black mt-1 ${(data.risk_48h || 0) > 0.7 ? 'text-red-600' : (data.risk_48h || 0) > 0.4 ? 'text-orange-500' : 'text-green-600'}`}>
-                              {((data.risk_48h || 0) * 100).toFixed(0)}%
-                            </span>
-                         </div>
-                         <div className="flex flex-col items-center justify-center bg-white border-2 border-black rounded-lg py-2 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
-                            <span className="text-[10px] text-zinc-500 font-bold uppercase tracking-widest">72H Risk</span>
-                            <span className={`text-lg font-black mt-1 ${(data.risk_72h || 0) > 0.7 ? 'text-red-600' : (data.risk_72h || 0) > 0.4 ? 'text-orange-500' : 'text-green-600'}`}>
-                              {((data.risk_72h || 0) * 100).toFixed(0)}%
-                            </span>
-                         </div>
-                      </div>
-                    )}
                   </>
                 )}
               </div>
 
               {!isDataMissing && data.explanation && data.explanation.length > 0 && (
                 <div className="flex flex-col mt-2">
-                  <h3 className="font-bold text-sm tracking-wide mb-3">🧠 Why this forecast?</h3>
+                  <h3 className="font-bold text-sm tracking-wide mb-3">Why this forecast?</h3>
                   <ul className="flex flex-col gap-3">
                     {data.explanation.map((exp, idx) => (
                       <li key={idx} className="flex items-start gap-3">
                         <div className={`shrink-0 w-2 h-2 mt-1.5 rounded-full ${isEvacuation ? 'bg-red-500' : isWatch ? 'bg-orange-500' : isUnavailable ? 'bg-zinc-400' : 'bg-green-500'}`} />
-                        <p className="text-sm font-medium text-black leading-relaxed">
-                          {exp}
-                        </p>
+                        <p className="text-sm font-medium text-black leading-relaxed">{exp}</p>
                       </li>
                     ))}
                   </ul>
@@ -334,8 +326,7 @@ export default function ForecastCard({ lga, bulkData, isBulkLoaded }: ForecastCa
               )}
 
               <motion.button 
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
+                whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}
                 onClick={() => setShowModal(false)}
                 className="w-full bg-white text-black py-4 rounded-xl font-bold text-lg mt-2 transition-colors border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:bg-gray-100 shrink-0"
               >

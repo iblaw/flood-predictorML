@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { CloudRain, Cloud, Sun, CloudLightning, Loader2, MapPin, Droplets, Mountain, Waves, AlertTriangle, ShieldCheck, Siren } from 'lucide-react';
+import TimeBadges from '../../components/TimeBadges';
 
 export interface LGA {
   name: string;
@@ -17,6 +18,9 @@ export interface LGA {
 export interface BFFData {
   tier: string;
   risk_level: number;
+  risk_24h?: number;
+  risk_48h?: number;
+  risk_72h?: number;
   explanation?: string[];
   weather: {
     rainfall_7d: number;
@@ -142,6 +146,9 @@ export default function ForecastCard({ lga, bulkData, isBulkLoaded }: ForecastCa
             <span className={`text-xs sm:text-sm font-bold tracking-widest mt-1 ${isEvacuation ? 'text-red-400' : isWatch ? 'text-orange-500' : isUnavailable ? 'text-zinc-500' : 'text-green-400'}`}>
               {statusText}
             </span>
+            {!isDataMissing && data?.risk_24h !== undefined && data?.risk_48h !== undefined && data?.risk_72h !== undefined && (
+              <TimeBadges risk24={data.risk_24h} risk48={data.risk_48h} risk72={data.risk_72h} />
+            )}
           </div>
           <div className="shrink-0 w-12 h-12 sm:w-16 sm:h-16 mt-1 ml-2 flex items-center justify-center">
             {isEvacuation ? (

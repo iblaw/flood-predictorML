@@ -46,14 +46,15 @@ except Exception as e:
 
 
 async def fetch_weather_for_lga(client: httpx.AsyncClient, lat: float, lon: float, max_retries: int = 2) -> Optional[Dict[str, Any]]:
-    """ Fetches historical and forecast weather telemetry with exponential backoff. """
+    """ Fetches historical and hourly forecast weather telemetry with exponential backoff. """
     url = "https://api.open-meteo.com/v1/forecast"
     params = {
         "latitude": lat,
         "longitude": lon,
         "past_days": 30,
-        "forecast_days": 2, 
+        "forecast_days": 4,  # Fetch 4 days to guarantee 72 hours of hourly data
         "daily": ["precipitation_sum", "soil_moisture_0_to_7cm_mean"],
+        "hourly": ["precipitation"], # Required for 24h/48h/72h horizon accumulations
         "timezone": "Africa/Lagos"
     }
     
@@ -111,6 +112,49 @@ def calculate_physics(weather_data: Dict[str, Any], is_urban: int, river_dist: f
     }
 
 
+def calculate_horizon_risks(base_input_data: Dict[str, Any], hourly_forecast: List[float]) -> Dict[str, float]:
+    """ Projects current hydrological state into 24h, 48h, and 72h future risk horizons. """
+    hourly_rain = [x if x is not None else 0.0 for x in hourly_forecast]
+    
+    # Ensure minimum array length to prevent index errors
+    while len(hourly_rain) < 72:
+        hourly_rain.append(0.0)
+        
+    horizons = {
+        "24h": sum(hourly_rain[0:24]),
+        "48h": sum(hourly_rain[0:48]),
+        "72h": sum(hourly_rain[0:72])
+    }
+    
+    horizon_preds = {}
+    
+    for label, acc_rain in horizons.items():
+        future_features = base_input_data.copy()
+        
+        # Project physics forward with forecasted accumulation
+        future_features['Past_3D_Rainfall_mm'] += acc_rain
+        future_features['Past_7D_Rainfall_mm'] += acc_rain
+        
+        # Recalculate dynamic dependents (Runoff)
+        is_urban = future_features.get('Is_Urban', 0)
+        soil7 = future_features.get('Past_7D_Soil_Moisture', 0.35)
+        future_features['Runoff_Potential'] = future_features['Past_3D_Rainfall_mm'] * (is_urban + 0.5) * (soil7 + 0.1)
+        
+        # Format for model inference
+        df_future = pd.DataFrame([future_features])
+        if feature_cols:
+            for col in feature_cols:
+                if col not in df_future.columns: df_future[col] = 0.0
+            X_future = df_future[feature_cols]
+        else:
+            X_future = df_future.drop(columns=['Elevation_m', 'True_Elevation'], errors='ignore')
+            
+        prob = float(model.predict_proba(X_future)[0][1])
+        horizon_preds[f'risk_{label}'] = prob
+        
+    return horizon_preds
+
+
 def generate_human_insights(input_data: Dict[str, Any], is_at_risk: bool) -> List[str]:
     """ Generates diagnostic natural language insights for UI consumption. """
     insights: List[str] = []
@@ -156,10 +200,13 @@ async def process_all_lgas() -> None:
             weather_data = await fetch_weather_for_lga(client, lat, lon)
             await asyncio.sleep(1.0)
             
+            # 1. Feature Engineering
             if weather_data:
                 weather_features = calculate_physics(weather_data, is_urban, river_dist, fallback_elev)
+                hourly_forecast = weather_data.get('hourly', {}).get('precipitation', [0.0] * 72)
             else:
                 print(f"[WARN] Utilizing baseline metrics for {lga_name}.")
+                hourly_forecast = [0.0] * 72
                 weather_features = {
                     'True_Elevation': fallback_elev,
                     'Past_3D_Rainfall_mm': 12.0,
@@ -181,6 +228,7 @@ async def process_all_lgas() -> None:
             }
             input_data.update(weather_features)
             
+            # 2. Base Prediction Processing
             df_input = pd.DataFrame([input_data])
             if feature_cols:
                 for col in feature_cols:
@@ -191,15 +239,23 @@ async def process_all_lgas() -> None:
 
             prob = float(model.predict_proba(X_input)[0][1])
             is_at_risk = prob >= 0.50
-            
             tier = "HIGH RISK" if prob >= 0.75 else "MODERATE RISK" if is_at_risk else "SAFE"
+            
+            # 3. Horizon Risk Processing
+            horizon_scores = calculate_horizon_risks(input_data, hourly_forecast)
+            
+            # 4. Generate Insights
             explanation = generate_human_insights(input_data, is_at_risk)
             
+            # 5. Database Payload Structuring
             db_rows.append({
                 "lga_name": lga_name,
                 "status": "AT RISK" if is_at_risk else "SAFE",
                 "tier": tier,
                 "probability_percent": round(prob * 100, 1),
+                "risk_24h": horizon_scores['risk_24h'],
+                "risk_48h": horizon_scores['risk_48h'],
+                "risk_72h": horizon_scores['risk_72h'],
                 "rainfall_7d": round(weather_features['Past_7D_Rainfall_mm'], 1),
                 "soil_moisture_7d": round(weather_features['Past_7D_Soil_Moisture'] * 100, 1),
                 "elevation": round(weather_features['True_Elevation'], 1),

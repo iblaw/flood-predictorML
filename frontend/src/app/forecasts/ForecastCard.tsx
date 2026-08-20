@@ -225,31 +225,31 @@ export default function ForecastCard({ lga, bulkData, isBulkLoaded }: ForecastCa
         {/* Weather summary bar */}
         <div className="mt-auto w-full bg-zinc-900 border-2 border-zinc-700 p-4 rounded-2xl flex items-center justify-between pointer-events-none group-hover:border-zinc-500 transition-colors">
           {isDataMissing ? (
-            <div className="flex w-full justify-between items-center py-1">
-              <div className="shrink-0 mr-4">
+            <>
+              <div className="shrink-0">
                 <div className="w-10 h-10 rounded-full bg-zinc-800 animate-pulse"></div>
               </div>
-              <div className="flex flex-col items-start flex-1 gap-1">
-                <div className="w-12 h-4 bg-zinc-800 rounded animate-pulse"></div>
+              <div className="flex flex-col items-center">
+                <div className="w-12 h-5 bg-zinc-800 rounded animate-pulse mb-1"></div>
                 <div className="w-16 h-3 bg-zinc-800 rounded animate-pulse"></div>
               </div>
-              <div className="flex flex-col items-end flex-1 gap-1">
-                <div className="w-12 h-4 bg-zinc-800 rounded animate-pulse"></div>
-                <div className="w-10 h-3 bg-zinc-800 rounded animate-pulse"></div>
+              <div className="flex flex-col items-end">
+                <div className="w-12 h-5 bg-zinc-800 rounded animate-pulse mb-1"></div>
+                <div className="w-14 h-3 bg-zinc-800 rounded animate-pulse"></div>
               </div>
-            </div>
+            </>
           ) : (
             <>
-              <div className="shrink-0 mr-4">
+              <div className="shrink-0">
                 {getWeatherIcon(weatherCode, "w-10 h-10 text-blue-400")}
               </div>
-              <div className="flex flex-col items-start flex-1">
+              <div className="flex flex-col items-center">
                 <span className="font-bold text-lg text-white">{temperature}&#176;C</span>
-                <span className="text-xs text-gray-400 uppercase tracking-widest">{getWeatherText(weatherCode)}</span>
+                <span className="text-xs text-gray-400 uppercase tracking-wider">{getWeatherText(weatherCode)}</span>
               </div>
-              <div className="flex flex-col items-end flex-1">
+              <div className="flex flex-col items-end">
                 <span className="font-bold text-lg text-white">{rainfall7d}mm</span>
-                <span className="text-xs text-gray-400 uppercase tracking-widest">7D Rain</span>
+                <span className="text-xs text-gray-400 uppercase tracking-wider">7D Rain</span>
               </div>
             </>
           )}

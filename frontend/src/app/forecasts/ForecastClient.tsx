@@ -265,7 +265,7 @@ export default function ForecastClient({ lgas }: ForecastClientProps) {
 
       <div className={`w-full relative transition-opacity duration-200 ${isTransitioning ? 'opacity-50 pointer-events-none' : 'opacity-100'}`}>
         {!isBulkLoaded ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 lg:gap-10 xl:gap-12 mt-12 w-full">
+          <div className="grid grid-cols-[repeat(auto-fit,minmax(340px,1fr))] gap-8 mt-12 w-full">
             {[...Array(8)].map((_, i) => (
               <div key={i} className="bg-gray-200 animate-pulse border-2 border-black rounded-3xl h-64 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] p-6 flex flex-col gap-4">
                 <div className="flex justify-between items-start w-full">

@@ -3,7 +3,10 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { SearchX } from 'lucide-react';
-import ForecastCard, { LGA, BFFData } from './ForecastCard';
+import { LGA, BFFData } from './ForecastCard';
+import dynamic from 'next/dynamic';
+
+const VirtualizedGrid = dynamic(() => import('../../components/VirtualizedForecastGrid'), { ssr: false });
 
 interface ForecastClientProps {
   lgas: LGA[];
@@ -214,22 +217,24 @@ export default function ForecastClient({ lgas }: ForecastClientProps) {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 w-full">
+      <div className="w-full">
         {!isBulkLoaded ? (
-          [...Array(6)].map((_, i) => (
-            <div key={i} className="bg-gray-200 animate-pulse border-2 border-black rounded-3xl h-64 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] p-6 flex flex-col gap-4">
-              <div className="flex justify-between items-start w-full">
-                <div className="w-1/2 h-8 bg-gray-300 rounded-md"></div>
-                <div className="w-16 h-8 bg-gray-300 rounded-full"></div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 w-full">
+            {[...Array(6)].map((_, i) => (
+              <div key={i} className="bg-gray-200 animate-pulse border-2 border-black rounded-3xl h-64 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] p-6 flex flex-col gap-4">
+                <div className="flex justify-between items-start w-full">
+                  <div className="w-1/2 h-8 bg-gray-300 rounded-md"></div>
+                  <div className="w-16 h-8 bg-gray-300 rounded-full"></div>
+                </div>
+                <div className="flex-1 flex flex-col gap-3 mt-4">
+                  <div className="w-full h-4 bg-gray-300 rounded-md"></div>
+                  <div className="w-5/6 h-4 bg-gray-300 rounded-md"></div>
+                  <div className="w-4/6 h-4 bg-gray-300 rounded-md"></div>
+                </div>
+                <div className="w-full h-10 bg-gray-300 rounded-xl mt-auto"></div>
               </div>
-              <div className="flex-1 flex flex-col gap-3 mt-4">
-                <div className="w-full h-4 bg-gray-300 rounded-md"></div>
-                <div className="w-5/6 h-4 bg-gray-300 rounded-md"></div>
-                <div className="w-4/6 h-4 bg-gray-300 rounded-md"></div>
-              </div>
-              <div className="w-full h-10 bg-gray-300 rounded-xl mt-auto"></div>
-            </div>
-          ))
+            ))}
+          </div>
         ) : (
           (() => {
             let finalLgas = filteredLgas;
@@ -244,7 +249,7 @@ export default function ForecastClient({ lgas }: ForecastClientProps) {
 
             if (finalLgas.length === 0) {
               return (
-                <div className="col-span-full bg-white border-2 border-black rounded-3xl p-12 text-center shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] space-y-4">
+                <div className="w-full bg-white border-2 border-black rounded-3xl p-12 text-center shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] space-y-4">
                   <div className="w-16 h-16 bg-red-100 border-2 border-black rounded-full flex items-center justify-center mx-auto">
                     <SearchX className="w-8 h-8 text-black" />
                   </div>
@@ -264,9 +269,13 @@ export default function ForecastClient({ lgas }: ForecastClientProps) {
               );
             }
 
-            return finalLgas.map((lga, idx) => (
-              <ForecastCard key={`${lga.name}-${idx}`} lga={lga} bulkData={bulkPredictions[lga.name]} isBulkLoaded={isBulkLoaded} />
-            ));
+            return (
+              <VirtualizedGrid 
+                lgas={finalLgas}
+                bulkPredictions={bulkPredictions}
+                isBulkLoaded={isBulkLoaded}
+              />
+            );
           })()
         )}
       </div>

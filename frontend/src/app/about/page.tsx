@@ -4,12 +4,12 @@ import React from 'react';
 import { motion } from 'framer-motion';
 
 const skills = [
-  { name: "Python", width: "100%" },
-  { name: "Machine Learning", width: "85%" },
-  { name: "Next.js", width: "95%" },
-  { name: "Geospatial GIS", width: "75%" },
-  { name: "FastAPI", width: "90%" },
-  { name: "UI/UX Design", width: "80%" },
+  { name: "Machine Learning", width: "100%" },
+  { name: "Python", width: "95%" },
+  { name: "Data Analysis", width: "90%" },
+  { name: "Feature Engineering", width: "85%" },
+  { name: "API Development", width: "85%" },
+  { name: "Product Development", width: "75%" },
 ];
 
 export default function About() {
@@ -19,9 +19,11 @@ export default function About() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 lg:gap-x-16 gap-y-10 sm:gap-y-12 w-full mt-4">
         
-        {/* Renders profile image placeholder */}
+        {/* Renders profile image */}
         <div className="order-1 md:order-none md:col-start-1 md:row-start-1 md:row-span-2">
-          <div className="w-full aspect-square bg-black rounded-[2.5rem] sm:rounded-[3rem]"></div>
+          <div className="w-full aspect-square bg-white border-4 border-black rounded-[2.5rem] sm:rounded-[3rem] shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] overflow-hidden">
+            <img src="/avatar.jpg" alt="Ibrahim Lawal" className="w-full h-full object-cover" />
+          </div>
         </div>
 
         {/* Renders fellow biography card */}

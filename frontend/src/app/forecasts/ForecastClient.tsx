@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useTransition, useDeferredValue, useMemo, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { SearchX } from 'lucide-react';
 import { LGA, BFFData } from './ForecastCard';
@@ -16,11 +16,14 @@ const placeholders = ["LGA", "latitude and longitude"];
 
 export default function ForecastClient({ lgas }: ForecastClientProps) {
   const [searchValue, setSearchValue] = useState("");
+  const deferredSearchValue = useDeferredValue(searchValue);
   const [isFocused, setIsFocused] = useState(false);
   const [placeholderIndex, setPlaceholderIndex] = useState(0);
 
   const [isLocating, setIsLocating] = useState(false);
+  
   const [statusFilter, setStatusFilter] = useState('ALL');
+  const [isPending, startTransition] = useTransition();
   
   const [bulkPredictions, setBulkPredictions] = useState<Record<string, BFFData>>({});
   const [isBulkLoaded, setIsBulkLoaded] = useState(false);
@@ -47,7 +50,7 @@ export default function ForecastClient({ lgas }: ForecastClientProps) {
           setLastUpdated(formatted);
         }
       })
-      .catch(err => console.error("Failed to fetch bulk predictions", err))
+      .catch(() => {})
       .finally(() => setIsBulkLoaded(true));
       
     const timer = setInterval(() => {
@@ -56,7 +59,7 @@ export default function ForecastClient({ lgas }: ForecastClientProps) {
     return () => clearInterval(timer);
   }, []);
 
-  const handleGeolocation = () => {
+  const handleGeolocation = useCallback(() => {
     if (!navigator.geolocation) {
       alert("Geolocation is not supported by your browser");
       return;
@@ -74,13 +77,19 @@ export default function ForecastClient({ lgas }: ForecastClientProps) {
         alert(`Unable to retrieve your location: ${error.message}`);
       }
     );
-  };
+  }, []);
 
-  let filteredLgas = lgas;
-  
-  if (searchValue) {
-    if (searchValue.includes(',')) {
-      const parts = searchValue.split(',');
+  const handleSetStatusFilter = useCallback((filterType: string) => {
+    startTransition(() => {
+      setStatusFilter(filterType);
+    });
+  }, []);
+
+  const filteredLgas = useMemo(() => {
+    if (!deferredSearchValue) return lgas;
+    
+    if (deferredSearchValue.includes(',')) {
+      const parts = deferredSearchValue.split(',');
       const lat = parseFloat(parts[0]);
       const lon = parseFloat(parts[1]);
       if (!isNaN(lat) && !isNaN(lon)) {
@@ -93,14 +102,40 @@ export default function ForecastClient({ lgas }: ForecastClientProps) {
             nearestLga = lga;
           }
         }
-        filteredLgas = [nearestLga];
-      } else {
-        filteredLgas = lgas.filter((lga) => lga.name.toLowerCase().includes(searchValue.toLowerCase()));
+        return [nearestLga];
       }
-    } else {
-      filteredLgas = lgas.filter((lga) => lga.name.toLowerCase().includes(searchValue.toLowerCase()));
     }
-  }
+    
+    const lowerSearch = deferredSearchValue.toLowerCase();
+    return lgas.filter((lga) => lga.name.toLowerCase().includes(lowerSearch));
+  }, [lgas, deferredSearchValue]);
+
+  const filterCounts = useMemo(() => {
+    const counts = { 'ALL': filteredLgas.length, 'HIGH RISK': 0, 'MODERATE RISK': 0, 'SAFE': 0 };
+    filteredLgas.forEach(lga => {
+      const data = bulkPredictions[lga.name];
+      if (data && data.tier) {
+        const tier = data.tier.toUpperCase();
+        if (counts[tier as keyof typeof counts] !== undefined) {
+          counts[tier as keyof typeof counts]++;
+        }
+      }
+    });
+    return counts;
+  }, [filteredLgas, bulkPredictions]);
+
+  const finalLgas = useMemo(() => {
+    if (statusFilter === 'ALL') return filteredLgas;
+    
+    return filteredLgas.filter(lga => {
+      const data = bulkPredictions[lga.name];
+      if (!data) return false;
+      const tier = data.tier ? data.tier.toUpperCase() : "PENDING";
+      return tier === statusFilter;
+    });
+  }, [filteredLgas, statusFilter, bulkPredictions]);
+
+  const isTransitioning = isPending || searchValue !== deferredSearchValue;
 
   return (
     <div className="flex flex-col min-h-screen items-center pt-24 pb-48 px-6 sm:px-8 max-w-6xl mx-auto w-full">
@@ -178,46 +213,27 @@ export default function ForecastClient({ lgas }: ForecastClientProps) {
         </button>
 
         <div className="flex gap-4 mt-8 flex-wrap justify-center">
-          {(() => {
-            const counts = {
-              'ALL': filteredLgas.length,
-              'HIGH RISK': 0,
-              'MODERATE RISK': 0,
-              'SAFE': 0
-            };
-
-            filteredLgas.forEach(lga => {
-              const data = bulkPredictions[lga.name];
-              if (data && data.tier) {
-                const tier = data.tier.toUpperCase();
-                if (counts[tier as keyof typeof counts] !== undefined) {
-                  counts[tier as keyof typeof counts]++;
-                }
-              }
-            });
-
-            return ['ALL', 'HIGH RISK', 'MODERATE RISK', 'SAFE'].map((filterType) => {
-              const count = counts[filterType as keyof typeof counts];
-              const isDisabled = filterType !== 'ALL' && count === 0;
-              return (
-                <button
-                  key={filterType}
-                  onClick={() => !isDisabled && setStatusFilter(filterType)}
-                  disabled={isDisabled}
-                  className={`flex items-center gap-2 border-2 border-black font-bold px-4 py-2 text-sm rounded-lg transition-colors ${statusFilter === filterType ? 'bg-black text-white' : 'bg-white text-black hover:bg-gray-100'} ${isDisabled ? 'opacity-40 cursor-not-allowed' : ''}`}
-                >
-                  {filterType === 'ALL' ? 'All' : filterType === 'HIGH RISK' ? 'High Risk' : filterType === 'MODERATE RISK' ? 'Moderate Risk' : 'Safe'}
-                  <span className={`text-xs px-2 py-0.5 rounded-full ${statusFilter === filterType ? 'bg-white/20 text-white' : 'bg-black/10 text-black'}`}>
-                    {count}
-                  </span>
-                </button>
-              );
-            });
-          })()}
+          {['ALL', 'HIGH RISK', 'MODERATE RISK', 'SAFE'].map((filterType) => {
+            const count = filterCounts[filterType as keyof typeof filterCounts];
+            const isDisabled = filterType !== 'ALL' && count === 0;
+            return (
+              <button
+                key={filterType}
+                onClick={() => !isDisabled && handleSetStatusFilter(filterType)}
+                disabled={isDisabled}
+                className={`flex items-center gap-2 border-2 border-black font-bold px-4 py-2 text-sm rounded-lg transition-colors ${statusFilter === filterType ? 'bg-black text-white' : 'bg-white text-black hover:bg-gray-100'} ${isDisabled ? 'opacity-40 cursor-not-allowed' : ''}`}
+              >
+                {filterType === 'ALL' ? 'All' : filterType === 'HIGH RISK' ? 'High Risk' : filterType === 'MODERATE RISK' ? 'Moderate Risk' : 'Safe'}
+                <span className={`text-xs px-2 py-0.5 rounded-full ${statusFilter === filterType ? 'bg-white/20 text-white' : 'bg-black/10 text-black'}`}>
+                  {count}
+                </span>
+              </button>
+            );
+          })}
         </div>
       </div>
 
-      <div className="w-full">
+      <div className={`w-full transition-opacity duration-200 ${isTransitioning ? 'opacity-50 pointer-events-none' : 'opacity-100'}`}>
         {!isBulkLoaded ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 w-full">
             {[...Array(6)].map((_, i) => (
@@ -235,48 +251,35 @@ export default function ForecastClient({ lgas }: ForecastClientProps) {
               </div>
             ))}
           </div>
+        ) : finalLgas.length === 0 ? (
+          <div className="w-full bg-white border-2 border-black rounded-3xl p-12 text-center shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] space-y-4">
+            <div className="w-16 h-16 bg-red-100 border-2 border-black rounded-full flex items-center justify-center mx-auto">
+              <SearchX className="w-8 h-8 text-black" />
+            </div>
+            <h3 className="text-2xl font-black heading-font">No Communities Match This Filter</h3>
+            <p className="text-gray-600 max-w-md mx-auto text-sm">
+              We couldn&apos;t find any local government areas matching this criteria. Try clearing your filters or searching for a different area.
+            </p>
+            <div className="pt-4">
+              <button
+                onClick={() => { 
+                  setSearchValue(''); 
+                  startTransition(() => {
+                    setStatusFilter('ALL'); 
+                  });
+                }}
+                className="border-2 border-black bg-black text-white font-bold px-6 py-3 rounded-lg hover:bg-gray-800 transition-colors shadow-[4px_4px_0px_0px_rgba(0,0,0,0.3)]"
+              >
+                Clear Search & Filters
+              </button>
+            </div>
+          </div>
         ) : (
-          (() => {
-            let finalLgas = filteredLgas;
-            if (statusFilter !== 'ALL') {
-              finalLgas = filteredLgas.filter(lga => {
-                const data = bulkPredictions[lga.name];
-                if (!data) return false;
-                const tier = data.tier ? data.tier.toUpperCase() : "PENDING";
-                return tier === statusFilter;
-              });
-            }
-
-            if (finalLgas.length === 0) {
-              return (
-                <div className="w-full bg-white border-2 border-black rounded-3xl p-12 text-center shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] space-y-4">
-                  <div className="w-16 h-16 bg-red-100 border-2 border-black rounded-full flex items-center justify-center mx-auto">
-                    <SearchX className="w-8 h-8 text-black" />
-                  </div>
-                  <h3 className="text-2xl font-black heading-font">No Communities Match This Filter</h3>
-                  <p className="text-gray-600 max-w-md mx-auto text-sm">
-                    We couldn&apos;t find any local government areas matching this criteria. Try clearing your filters or searching for a different area.
-                  </p>
-                  <div className="pt-4">
-                    <button
-                      onClick={() => { setSearchValue(''); setStatusFilter('ALL'); }}
-                      className="border-2 border-black bg-black text-white font-bold px-6 py-3 rounded-lg hover:bg-gray-800 transition-colors shadow-[4px_4px_0px_0px_rgba(0,0,0,0.3)]"
-                    >
-                      Clear Search & Filters
-                    </button>
-                  </div>
-                </div>
-              );
-            }
-
-            return (
-              <VirtualizedGrid 
-                lgas={finalLgas}
-                bulkPredictions={bulkPredictions}
-                isBulkLoaded={isBulkLoaded}
-              />
-            );
-          })()
+          <VirtualizedGrid 
+            lgas={finalLgas}
+            bulkPredictions={bulkPredictions}
+            isBulkLoaded={isBulkLoaded}
+          />
         )}
       </div>
     </div>

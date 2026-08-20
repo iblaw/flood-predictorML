@@ -3,7 +3,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { CloudRain, Cloud, Sun, CloudLightning, Loader2, MapPin, Droplets, Mountain, Waves, AlertTriangle, ShieldCheck, Siren } from 'lucide-react';
-import TimeBadges from '../../components/TimeBadges';
 
 export interface LGA {
   name: string;
@@ -146,9 +145,6 @@ export default function ForecastCard({ lga, bulkData, isBulkLoaded }: ForecastCa
             <span className={`text-xs sm:text-sm font-bold tracking-widest mt-1 ${isEvacuation ? 'text-red-400' : isWatch ? 'text-orange-500' : isUnavailable ? 'text-zinc-500' : 'text-green-400'}`}>
               {statusText}
             </span>
-            {!isDataMissing && (data.risk_24h !== undefined || data.risk_48h !== undefined || data.risk_72h !== undefined) && (
-              <TimeBadges risk_24h={data.risk_24h} risk_48h={data.risk_48h} risk_72h={data.risk_72h} />
-            )}
           </div>
           <div className="shrink-0 w-12 h-12 sm:w-16 sm:h-16 mt-1 ml-2 flex items-center justify-center">
             {isEvacuation ? (
@@ -168,7 +164,7 @@ export default function ForecastCard({ lga, bulkData, isBulkLoaded }: ForecastCa
           </div>
         </div>
         
-        <div className="w-full bg-zinc-900 border border-zinc-700 p-4 rounded-2xl flex justify-between items-center pointer-events-none group-hover:border-zinc-500 transition-colors">
+        <div className="w-full bg-zinc-900 border border-zinc-700 p-4 rounded-2xl flex flex-col pointer-events-none group-hover:border-zinc-500 transition-colors">
           {isDataMissing ? (
             <div className="flex w-full justify-between items-center py-1">
               <div className="flex items-center gap-3">
@@ -185,17 +181,42 @@ export default function ForecastCard({ lga, bulkData, isBulkLoaded }: ForecastCa
             </div>
           ) : (
             <>
-              <div className="flex items-center gap-3">
-                {getWeatherIcon(weatherCode, "w-8 h-8 text-blue-400")}
-                <div className="flex flex-col">
-                  <span className="text-sm font-bold text-white">{temperature}°C</span>
-                  <span className="text-[10px] text-zinc-400 font-bold uppercase tracking-wider">{getWeatherText(weatherCode)}</span>
+              <div className="flex justify-between items-center w-full">
+                <div className="flex items-center gap-3">
+                  {getWeatherIcon(weatherCode, "w-8 h-8 text-blue-400")}
+                  <div className="flex flex-col">
+                    <span className="text-sm font-bold text-white">{temperature}°C</span>
+                    <span className="text-[10px] text-zinc-400 font-bold uppercase tracking-wider">{getWeatherText(weatherCode)}</span>
+                  </div>
+                </div>
+                <div className="flex flex-col items-end">
+                  <span className="text-sm font-bold text-white">{rainfall7d}mm</span>
+                  <span className="text-[10px] text-zinc-400 font-bold uppercase tracking-wider">7d Rain</span>
                 </div>
               </div>
-              <div className="flex flex-col items-end">
-                <span className="text-sm font-bold text-white">{rainfall7d}mm</span>
-                <span className="text-[10px] text-zinc-400 font-bold uppercase tracking-wider">7d Rain</span>
-              </div>
+              
+              {data.risk_24h !== undefined && (
+                <div className="flex justify-between gap-2 mt-3 pt-3 border-t border-zinc-700/50">
+                  <div className="flex flex-col items-center flex-1 bg-black/50 rounded-lg py-1.5">
+                    <span className="text-[9px] text-zinc-400 font-bold uppercase tracking-wider">24H</span>
+                    <span className={`text-xs font-black mt-0.5 ${data.risk_24h > 0.7 ? 'text-red-400' : data.risk_24h > 0.4 ? 'text-orange-400' : 'text-green-400'}`}>
+                      {(data.risk_24h * 100).toFixed(0)}%
+                    </span>
+                  </div>
+                  <div className="flex flex-col items-center flex-1 bg-black/50 rounded-lg py-1.5">
+                    <span className="text-[9px] text-zinc-400 font-bold uppercase tracking-wider">48H</span>
+                    <span className={`text-xs font-black mt-0.5 ${(data.risk_48h || 0) > 0.7 ? 'text-red-400' : (data.risk_48h || 0) > 0.4 ? 'text-orange-400' : 'text-green-400'}`}>
+                      {((data.risk_48h || 0) * 100).toFixed(0)}%
+                    </span>
+                  </div>
+                  <div className="flex flex-col items-center flex-1 bg-black/50 rounded-lg py-1.5">
+                    <span className="text-[9px] text-zinc-400 font-bold uppercase tracking-wider">72H</span>
+                    <span className={`text-xs font-black mt-0.5 ${(data.risk_72h || 0) > 0.7 ? 'text-red-400' : (data.risk_72h || 0) > 0.4 ? 'text-orange-400' : 'text-green-400'}`}>
+                      {((data.risk_72h || 0) * 100).toFixed(0)}%
+                    </span>
+                  </div>
+                </div>
+              )}
             </>
           )}
         </div>
@@ -269,6 +290,29 @@ export default function ForecastCard({ lga, bulkData, isBulkLoaded }: ForecastCa
                       <div className="flex items-center gap-2 font-sans font-bold text-xs uppercase tracking-widest">Return Period (RP)</div>
                       <span className="font-bold text-blue-400 text-lg">{lga.rp}</span>
                     </div>
+                    
+                    {data.risk_24h !== undefined && (
+                      <div className="col-span-1 sm:col-span-2 grid grid-cols-3 gap-2 mt-2">
+                         <div className="flex flex-col items-center justify-center bg-white border-2 border-black rounded-lg py-2 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+                            <span className="text-[10px] text-zinc-500 font-bold uppercase tracking-widest">24H Risk</span>
+                            <span className={`text-lg font-black mt-1 ${data.risk_24h > 0.7 ? 'text-red-600' : data.risk_24h > 0.4 ? 'text-orange-500' : 'text-green-600'}`}>
+                              {(data.risk_24h * 100).toFixed(0)}%
+                            </span>
+                         </div>
+                         <div className="flex flex-col items-center justify-center bg-white border-2 border-black rounded-lg py-2 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+                            <span className="text-[10px] text-zinc-500 font-bold uppercase tracking-widest">48H Risk</span>
+                            <span className={`text-lg font-black mt-1 ${(data.risk_48h || 0) > 0.7 ? 'text-red-600' : (data.risk_48h || 0) > 0.4 ? 'text-orange-500' : 'text-green-600'}`}>
+                              {((data.risk_48h || 0) * 100).toFixed(0)}%
+                            </span>
+                         </div>
+                         <div className="flex flex-col items-center justify-center bg-white border-2 border-black rounded-lg py-2 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+                            <span className="text-[10px] text-zinc-500 font-bold uppercase tracking-widest">72H Risk</span>
+                            <span className={`text-lg font-black mt-1 ${(data.risk_72h || 0) > 0.7 ? 'text-red-600' : (data.risk_72h || 0) > 0.4 ? 'text-orange-500' : 'text-green-600'}`}>
+                              {((data.risk_72h || 0) * 100).toFixed(0)}%
+                            </span>
+                         </div>
+                      </div>
+                    )}
                   </>
                 )}
               </div>

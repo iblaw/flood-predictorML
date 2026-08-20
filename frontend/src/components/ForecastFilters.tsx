@@ -100,7 +100,7 @@ export default function ForecastFilters({ onApply, initialFilters }: ForecastFil
                 Filter by Time Horizon
               </h3>
               <div className="flex flex-col gap-2">
-                {["CURRENT", "24H", "48H", "72H"].map((horizon) => (
+                {["24H", "48H", "72H"].map((horizon) => (
                   <label key={horizon} className="flex items-center gap-3 cursor-pointer group" onClick={(e) => { e.preventDefault(); toggleTimeHorizon(horizon); }}>
                     <div className={`w-5 h-5 border-2 border-black flex items-center justify-center transition-colors ${filters.timeHorizons.includes(horizon) ? 'bg-black' : 'bg-white group-hover:bg-gray-200'}`}>
                       {filters.timeHorizons.includes(horizon) && <div className="w-2 h-2 bg-white" />}

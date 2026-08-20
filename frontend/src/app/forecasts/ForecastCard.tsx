@@ -104,14 +104,13 @@ export default function ForecastCard({ lga, bulkData, isBulkLoaded }: ForecastCa
   const data = bulkData || localData;
   const isDataMissing = !data;
 
-  // WATERFALL MAX RULE: Find highest risk across all time horizons
+  // WATERFALL MAX RULE: Find highest risk across 24h, 48h, 72h horizons
   let maxRisk = -1;
-  let maxTimeframe = "CURRENT STATE";
+  let maxTimeframe = "24H FORECAST";
   let finalTier = "PENDING";
 
   if (data && data.tier !== "UNAVAILABLE") {
     const horizons = [
-      { name: "CURRENT STATE", val: data.risk_level ?? 0 },
       { name: "24H FORECAST", val: data.risk_24h ?? 0 },
       { name: "48H FORECAST", val: data.risk_48h ?? 0 },
       { name: "72H FORECAST", val: data.risk_72h ?? 0 }
@@ -176,46 +175,47 @@ export default function ForecastCard({ lga, bulkData, isBulkLoaded }: ForecastCa
         onClick={() => setShowModal(true)} 
         whileHover={{ scale: 1.02, y: -4 }}
         whileTap={{ scale: 0.98 }}
-        className="bg-black cursor-pointer text-white rounded-3xl p-5 sm:p-6 flex flex-col relative group hover:ring-4 hover:ring-blue-600 transition-all shadow-[8px_8px_0px_0px_rgba(0,0,0,0.15)] h-full"
+        className="bg-black cursor-pointer text-white rounded-[2rem] p-6 sm:p-8 flex flex-col relative group hover:ring-4 hover:ring-blue-600 transition-all shadow-[8px_8px_0px_0px_rgba(0,0,0,0.15)] h-full gap-5"
       >
         {/* Header: name + status icon */}
-        <div className="flex justify-between items-start w-full pointer-events-none mb-3">
+        <div className="flex justify-between items-start w-full pointer-events-none">
           <div className="flex flex-col">
-            <span className="text-2xl sm:text-3xl font-light tracking-tight">{lga.name}</span>
-            <span className={`text-xs sm:text-sm font-bold tracking-widest mt-1 ${isEvacuation ? 'text-red-400' : isWatch ? 'text-orange-500' : isUnavailable ? 'text-zinc-500' : 'text-green-400'}`}>
+            <span className="text-3xl sm:text-4xl font-light tracking-tight">{lga.name}</span>
+            <span className={`text-sm sm:text-base font-black tracking-widest mt-2 ${isEvacuation ? 'text-red-400' : isWatch ? 'text-orange-500' : isUnavailable ? 'text-zinc-500' : 'text-green-400'}`}>
               {statusText}
             </span>
           </div>
-          <div className="shrink-0 w-12 h-12 sm:w-16 sm:h-16 mt-1 ml-2 flex items-center justify-center">
+          <div className="shrink-0 w-14 h-14 sm:w-16 sm:h-16 flex items-center justify-center">
             {isEvacuation ? (
               <motion.div animate={{ scale: [1, 1.1, 1], opacity: [0.7, 1, 0.7] }} transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}>
-                <Siren className="w-10 h-10 sm:w-14 sm:h-14 text-red-500" strokeWidth={2.5} />
+                <Siren className="w-12 h-12 sm:w-14 sm:h-14 text-red-500" strokeWidth={2.5} />
               </motion.div>
             ) : isWatch ? (
-              <AlertTriangle className="w-10 h-10 sm:w-14 sm:h-14 text-orange-500" strokeWidth={2.5} />
+              <AlertTriangle className="w-12 h-12 sm:w-14 sm:h-14 text-orange-500" strokeWidth={2.5} />
             ) : isSafe ? (
-              <ShieldCheck className="w-10 h-10 sm:w-14 sm:h-14 text-green-500" strokeWidth={2.5} />
+              <ShieldCheck className="w-12 h-12 sm:w-14 sm:h-14 text-green-500" strokeWidth={2.5} />
             ) : (
-              <Loader2 className="w-10 h-10 sm:w-14 sm:h-14 text-zinc-500 animate-spin" strokeWidth={2.5} />
+              <Loader2 className="w-12 h-12 sm:w-14 sm:h-14 text-zinc-500 animate-spin" strokeWidth={2.5} />
             )}
           </div>
         </div>
 
         {/* Time-horizon risk badge strip — only shown once data has arrived */}
         {!isDataMissing && (
-          <div className="pointer-events-none flex items-center gap-2 flex-wrap mb-3">
-            <Clock className="w-3 h-3 text-zinc-400 shrink-0" />
+          <div className="pointer-events-none flex items-center gap-2.5 flex-wrap">
+            <Clock className="w-4 h-4 text-zinc-400 shrink-0" />
             {hasHorizons ? (
               [{ window: '24h', ...h24 }, { window: '48h', ...h48 }, { window: '72h', ...h72 }].map(({ window, bg, text, label }) => (
-                <span key={window} className={`inline-flex items-center gap-1 ${bg} ${text} text-[10px] font-black tracking-widest px-2 py-0.5 rounded`}>
-                  <span className="opacity-60">{window}</span>
+                <span key={window} className={`inline-flex items-center gap-1.5 ${bg} ${text} text-xs font-black tracking-widest px-3 py-1 rounded-md shadow-sm`}>
+                  {label === 'HIGH' ? <Siren className="w-3.5 h-3.5" /> : label === 'MOD' ? <AlertTriangle className="w-3.5 h-3.5" /> : <ShieldCheck className="w-3.5 h-3.5" />}
+                  <span className="opacity-75">{window}</span>
                   <span>{label}</span>
                 </span>
               ))
             ) : (
               ['24h', '48h', '72h'].map(h => (
-                <span key={h} className="inline-flex items-center gap-1 bg-zinc-800 text-[10px] font-black tracking-widest px-2 py-0.5 rounded text-zinc-500">
-                  <span>{h}</span><span>N/A</span>
+                <span key={h} className="inline-flex items-center gap-1.5 bg-zinc-800 text-xs font-black tracking-widest px-3 py-1 rounded-md text-zinc-500 shadow-sm">
+                  <span className="opacity-75">{h}</span><span>N/A</span>
                 </span>
               ))
             )}
@@ -223,33 +223,33 @@ export default function ForecastCard({ lga, bulkData, isBulkLoaded }: ForecastCa
         )}
         
         {/* Weather summary bar */}
-        <div className="mt-auto w-full bg-zinc-900 border border-zinc-700 p-4 rounded-2xl flex justify-between items-center pointer-events-none group-hover:border-zinc-500 transition-colors">
+        <div className="mt-auto w-full bg-zinc-900 border-2 border-zinc-700 p-5 rounded-2xl flex justify-between items-center pointer-events-none group-hover:border-zinc-500 transition-colors">
           {isDataMissing ? (
             <div className="flex w-full justify-between items-center py-1">
-              <div className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-full bg-zinc-800 animate-pulse"></div>
+              <div className="flex items-center gap-4">
+                <div className="w-10 h-10 rounded-full bg-zinc-800 animate-pulse"></div>
                 <div className="flex flex-col gap-2">
                   <div className="w-12 h-4 bg-zinc-800 rounded animate-pulse"></div>
-                  <div className="w-16 h-2 bg-zinc-800 rounded animate-pulse"></div>
+                  <div className="w-16 h-3 bg-zinc-800 rounded animate-pulse"></div>
                 </div>
               </div>
               <div className="flex flex-col items-end gap-2">
                 <div className="w-12 h-4 bg-zinc-800 rounded animate-pulse"></div>
-                <div className="w-10 h-2 bg-zinc-800 rounded animate-pulse"></div>
+                <div className="w-10 h-3 bg-zinc-800 rounded animate-pulse"></div>
               </div>
             </div>
           ) : (
             <>
-              <div className="flex items-center gap-3">
-                {getWeatherIcon(weatherCode, "w-8 h-8 text-blue-400")}
-                <div className="flex flex-col">
-                  <span className="text-sm font-bold text-white">{temperature}&#176;C</span>
-                  <span className="text-[10px] text-zinc-400 font-bold uppercase tracking-wider">{getWeatherText(weatherCode)}</span>
+              <div className="flex items-center gap-4">
+                {getWeatherIcon(weatherCode, "w-10 h-10 text-blue-400")}
+                <div className="flex flex-col gap-0.5">
+                  <span className="text-base font-bold text-white tracking-wide">{temperature}&#176;C</span>
+                  <span className="text-xs text-zinc-400 font-bold uppercase tracking-widest">{getWeatherText(weatherCode)}</span>
                 </div>
               </div>
-              <div className="flex flex-col items-end">
-                <span className="text-sm font-bold text-white">{rainfall7d}mm</span>
-                <span className="text-[10px] text-zinc-400 font-bold uppercase tracking-wider">7d Rain</span>
+              <div className="flex flex-col items-end gap-0.5">
+                <span className="text-base font-bold text-white tracking-wide">{rainfall7d}mm</span>
+                <span className="text-xs text-zinc-400 font-bold uppercase tracking-widest">7d Rain</span>
               </div>
             </>
           )}

@@ -127,7 +127,7 @@ export default function ForecastClient({ lgas }: ForecastClientProps) {
       let maxRisk = -1;
       let finalTier = "PENDING";
       if (data.tier !== "UNAVAILABLE") {
-        const horizons = [r_cur, r_24, r_48, r_72];
+        const horizons = [r_24, r_48, r_72];
         maxRisk = Math.max(...horizons);
         if (maxRisk >= 0.7) finalTier = "HIGH RISK";
         else if (maxRisk >= 0.4) finalTier = "MODERATE RISK";
@@ -143,7 +143,6 @@ export default function ForecastClient({ lgas }: ForecastClientProps) {
       let timeMatch = filters.timeHorizons.length === 0;
       if (!timeMatch && data.tier !== "UNAVAILABLE") {
         const timeChecks = [];
-        if (filters.timeHorizons.includes("CURRENT")) timeChecks.push(r_cur);
         if (filters.timeHorizons.includes("24H")) timeChecks.push(r_24);
         if (filters.timeHorizons.includes("48H")) timeChecks.push(r_48);
         if (filters.timeHorizons.includes("72H")) timeChecks.push(r_72);
@@ -180,91 +179,94 @@ export default function ForecastClient({ lgas }: ForecastClientProps) {
   const isTransitioning = isPending || searchValue !== deferredSearchValue;
 
   return (
-    <div className="flex flex-col w-full min-h-screen items-center pt-24 pb-12 px-6 sm:px-8 max-w-[1400px] mx-auto">
+    <div className="flex flex-col w-full min-h-screen items-center pt-24 pb-12 px-6 sm:px-10 lg:px-12 xl:px-16 max-w-[1600px] mx-auto">
       <div className="w-full shrink-0 z-10 bg-white pb-6 flex flex-col items-center">
-        <div className="flex flex-col items-center w-full max-w-2xl text-center relative">
+        <div className="flex flex-col items-center w-full max-w-7xl text-center relative mx-auto">
           <h1 className="text-3xl sm:text-5xl lg:text-7xl font-black text-black mb-2 tracking-tight">Flood Forecasts</h1>
           {lastUpdated && (
             <div className="text-sm font-medium text-black/80 font-mono mt-2 mb-6">
               Last Forecast: {lastUpdated}
             </div>
           )}
-          <div className="relative w-full px-4 sm:px-0">
-            <input
-              type="text"
-              value={searchValue}
-              onFocus={() => setIsFocused(true)}
-              onBlur={() => setIsFocused(false)}
-              onChange={(e) => setSearchValue(e.target.value)}
-              className="w-full border-2 border-black rounded-full px-6 py-4 text-base font-medium outline-none focus:ring-2 focus:ring-blue-600 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all bg-white text-center relative z-10"
-            />
-            {!searchValue && (
-              <div className="absolute inset-0 flex justify-center items-center pointer-events-none z-20 text-zinc-400 text-base font-medium">
-                <span className="whitespace-nowrap mr-1">Search by </span>
-                <div className="relative flex items-center">
-                  <AnimatePresence mode="wait">
-                    <motion.span
-                      key={placeholderIndex}
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      transition={{ duration: 0.4, ease: "easeInOut" }}
-                      className="whitespace-nowrap"
-                    >
-                      {placeholders[placeholderIndex]}
-                    </motion.span>
-                  </AnimatePresence>
-                </div>
-              </div>
-            )}
-
-            <AnimatePresence>
-              {isFocused && searchValue && filteredLgas.length > 0 && !searchValue.includes(',') && (
-                <motion.div
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.2 }}
-                  className="bg-white border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] rounded-xl z-50 absolute w-full mt-2 overflow-hidden left-0 text-left"
-                >
-                  <div className="max-h-60 overflow-y-auto flex flex-col">
-                    {filteredLgas.slice(0, 30).map((lga, idx) => (
-                      <div
-                        key={idx}
-                        onMouseDown={(e) => {
-                          e.preventDefault();
-                          setSearchValue(lga.name);
-                          setIsFocused(false);
-                        }}
-                        className="px-6 py-3 cursor-pointer font-bold text-black border-b border-black/10 last:border-b-0 hover:bg-blue-600 hover:text-white transition-colors"
+          
+          <div className="flex flex-col sm:flex-row items-center gap-6 w-full relative z-30 mt-2">
+            <div className="relative w-full flex-1">
+              <input
+                type="text"
+                value={searchValue}
+                onFocus={() => setIsFocused(true)}
+                onBlur={() => setIsFocused(false)}
+                onChange={(e) => setSearchValue(e.target.value)}
+                className="w-full border-2 border-black rounded-full px-6 py-4 text-base font-medium outline-none focus:ring-2 focus:ring-blue-600 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all bg-white text-left sm:text-center relative z-10"
+              />
+              {!searchValue && (
+                <div className="absolute inset-0 flex justify-start sm:justify-center px-6 sm:px-0 items-center pointer-events-none z-20 text-zinc-400 text-base font-medium">
+                  <span className="whitespace-nowrap mr-1">Search by </span>
+                  <div className="relative flex items-center">
+                    <AnimatePresence mode="wait">
+                      <motion.span
+                        key={placeholderIndex}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.4, ease: "easeInOut" }}
+                        className="whitespace-nowrap"
                       >
-                        {lga.name}
-                      </div>
-                    ))}
+                        {placeholders[placeholderIndex]}
+                      </motion.span>
+                    </AnimatePresence>
                   </div>
-                </motion.div>
+                </div>
               )}
-            </AnimatePresence>
+
+              <AnimatePresence>
+                {isFocused && searchValue && filteredLgas.length > 0 && !searchValue.includes(',') && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.2 }}
+                    className="bg-white border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] rounded-xl z-50 absolute w-full mt-2 overflow-hidden left-0 text-left"
+                  >
+                    <div className="max-h-60 overflow-y-auto flex flex-col">
+                      {filteredLgas.slice(0, 30).map((lga, idx) => (
+                        <div
+                          key={idx}
+                          onMouseDown={(e) => {
+                            e.preventDefault();
+                            setSearchValue(lga.name);
+                            setIsFocused(false);
+                          }}
+                          className="px-6 py-3 cursor-pointer font-bold text-black border-b border-black/10 last:border-b-0 hover:bg-blue-600 hover:text-white transition-colors"
+                        >
+                          {lga.name}
+                        </div>
+                      ))}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+            
+            <div className="shrink-0 w-full sm:w-auto">
+              <ForecastFilters onApply={handleApplyFilters} initialFilters={filters} />
+            </div>
           </div>
 
           <button
             onClick={handleGeolocation}
             disabled={isLocating}
-            className="mt-4 text-blue-600 underline underline-offset-4 decoration-1 text-sm font-medium hover:text-blue-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            className="mt-6 text-blue-600 underline underline-offset-4 decoration-1 text-sm font-medium hover:text-blue-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {isLocating ? 'Locating...' : 'my current location'}
           </button>
-
-          <div className="flex gap-4 mt-8 flex-wrap justify-center w-full relative z-30">
-            <ForecastFilters onApply={handleApplyFilters} initialFilters={filters} />
-          </div>
         </div>
       </div>
 
       <div className={`w-full relative transition-opacity duration-200 ${isTransitioning ? 'opacity-50 pointer-events-none' : 'opacity-100'}`}>
         {!isBulkLoaded ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 w-full">
-            {[...Array(6)].map((_, i) => (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 lg:gap-10 xl:gap-12 mt-12 w-full">
+            {[...Array(8)].map((_, i) => (
               <div key={i} className="bg-gray-200 animate-pulse border-2 border-black rounded-3xl h-64 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] p-6 flex flex-col gap-4">
                 <div className="flex justify-between items-start w-full">
                   <div className="w-1/2 h-8 bg-gray-300 rounded-md"></div>

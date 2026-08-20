@@ -1,8 +1,9 @@
 "use client";
 
 import React from 'react';
-import { FixedSizeGrid as Grid, GridChildComponentProps } from 'react-window';
-import AutoSizer from 'react-virtualized-auto-sizer';
+import { FixedSizeGrid as Grid } from 'react-window';
+import type { GridChildComponentProps } from 'react-window';
+import { AutoSizer } from 'react-virtualized-auto-sizer';
 import ForecastCard, { LGA, BFFData } from '../app/forecasts/ForecastCard';
 
 interface VirtualizedForecastGridProps {

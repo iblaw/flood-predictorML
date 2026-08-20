@@ -3,6 +3,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import { BookOpen } from 'lucide-react';
 
 const blocks = [
   {
@@ -143,21 +144,30 @@ export default function Home() {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3, duration: 0.3 }}
-          className="flex flex-col sm:flex-row gap-4 mt-8"
+          className="flex flex-col sm:flex-row gap-4 mt-8 flex-wrap justify-center"
         >
           <Link
             href="https://github.com/iblaw/flood-predictorML"
             target="_blank"
-            className="border-2 border-black bg-black text-white px-8 py-4 font-bold text-lg hover:-translate-y-1 hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all flex items-center justify-center"
+            className="border-2 border-black bg-black text-white px-8 py-4 font-bold text-lg hover:-translate-y-1 hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all flex items-center justify-center whitespace-nowrap"
           >
             View GitHub Repo
           </Link>
           <Link
             href="#"
-            className="border-2 border-black bg-white text-black px-8 py-4 font-bold text-lg hover:-translate-y-1 hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all flex items-center justify-center"
+            className="border-2 border-black bg-white text-black px-8 py-4 font-bold text-lg hover:-translate-y-1 hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all flex items-center justify-center whitespace-nowrap"
           >
             Watch Demo Video
           </Link>
+          <a
+            href="https://colab.research.google.com/drive/1gtRA5ohLVmmIgA07jwwrTtQZhmb32uFZ?usp=sharing"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="border-2 border-black bg-orange-400 text-black px-8 py-4 font-bold text-lg font-mono uppercase tracking-wide hover:-translate-y-1 hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all flex items-center justify-center gap-2 whitespace-nowrap"
+          >
+            <BookOpen className="w-5 h-5" />
+            View Colab Notebook
+          </a>
         </motion.div>
 
         <motion.div 

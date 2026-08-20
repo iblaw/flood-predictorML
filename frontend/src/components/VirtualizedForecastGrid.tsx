@@ -43,7 +43,7 @@ function CellRenderer({ columnIndex, rowIndex, style, data }: CellRendererProps)
 
 export default function VirtualizedForecastGrid({ lgas, bulkPredictions, isBulkLoaded }: VirtualizedForecastGridProps) {
   return (
-    <div className="flex-1 relative w-full">
+    <div className="w-full h-[calc(100vh-320px)] relative">
       <AutoSizer>
         {({ height, width }: { height: number; width: number }) => {
           let columnCount = 1;

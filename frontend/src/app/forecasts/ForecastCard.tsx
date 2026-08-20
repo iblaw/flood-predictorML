@@ -295,7 +295,7 @@ export default function ForecastCard({ lga, bulkData, isBulkLoaded }: ForecastCa
                 <div className="flex flex-col gap-3">
                   <div className="flex items-center gap-2">
                     <Clock className="w-4 h-4 text-black" />
-                    <h3 className="font-black text-sm tracking-widest uppercase">Predictive Horizon</h3>
+                    <h3 className="font-black text-sm tracking-widest uppercase">Forecast Horizon</h3>
                   </div>
                   <div className="grid grid-cols-3 gap-3">
                     {[
@@ -303,11 +303,11 @@ export default function ForecastCard({ lga, bulkData, isBulkLoaded }: ForecastCa
                       { window: '48-Hour', ...h48, raw: data?.risk_48h },
                       { window: '72-Hour', ...h72, raw: data?.risk_72h },
                     ].map(({ window, bg, text, label, raw }) => (
-                      <div key={window} className={`flex flex-col items-center justify-center gap-1 ${bg} rounded-xl p-3 border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]`}>
-                        <span className={`text-[10px] font-black tracking-widest uppercase ${text} opacity-75`}>{window}</span>
-                        <span className={`text-xl font-black ${text}`}>{label}</span>
+                      <div key={window} className={`flex flex-col items-center justify-center p-4 ${bg} rounded-xl border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]`}>
+                        <span className={`text-xs font-bold uppercase tracking-wider opacity-90 mb-1 ${text}`}>{window}</span>
+                        <span className={`text-2xl sm:text-3xl font-black uppercase leading-none ${text}`}>{label}</span>
                         {raw != null && (
-                          <span className={`text-[10px] font-mono ${text} opacity-60`}>{(raw * 100).toFixed(0)}%</span>
+                          <span className={`text-base sm:text-lg font-extrabold mt-2 ${text}`}>{(raw * 100).toFixed(0)}%</span>
                         )}
                       </div>
                     ))}

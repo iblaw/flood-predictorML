@@ -20,12 +20,12 @@ export default function About() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 lg:gap-x-16 gap-y-10 sm:gap-y-12 w-full mt-4">
         
         {/* Renders profile image placeholder */}
-        <div className="order-2 md:order-none md:col-start-1 md:row-start-1 md:row-span-2">
+        <div className="order-1 md:order-none md:col-start-1 md:row-start-1 md:row-span-2">
           <div className="w-full aspect-square bg-black rounded-[2.5rem] sm:rounded-[3rem]"></div>
         </div>
 
         {/* Renders fellow biography card */}
-        <div className="order-1 md:order-none md:col-start-2 md:row-start-1 flex flex-col justify-end">
+        <div className="order-2 md:order-none md:col-start-2 md:row-start-1 flex flex-col justify-end">
           <div className="border-2 border-black p-8 rounded-2xl shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] bg-white text-xl sm:text-2xl lg:text-[26px] leading-snug font-medium text-black">
             <p>
               Hi there! I am Lawal Ibrahim, a 3MTT NextGen Cohort Fellow specializing in the AI/ML track. This Flood Forecast ML system serves as my capstone project.

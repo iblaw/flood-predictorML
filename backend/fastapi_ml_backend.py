@@ -98,6 +98,9 @@ async def get_bulk_forecasts() -> Dict[str, Any]:
                 "status": row["status"],
                 "tier": row["tier"],
                 "probability_percent": float(row["probability_percent"]),
+                "risk_24h": float(row.get("risk_24h")) if row.get("risk_24h") is not None else None,
+                "risk_48h": float(row.get("risk_48h")) if row.get("risk_48h") is not None else None,
+                "risk_72h": float(row.get("risk_72h")) if row.get("risk_72h") is not None else None,
                 "weather": {
                     "rainfall_7d": float(row["rainfall_7d"]),
                     "soil_moisture_7d": float(row["soil_moisture_7d"]),

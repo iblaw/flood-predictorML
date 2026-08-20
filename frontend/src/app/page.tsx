@@ -8,7 +8,7 @@ const blocks = [
   {
     num: "01",
     title: "Introduction | Defining the Problem",
-    text: "There is a terrifying quiet to how floods begin. Long before rivers overflow their banks, an invisible chain reaction is already underway: soil saturation peaks, upstream basins accumulate pressure, and heavy downpours overwhelm urban drainage. Too often, communities only realize the danger when the water is already at their doorstep. Flood Forecast ML was born out of a desire to break that cycle of reactive panic. I wanted to build a system that doesn't just watch the weather happen, but decodes the hidden physics of the land to predict disasters before they strike.",
+    text: "Predicting floods isn't just about knowing when it's going to rain. It's about understanding how that rain interacts with the ground, the infrastructure, and local river systems. I started building Flood Forecast ML because I wanted to move away from reactive disaster response and see if we could actually process environmental data fast enough to predict these events before they get out of hand. But to do that, I first had to figure out how to teach a model what a flood actually looks like on paper.",
     svg: (
       <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full max-w-[200px] overflow-visible">
         <motion.path d="M10 50 Q 30 20 50 50 T 90 50" stroke="black" strokeWidth="4" fill="none" strokeLinecap="round" variants={{ hover: { pathLength: [0, 1], transition: { duration: 1.5, ease: "easeInOut" } } }} />
@@ -20,7 +20,7 @@ const blocks = [
   {
     num: "02",
     title: "Solution Approach | Framing the Target",
-    text: "The hardest part of machine learning isn't writing the algorithm; it's defining the ground truth. In disaster forecasting, reliable historical labels across hundreds of local government areas are scarce. To solve this, I leaned on satellite-derived datasets from SFED (Standard Flood Extent Depiction) and engineered a robust proxy target framework utilizing Return Periods (RP) and Annual Exceedance Probabilities (AEP). Transforming chaotic geospatial realities into a clean classification target required aggressive data structuring and domain-specific modeling.",
+    text: "That turned out to be the biggest hurdle right out of the gate—figuring out our \"ground truth.\" We don't have perfect, historical flood logs for every local government area in Nigeria. To get around this, I used satellite-derived data from SFED and built a proxy target using Return Periods (RP) and Annual Exceedance Probabilities (AEP). It required a lot of data wrangling, but it finally gave the model a solid, objective target to learn from. Of course, having a target is useless without the underlying weather data, which led me straight into my next major headache.",
     svg: (
       <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full max-w-[200px] overflow-visible">
         <circle cx="50" cy="50" r="35" stroke="black" strokeWidth="4" strokeDasharray="8 8" />
@@ -33,8 +33,8 @@ const blocks = [
   },
   {
     num: "03",
-    title: "Data Pipeline | Surviving Rate-Limiting Hell",
-    text: "Scale brings chaos. Merging spatial boundaries, static LGA lookups, and dynamic Open-Meteo weather telemetry for over 700 communities meant processing massive volumes of time-series data. And then came the rate limits—API timeouts that slammed the door mid-execution and threatened to tank the pipeline. Building this required resilience: implementing smart API fallbacks, chunked background workers, and automated database checkpoints so that an external network drop could never compromise core data integrity.",
+    title: "Data Pipeline | Dealing with APIs and Limits",
+    text: "Pulling historical and forecast weather telemetry for over 700 communities sounds straightforward until you hit API rate limits. Watching a script run for hours only to crash halfway through because of a timeout from Open-Meteo is incredibly frustrating. I had to rewrite the backend pipeline to be much more resilient—adding exponential backoffs, chunking the requests, and saving checkpoints to Supabase so a network blip wouldn't force me to start over from scratch. Once the data was safely flowing, I quickly realized that raw numbers weren't going to be enough.",
     svg: (
       <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full max-w-[200px] overflow-visible">
         <motion.rect x="20" y="20" width="60" height="15" rx="4" stroke="black" strokeWidth="4" fill="white" variants={{ hover: { y: -5, transition: { duration: 0.3 } } }} />
@@ -48,8 +48,8 @@ const blocks = [
   },
   {
     num: "04",
-    title: "Feature Engineering | Teaching the Model Nature's Memory",
-    text: "Raw weather sums lie to you. Nature has a memory, and it forgets. Yesterday’s storm stresses saturated earth entirely differently than a heavy downpour from three weeks ago that has long since evaporated or drained. To capture this, I engineered temporal features—prioritizing recent precipitation windows, calculating soil moisture velocity, and leveraging Annual Exceedance Probabilities (AEP). By giving the model a mathematical sense of retention and hydrological time, it stopped treating weather data as flat numbers and started understanding how land actually holds water.",
+    title: "Feature Engineering | Modeling How Water Behaves",
+    text: "Feeding basic rainfall totals into a model doesn't work well because the ground doesn't hold water forever. A heavy storm yesterday is a much bigger risk than a heavy storm three weeks ago that has already drained. I spent a lot of time engineering features to account for this, like soil moisture velocity and decaying precipitation indexes. It was really about teaching the model how the environment naturally retains and loses water over time. With these complex hydrological features in place, I needed an algorithm that could actually make sense of them.",
     svg: (
       <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full max-w-[200px] overflow-visible">
         <motion.circle cx="35" cy="50" r="20" stroke="black" strokeWidth="4" strokeDasharray="8 8" fill="none" variants={{ hover: { rotate: 360, transition: { duration: 4, ease: "linear", repeat: Infinity } } }} style={{ originX: '35px', originY: '50px' }} />
@@ -61,8 +61,8 @@ const blocks = [
   },
   {
     num: "05",
-    title: "Building the Brain | Why Ensembling Beats a Single Model",
-    text: "Natural systems are inherently non-linear, chaotic, and resistant to simple formulas. Forcing something as unpredictable as environmental hydrology through a single mathematical model is a recipe for blind spots. Instead, I built a Stacking Ensemble—blending XGBoost, Random Forest, and Decision Trees under a Soft Voting Classifier. This multi-model approach allows different algorithmic perspectives to debate and cross-validate complex patterns, mirroring how a panel of experts reaches a consensus in the real world.",
+    title: "Building the Brain | Why an Ensemble?",
+    text: "Because weather is chaotic, no single algorithm handles all its edge cases perfectly. Instead of trying to force everything through one model, I set up a Stacking Ensemble. By combining XGBoost, Random Forest, and Decision Trees with a Soft Voting Classifier, the models essentially cross-validate each other. It made the predictions much more stable and reliable across different types of terrain. But building a stable model is only part of the equation; I still had to prove it wasn't just blindly guessing.",
     svg: (
       <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full max-w-[200px] overflow-visible">
         <circle cx="50" cy="20" r="8" stroke="black" strokeWidth="4" fill="white" />
@@ -77,8 +77,8 @@ const blocks = [
   },
   {
     num: "06",
-    title: "Evaluation & Interpretability | Prioritizing What Actually Matters",
-    text: "Chasing vanity metrics like 97% overall accuracy in imbalanced classification is a trap. Out of 13,172 evaluation samples, only 375 represented actual flood events; a lazy model predicting \"Safe\" everywhere would look brilliant on paper while missing disasters. I prioritized PR-AUC optimization, tuning the decision threshold to 0.904 to successfully capture over 70% of true flood risks without drowning communities in false alarms. Coupled with SHAP (SHapley Additive exPlanations) analysis, the model's feature importance proved it wasn't guessing: features like AEP and topographic wetness indexes (TWI_Proxy) dominated, confirming the system genuinely understands physical terrain and accumulation pathways.",
+    title: "Evaluation & Interpretability | The Right Metrics",
+    text: "In flood prediction, standard accuracy is dangerously misleading. Out of over 13,000 evaluation samples in my dataset, only 375 were actual floods. A model that just guesses \"Safe\" every single time would look highly accurate but be completely useless. I focused heavily on the Precision-Recall curve (PR-AUC) and tuned my decision threshold to 0.904, which let me catch over 70% of actual floods while keeping false alarms low. Looking at the SHAP values also confirmed the model was making decisions based on the right factors—like AEP and topographic wetness—rather than just random noise. With a model I could finally trust, the last step was getting it out of my notebook and onto the web.",
     svg: (
       <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full max-w-[200px] overflow-visible">
         <motion.rect x="15" y="60" width="15" height="30" stroke="black" strokeWidth="4" fill="white" variants={{ hover: { height: 50, y: -20, fill: "#2563eb", transition: { duration: 0.5 } } }} />
@@ -90,8 +90,8 @@ const blocks = [
   },
   {
     num: "07",
-    title: "Production & Product | From Local Script to Live System",
-    text: "Moving from a local Jupyter notebook to a production-grade application is where the real engineering begins. Wrapping this machine learning core into a lightning-fast Next.js frontend, powered by a FastAPI asynchronous backend and secured via Supabase, brought everything together. Navigating free-tier server constraints, deployment hurdles, and UI rendering optimizations tested every limit. Seeing it live—instantly calculating flood risk across Nigeria in milliseconds—turned an abstract code base into a powerful, working tool with real-world impact.",
+    title: "Production | Bringing It Online",
+    text: "Getting the code working locally was great, but the goal was always a live tool. I hooked the machine learning core up to a FastAPI backend, managed the database with Supabase, and built the interface using Next.js. Navigating free-tier server limits and optimizing the UI so it wouldn't lag under heavy data loads was a massive challenge. But seeing it finally run—calculating 24, 48, and 72-hour flood risk horizons across the country in milliseconds—made all the debugging completely worth it.",
     svg: (
       <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full max-w-[200px] overflow-visible">
         <motion.path d="M20 50 L40 50 L40 30 L60 30 L60 50 L80 50" stroke="black" strokeWidth="6" fill="none" strokeLinejoin="round" variants={{ hover: { stroke: "#2563eb", pathLength: [0, 1], transition: { duration: 1 } } }} />

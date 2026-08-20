@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -39,7 +39,7 @@ interface ForecastCardProps {
 
 /** Converts a raw 0-1 probability into a display label + Tailwind colour classes. */
 function riskLabel(value: number | undefined): { label: string; bg: string; text: string } {
-  if (value === undefined || value === null) return { label: '-', bg: 'bg-zinc-700', text: 'text-zinc-300' };
+  if (value === undefined || value === null) return { label: 'N/A', bg: 'bg-zinc-700', text: 'text-zinc-300' };
   if (value >= 0.7) return { label: 'HIGH', bg: 'bg-red-600', text: 'text-white' };
   if (value >= 0.4) return { label: 'MOD', bg: 'bg-orange-500', text: 'text-white' };
   return { label: 'LOW', bg: 'bg-green-600', text: 'text-white' };
@@ -141,10 +141,10 @@ export default function ForecastCard({ lga, bulkData, isBulkLoaded }: ForecastCa
         onClick={() => setShowModal(true)} 
         whileHover={{ scale: 1.02, y: -4 }}
         whileTap={{ scale: 0.98 }}
-        className="bg-black cursor-pointer text-white rounded-3xl p-6 sm:p-8 flex flex-col justify-between relative group hover:ring-4 hover:ring-blue-600 transition-all shadow-[8px_8px_0px_0px_rgba(0,0,0,0.15)] h-auto sm:aspect-square"
+        className="bg-black cursor-pointer text-white rounded-3xl p-5 sm:p-6 flex flex-col relative group hover:ring-4 hover:ring-blue-600 transition-all shadow-[8px_8px_0px_0px_rgba(0,0,0,0.15)] h-full"
       >
         {/* Header: name + status icon */}
-        <div className="flex justify-between items-start w-full pointer-events-none mb-4 sm:mb-0">
+        <div className="flex justify-between items-start w-full pointer-events-none mb-3">
           <div className="flex flex-col">
             <span className="text-2xl sm:text-3xl font-light tracking-tight">{lga.name}</span>
             <span className={`text-xs sm:text-sm font-bold tracking-widest mt-1 ${isEvacuation ? 'text-red-400' : isWatch ? 'text-orange-500' : isUnavailable ? 'text-zinc-500' : 'text-green-400'}`}>
@@ -166,30 +166,29 @@ export default function ForecastCard({ lga, bulkData, isBulkLoaded }: ForecastCa
           </div>
         </div>
 
-        {/* Time-horizon risk badge strip */}
-        {hasHorizons ? (
-          <div className="pointer-events-none flex items-center gap-2 mb-4 sm:mb-3">
+        {/* Time-horizon risk badge strip — only shown once data has arrived */}
+        {!isDataMissing && (
+          <div className="pointer-events-none flex items-center gap-2 flex-wrap mb-3">
             <Clock className="w-3 h-3 text-zinc-400 shrink-0" />
-            {[{ window: '24h', ...h24 }, { window: '48h', ...h48 }, { window: '72h', ...h72 }].map(({ window, bg, text, label }) => (
-              <span key={window} className={`inline-flex items-center gap-1 ${bg} ${text} text-[10px] font-black tracking-widest px-2 py-0.5 rounded`}>
-                <span className="opacity-60">{window}</span>
-                <span>{label}</span>
-              </span>
-            ))}
-          </div>
-        ) : !isDataMissing && (
-          <div className="pointer-events-none flex items-center gap-2 mb-4 sm:mb-3">
-            <Clock className="w-3 h-3 text-zinc-600 shrink-0" />
-            {['24h', '48h', '72h'].map(h => (
-              <span key={h} className="inline-flex items-center gap-1 bg-zinc-800 text-[10px] font-black tracking-widest px-2 py-0.5 rounded text-zinc-500">
-                <span>{h}</span><span>-</span>
-              </span>
-            ))}
+            {hasHorizons ? (
+              [{ window: '24h', ...h24 }, { window: '48h', ...h48 }, { window: '72h', ...h72 }].map(({ window, bg, text, label }) => (
+                <span key={window} className={`inline-flex items-center gap-1 ${bg} ${text} text-[10px] font-black tracking-widest px-2 py-0.5 rounded`}>
+                  <span className="opacity-60">{window}</span>
+                  <span>{label}</span>
+                </span>
+              ))
+            ) : (
+              ['24h', '48h', '72h'].map(h => (
+                <span key={h} className="inline-flex items-center gap-1 bg-zinc-800 text-[10px] font-black tracking-widest px-2 py-0.5 rounded text-zinc-500">
+                  <span>{h}</span><span>N/A</span>
+                </span>
+              ))
+            )}
           </div>
         )}
         
         {/* Weather summary bar */}
-        <div className="w-full bg-zinc-900 border border-zinc-700 p-4 rounded-2xl flex justify-between items-center pointer-events-none group-hover:border-zinc-500 transition-colors">
+        <div className="mt-auto w-full bg-zinc-900 border border-zinc-700 p-4 rounded-2xl flex justify-between items-center pointer-events-none group-hover:border-zinc-500 transition-colors">
           {isDataMissing ? (
             <div className="flex w-full justify-between items-center py-1">
               <div className="flex items-center gap-3">
@@ -269,7 +268,7 @@ export default function ForecastCard({ lga, bulkData, isBulkLoaded }: ForecastCa
                       <div key={window} className={`flex flex-col items-center justify-center gap-1 ${bg} rounded-xl p-3 border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]`}>
                         <span className={`text-[10px] font-black tracking-widest uppercase ${text} opacity-75`}>{window}</span>
                         <span className={`text-xl font-black ${text}`}>{label}</span>
-                        {raw !== undefined && (
+                        {raw != null && (
                           <span className={`text-[10px] font-mono ${text} opacity-60`}>{(raw * 100).toFixed(0)}%</span>
                         )}
                       </div>

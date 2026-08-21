@@ -14,7 +14,7 @@ interface ForecastClientProps {
   lgas: LGA[];
 }
 
-const placeholders = ["LGA", "latitude and longitude"];
+const placeholders = ["LGA", "coordinates"];
 
 export default function ForecastClient({ lgas }: ForecastClientProps) {
   const [searchValue, setSearchValue] = useState("");
@@ -189,8 +189,8 @@ export default function ForecastClient({ lgas }: ForecastClientProps) {
             </div>
           )}
           
-          <div className="flex flex-row items-center justify-center gap-2 sm:gap-4 w-full max-w-2xl mx-auto px-4 relative z-30 mt-2">
-            <div className="relative flex-1">
+          <div className="flex flex-row items-center justify-between gap-3 w-full max-w-2xl mx-auto px-4 sm:px-0 relative z-30 mt-2">
+            <div className="relative flex-1 min-w-0">
               <input
                 type="text"
                 value={searchValue}

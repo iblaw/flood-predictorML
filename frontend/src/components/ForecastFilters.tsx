@@ -65,10 +65,10 @@ export default function ForecastFilters({ onApply, initialFilters }: ForecastFil
     <div className="relative inline-block text-left z-40" ref={dropdownRef}>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="bg-white border-4 border-black px-6 py-3 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex items-center gap-2 font-mono text-sm uppercase font-bold hover:-translate-y-1 hover:shadow-[10px_10px_0px_0px_rgba(0,0,0,1)] transition-all active:translate-y-1 active:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]"
+        className="shrink-0 bg-white border-4 border-black px-6 py-3 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex items-center gap-2 font-mono text-sm uppercase font-bold hover:-translate-y-1 hover:shadow-[10px_10px_0px_0px_rgba(0,0,0,1)] transition-all active:translate-y-1 active:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]"
       >
         <Filter className="w-5 h-5" />
-        FILTER OPTIONS
+        <span className="sm:hidden">FILTER</span><span className="hidden sm:inline">FILTER OPTIONS</span>
       </button>
 
       <AnimatePresence>

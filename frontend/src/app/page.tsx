@@ -156,12 +156,14 @@ export default function Home() {
             </svg>
             View GitHub Repo
           </Link>
-          <Link
-            href="#"
+          <a
+            href="https://youtu.be/b7Vk9K72NRw"
+            target="_blank"
+            rel="noopener noreferrer"
             className="border-2 border-black bg-white text-black px-8 py-4 font-bold text-lg hover:bg-gray-100 hover:-translate-y-1 hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all flex items-center justify-center gap-2"
           >
             <PlayCircle size={20} /> Watch Demo Video
-          </Link>
+          </a>
           <a
             href="https://colab.research.google.com/drive/1gtRA5ohLVmmIgA07jwwrTtQZhmb32uFZ?usp=sharing"
             target="_blank" 

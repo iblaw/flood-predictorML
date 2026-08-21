@@ -189,8 +189,8 @@ export default function ForecastClient({ lgas }: ForecastClientProps) {
             </div>
           )}
           
-          <div className="flex flex-col sm:flex-row items-center gap-6 w-full relative z-30 mt-2">
-            <div className="relative w-full flex-1">
+          <div className="flex flex-row items-center justify-center gap-2 sm:gap-4 w-full max-w-2xl mx-auto px-4 relative z-30 mt-2">
+            <div className="relative flex-1">
               <input
                 type="text"
                 value={searchValue}
@@ -248,7 +248,7 @@ export default function ForecastClient({ lgas }: ForecastClientProps) {
               </AnimatePresence>
             </div>
             
-            <div className="shrink-0 w-full sm:w-auto">
+            <div className="shrink-0">
               <ForecastFilters onApply={handleApplyFilters} initialFilters={filters} />
             </div>
           </div>

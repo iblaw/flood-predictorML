@@ -77,7 +77,7 @@ export default function ForecastFilters({ onApply, initialFilters }: ForecastFil
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            className="absolute top-full left-0 mt-4 bg-white border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] z-50 w-72 p-4 flex flex-col font-mono"
+            className="absolute top-full right-0 mt-2 w-64 sm:w-72 max-w-[calc(100vw-2rem)] bg-white border-4 border-black p-4 z-50 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex flex-col font-mono"
           >
             <div className="mb-4">
               <h3 className="font-bold uppercase tracking-widest text-sm mb-3 border-b-2 border-black pb-1">
@@ -89,7 +89,7 @@ export default function ForecastFilters({ onApply, initialFilters }: ForecastFil
                     <div className={`w-5 h-5 border-2 border-black flex items-center justify-center transition-colors ${filters.riskLevels.includes(level) ? 'bg-black' : 'bg-white group-hover:bg-gray-200'}`}>
                       {filters.riskLevels.includes(level) && <div className="w-2 h-2 bg-white" />}
                     </div>
-                    <span className="text-sm font-bold uppercase">{level}</span>
+                    <span className="text-sm font-bold uppercase break-words whitespace-normal">{level}</span>
                   </label>
                 ))}
               </div>
@@ -105,7 +105,7 @@ export default function ForecastFilters({ onApply, initialFilters }: ForecastFil
                     <div className={`w-5 h-5 border-2 border-black flex items-center justify-center transition-colors ${filters.timeHorizons.includes(horizon) ? 'bg-black' : 'bg-white group-hover:bg-gray-200'}`}>
                       {filters.timeHorizons.includes(horizon) && <div className="w-2 h-2 bg-white" />}
                     </div>
-                    <span className="text-sm font-bold uppercase">{horizon} FORECAST</span>
+                    <span className="text-sm font-bold uppercase break-words whitespace-normal">{horizon} FORECAST</span>
                   </label>
                 ))}
               </div>
